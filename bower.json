@@ -1,0 +1,28 @@
+{
+  "name": "sir-trevor-blocks",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Upplication/sir-trevor-blocks",
+  "authors": [
+    "Souler <juanjo.herrero@upplication.com>"
+  ],
+  "description": "Collection of blocks used by Upplication apps for SirTrevor",
+  "main": "sir-trevor-blocks.min.js",
+  "moduleType": [],
+  "keywords": [
+    "sir",
+    "trevor",
+    "blocks",
+    "sirtrevor",
+    "widget",
+    "html",
+    "button"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
