@@ -100,17 +100,29 @@
             var editor = $('<div>', { class: 'st-button-editor' });
             var preview = $('<div>', { class: 'st-button-preview' });
 
-            var captionDiv = editor.append($('<div>'));
-            captionDiv.append($('<label>').html('Caption'));
-            captionDiv.append($('<input>', { type: 'text', name: 'caption' }));
+            var staticProperties = [
+                {
+                    property: 'caption',
+                    text: 'Caption'
+                },
+                {
+                    property: 'href',
+                    text: 'href'
+                },
+                {
+                    property: 'onclick',
+                    text: 'On Click'
+                }
+            ];
 
-            var hrefDiv = editor.append($('<div>'));
-            hrefDiv.append($('<label>').html('href'));
-            hrefDiv.append($('<input>', { type: 'text', name: 'href' }));
-
-            var onclickDiv = editor.append($('<div>'));
-            onclickDiv.append($('<label>').html('On Click'));
-            onclickDiv.append($('<input>', { type: 'text', name: 'onclick' }));
+            staticProperties.forEach(function (property) {
+                var propDiv = $('<div>');
+                propDiv.addClass(self._namePrepend + '-style');
+                propDiv.addClass(self._namePrepend + '-style-' + property);
+                propDiv.append($('<label>').html(property));
+                propDiv.append($('<input>', { type: 'text', name: property }));
+                editor.append(propDiv);
+            })
 
             Object.keys(self.cssProperties).forEach(function (cssProperty) {
                 var div = $('<div>');
