@@ -1,5 +1,20 @@
+
 .st-block-control[data-type="button"] .st-icon,
-.st-block-control[data-type="map"] .st-icon,
 .st-block-control[data-type="widget"] .st-icon {
+    display: none;
+}
+
+.st-block-control[data-type="button"]:before,
+.st-block-control[data-type="widget"]:before{
+    font-size: 2.25em;
     font-family: 'ST-Icons-Upplication' !important;
+    display: block;
+}
+
+.st-block-control[data-type="button"]:before {
+    content: '\e803';
+}
+
+.st-block-control[data-type="widget"]:before {
+    content: '\e800';
 }
