@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
+    minifyCSS = require('gulp-minify-css'),
     jsdoc = require('gulp-jsdoc'),
     git = require('gulp-git'),
     bump = require('gulp-bump'),
@@ -35,8 +36,17 @@ gulp.task('patch', function() { return inc('patch'); })
 gulp.task('feature', function() { return inc('minor'); })
 gulp.task('release', function() { return inc('major'); })
 
-gulp.task('compile', function () {
-    gulp.src('./src/*.js')
+gulp.task('css', function() {
+  gulp.src('./src/css/*.css')
+      .pipe(concat('sir-trevor-blocks.css'))
+      .pipe(gulp.dest("."))
+      .pipe(rename('sir-trevor-blocks.min.css'))
+      .pipe(minifyCSS({keepBreaks: false}))
+      .pipe(gulp.dest("."));
+});
+
+gulp.task('js', function () {
+    gulp.src('./src/js/*.js')
         .pipe(concat("sir-trevor-blocks.js"))
         .pipe(gulp.dest("."))
         .pipe(rename('sir-trevor-blocks.min.js'))
@@ -44,4 +54,4 @@ gulp.task('compile', function () {
         .pipe(gulp.dest("."))
 });
 
-gulp.task('default', ['compile'])
+gulp.task('default', [ 'css', 'js' ])

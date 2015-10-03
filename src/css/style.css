@@ -1,0 +1,5 @@
+.st-block-control[data-type="button"] .st-icon,
+.st-block-control[data-type="map"] .st-icon,
+.st-block-control[data-type="widget"] .st-icon {
+    font-family: 'ST-Icons-Upplication' !important;
+}
