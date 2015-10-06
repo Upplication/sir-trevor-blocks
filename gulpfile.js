@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
+    addsrc = require('gulp-add-src'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
     minifyCSS = require('gulp-minify-css'),
@@ -26,15 +27,20 @@ var inc = function(importance) {
     // get all the files to bump version in
     return gulp.src(['./package.json', './bower.json'])
         .pipe(bump({type: importance}))            // bump the version number in those files
+        .pipe(addsrc(['./sir-trevor-blocks.*', './sir-trevor-blocks.min.*']))
         .pipe(gulp.dest('./'))                     // save it back to filesystem
         .pipe(git.commit('bump package version'))  // commit the changed version number
         .pipe(filter('package.json'))              // read only one file to get the version number
         .pipe(tag({ prefix: '' }))                 // **tag it in the repository**
 }
 
-gulp.task('patch', function() { return inc('patch'); })
-gulp.task('feature', function() { return inc('minor'); })
-gulp.task('release', function() { return inc('major'); })
+gulp.task('tag-patch', function() { return inc('patch'); });
+gulp.task('tag-feature', function() { return inc('patch'); });
+gulp.task('tag-release', function() { return inc('patch'); });
+
+gulp.task('patch', ['compile', 'tag-patch'])
+gulp.task('feature', ['compile', 'tag-minor'])
+gulp.task('release', ['compile', 'tag-major'])
 
 gulp.task('css', function() {
   gulp.src('./src/css/*.css')
@@ -46,7 +52,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function () {
-    gulp.src('./src/js/*.js')
+    gulp.src('./src/*.js')
         .pipe(concat("sir-trevor-blocks.js"))
         .pipe(gulp.dest("."))
         .pipe(rename('sir-trevor-blocks.min.js'))
@@ -54,4 +60,12 @@ gulp.task('js', function () {
         .pipe(gulp.dest("."))
 });
 
-gulp.task('default', [ 'css', 'js' ])
+gulp.task('compile', ['js', 'css'])
+
+gulp.task('doc', function() {
+    gulp.src("./src/*.js")
+      .pipe(jsdoc('./doc'))
+})
+gulp.task('docs', ['doc'])
+
+gulp.task('default', ['compile'])
