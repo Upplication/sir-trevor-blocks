@@ -35,8 +35,8 @@ var inc = function(importance) {
 }
 
 gulp.task('tag-patch', function() { return inc('patch'); });
-gulp.task('tag-feature', function() { return inc('patch'); });
-gulp.task('tag-release', function() { return inc('patch'); });
+gulp.task('tag-minor', function() { return inc('patch'); });
+gulp.task('tag-major', function() { return inc('patch'); });
 
 gulp.task('css', function() {
   gulp.src('./src/css/*.css')
