@@ -6,7 +6,7 @@
 
     SirTrevor.Blocks.ImageEdit = SirTrevor.Blocks.Image.extend({
 
-        type: "image-edit",
+        type: "image_edit",
 
         onDrop: function(transferData) {
             var file = transferData.files[0],
@@ -36,4 +36,4 @@
             return data;
         },
     });
-})()
+})();
