@@ -11,6 +11,7 @@
 .st-block-control[data-type="text"]:before { content: '\e807'; }
 .st-block-control[data-type="quote"]:before { content: '\e805'; }
 .st-block-control[data-type="image"]:before { content: '\e801'; }
+.st-block-control[data-type="image-edit"]:before { content: '\e801'; }
 .st-block-control[data-type="Heading"]:before { content: '\e808'; }
 .st-block-control[data-type="list"]:before { content: '\e806'; }
 .st-block-control[data-type="video"]:before { content: '\e809'; }
