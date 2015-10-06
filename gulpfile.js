@@ -27,8 +27,8 @@ var inc = function(importance) {
     // get all the files to bump version in
     return gulp.src(['./package.json', './bower.json'])
         .pipe(bump({type: importance}))            // bump the version number in those files
-        .pipe(addsrc(['./sir-trevor-blocks.*', './sir-trevor-blocks.min.*']))
         .pipe(gulp.dest('./'))                     // save it back to filesystem
+        .pipe(addsrc(['./sir-trevor-blocks.*', './sir-trevor-blocks.min.*']))
         .pipe(git.commit('bump package version'))  // commit the changed version number
         .pipe(filter('package.json'))              // read only one file to get the version number
         .pipe(tag({ prefix: '' }))                 // **tag it in the repository**
