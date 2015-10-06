@@ -38,10 +38,6 @@ gulp.task('tag-patch', function() { return inc('patch'); });
 gulp.task('tag-feature', function() { return inc('patch'); });
 gulp.task('tag-release', function() { return inc('patch'); });
 
-gulp.task('patch', ['compile', 'tag-patch'])
-gulp.task('feature', ['compile', 'tag-minor'])
-gulp.task('release', ['compile', 'tag-major'])
-
 gulp.task('css', function() {
   gulp.src('./src/css/*.css')
       .pipe(concat('sir-trevor-blocks.css'))
@@ -52,15 +48,14 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function () {
-    gulp.src('./src/*.js')
-        .pipe(concat("sir-trevor-blocks.js"))
-        .pipe(gulp.dest("."))
-        .pipe(rename('sir-trevor-blocks.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest("."))
+  gulp.src('./src/js/*.js')
+      .pipe(concat("sir-trevor-blocks.js"))
+      .pipe(gulp.dest("."))
+      .pipe(rename('sir-trevor-blocks.min.js'))
+      .pipe(uglify())
+      .pipe(gulp.dest("."));
 });
 
-gulp.task('compile', ['js', 'css'])
 
 gulp.task('doc', function() {
     gulp.src("./src/*.js")
@@ -68,4 +63,8 @@ gulp.task('doc', function() {
 })
 gulp.task('docs', ['doc'])
 
+gulp.task('compile', ['js', 'css'])
+gulp.task('patch', ['compile', 'tag-patch'])
+gulp.task('feature', ['compile', 'tag-minor'])
+gulp.task('release', ['compile', 'tag-major'])
 gulp.task('default', ['compile'])
