@@ -115,14 +115,13 @@
                 }
             ];
 
-            staticProperties.forEach(function (property) {
+            staticProperties.forEach(function (p) {
                 var propDiv = $('<div>');
                 propDiv.addClass(self._namePrepend + '-style');
-                propDiv.addClass(self._namePrepend + '-style-' + property);
-                propDiv.append($('<label>').html(property));
-                propDiv.append($('<input>', { type: 'text', name: property }));
+                propDiv.addClass(self._namePrepend + '-style-' + p.property);
+                propDiv.append($('<input>', { type: 'text', name: p.property, placeholder: p.text }));
                 editor.append(propDiv);
-            })
+            });
 
             Object.keys(self.cssProperties).forEach(function (cssProperty) {
                 var div = $('<div>');
@@ -299,6 +298,11 @@
         type: "image_edit",
         cropTimeout: 1000,
 
+        loadData: function(data){
+            // Create our image tag
+            this.$editor.html($('<img>', { src: data.file.url })).show();
+        },
+
         onDrop: function(transferData) {
             var file = transferData.files[0],
                 urlAPI = (typeof URL !== "undefined") ? URL : (typeof webkitURL !== "undefined") ? webkitURL : null;
@@ -335,8 +339,12 @@
 
         _serializeData: function() {
             var data = { file: { url: null } };
+
             if (this.$cropper)
                 data.file.url = this.$cropper('getCroppedCanvas').toDataURL()
+            else
+                data.file.url = this.$editor.find('img').attr('src');
+
             return data;
         },
     });
