@@ -115,14 +115,13 @@
                 }
             ];
 
-            staticProperties.forEach(function (property) {
+            staticProperties.forEach(function (p) {
                 var propDiv = $('<div>');
                 propDiv.addClass(self._namePrepend + '-style');
-                propDiv.addClass(self._namePrepend + '-style-' + property);
-                propDiv.append($('<label>').html(property));
-                propDiv.append($('<input>', { type: 'text', name: property }));
+                propDiv.addClass(self._namePrepend + '-style-' + p.property);
+                propDiv.append($('<input>', { type: 'text', name: p.property, placeholder: p.text }));
                 editor.append(propDiv);
-            })
+            });
 
             Object.keys(self.cssProperties).forEach(function (cssProperty) {
                 var div = $('<div>');

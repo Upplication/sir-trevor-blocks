@@ -9,6 +9,11 @@
         type: "image_edit",
         cropTimeout: 1000,
 
+        loadData: function(data){
+            // Create our image tag
+            this.$editor.html($('<img>', { src: data.file.url })).show();
+        },
+
         onDrop: function(transferData) {
             var file = transferData.files[0],
                 urlAPI = (typeof URL !== "undefined") ? URL : (typeof webkitURL !== "undefined") ? webkitURL : null;
@@ -45,8 +50,12 @@
 
         _serializeData: function() {
             var data = { file: { url: null } };
+
             if (this.$cropper)
                 data.file.url = this.$cropper('getCroppedCanvas').toDataURL()
+            else
+                data.file.url = this.$editor.find('img').attr('src');
+
             return data;
         },
     });
