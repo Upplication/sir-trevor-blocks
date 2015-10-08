@@ -33,6 +33,7 @@
     "highlightjs": "~8.8.0",
     "spectrum": "~1.7.1",
     "jquery": "~2.1.4",
-    "lodash": "~3.10.1"
+    "lodash": "~3.10.1",
+    "cropper": "~0.11.1"
   }
 }
