@@ -17,3 +17,4 @@
 .st-block-control[data-type="video"]:before { content: '\e809'; }
 .st-block-control[data-type="button"]:before { content: '\e803'; }
 .st-block-control[data-type="widget"]:before { content: '\e800'; }
+.st-block-control[data-type="map"]:before { content: '\e802'; }
