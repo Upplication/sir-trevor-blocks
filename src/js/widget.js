@@ -14,9 +14,9 @@
 
       paste_options: {
         html: [
-                '<div style="text-align: center;  padding:20px;">',
-                '  <span>Paste your external widget html here</span>',
-                '  <textarea class="st-paste-block" style="width: 100%; padding: 0.6em; border: 1px solid #D4D4D4;"  placeholder="Paste your code here"></textarea>',
+                '<div class="st-widget-editor-container">',
+                '  <span class="st-icon"></span>',
+                '  <textarea class="st-paste-block" placeholder="Paste your external Widget html here"></textarea>',
                 '</div>',
             ].join('\n')
       },
@@ -41,6 +41,8 @@
       },
 
       loadPastedContent: function(code) {
+        code = code || "";
+
         // First load the code into the text area
         this.$el.find('textarea').val(code);
 
