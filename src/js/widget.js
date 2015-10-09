@@ -28,6 +28,10 @@
         }
       },
 
+      isEmpty: function() {
+        return !(this.$el && this.$el.find('textarea').length > 0 && this.$el.find('textarea').val().length > 0);
+      },
+
       loadData: function(data) {
         this.loadPastedContent(data.text);
       },

@@ -48,15 +48,22 @@
             }
         },
 
+        isEmpty: function() {
+            return this.$editor.find('img').length <= 0;
+        },
+
         _serializeData: function() {
-            var data = { file: { url: null } };
+            var url = null;
 
             if (this.$cropper)
-                data.file.url = this.$cropper('getCroppedCanvas').toDataURL()
+                url = this.$cropper('getCroppedCanvas').toDataURL()
             else
-                data.file.url = this.$editor.find('img').attr('src');
+                url = this.$editor.find('img').attr('src');
 
-            return data;
+            if (url && url.length > 0)
+                return  { file: { url: url } };
+            else
+                return null;
         },
     });
 })();
