@@ -337,15 +337,22 @@
             }
         },
 
+        isEmpty: function() {
+            return this.$editor.find('img').length <= 0;
+        },
+
         _serializeData: function() {
-            var data = { file: { url: null } };
+            var url = null;
 
             if (this.$cropper)
-                data.file.url = this.$cropper('getCroppedCanvas').toDataURL()
+                url = this.$cropper('getCroppedCanvas').toDataURL()
             else
-                data.file.url = this.$editor.find('img').attr('src');
+                url = this.$editor.find('img').attr('src');
 
-            return data;
+            if (url && url.length > 0)
+                return  { file: { url: url } };
+            else
+                return null;
         },
     });
 })();
@@ -387,6 +394,7 @@
                 'height': this.default_height + 'px',
                 'width': '100%'
             });
+            map.hide();
             return container.html();
         },
 
@@ -417,6 +425,11 @@
                 this._reloadMap();
             }.bind(this);
 
+            // Prevent submit on enter
+            this.$editor.bind('keypress keydown keyup', function (e){
+                if(e.keyCode == 13) e.preventDefault();
+            });
+
             this.$map.on('click', openGmaps);
 
             // If edition is enabled, zoom should be too
@@ -434,6 +447,24 @@
             this._reloadMap();
         },
 
+        isEmpty: function() {
+            return !(this.$el && this.$el.find('[name="address"]').length > 0 && this.$el.find('[name="address"]').val().length > 0);
+        },
+
+        _serializeData: function() {
+            var address = this.$el.find('[name="address"]').val();
+
+            if (!address || address.length <= 0)
+                return null;
+
+            return {
+                address: address,
+                zoom: this.$el.find('[name="zoom"]').val(),
+                width: this.$el.find('[name="width"]').val(),
+                height: this.$el.find('[name="height"]').val()
+            }
+        },
+
         _safeData: function(data) {
             var result = {};
             Object.keys(data).forEach(function(e) {
@@ -444,6 +475,10 @@
 
         _reloadMap: function() {
             var $map = this.$map || this.$el.find('.map');
+
+            // Show the map if not visible
+            if (!($map.is(':visible')))
+                $map.show();
 
             // Set the UI variables for the loading effect
             if (!this.$el.hasClass('st--is-loading')) {
@@ -496,6 +531,10 @@
             format: 'html',
             text: this.$el.find('textarea').val()
         }
+      },
+
+      isEmpty: function() {
+        return !(this.$el && this.$el.find('textarea').length > 0 && this.$el.find('textarea').val().length > 0);
       },
 
       loadData: function(data) {
