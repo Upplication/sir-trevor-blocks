@@ -1,4 +1,38 @@
 (function() {
+    var Locales = {
+        en: {
+            blocks: {
+                button: {
+                    title: "Button",
+                    styles: {
+                        backgroundColor: "Background Color",
+                        borderWidth: "Border Width",
+                        borderColor: "Border Color",
+                        borderRadius: "Border Radius",
+                        width: "Width",
+                        height: "Height",
+                        italic: "Italic",
+                        bold: "Bold"
+                    },
+                    caption: "Caption",
+                    href: "Link",
+                    onclick: "On Click"
+                },
+                map: {
+                    title: "Map",
+                    hint: "Write an address here!"
+                },
+                widget: {
+                    title: "Widget",
+                    hint: "Paste your external Widget html here"
+                }
+            }
+        }
+    };
+
+    jQuery.extend(SirTrevor.Locales, Locales);
+})();
+(function() {
     "use strict";
 
     if (!SirTrevor)
@@ -6,8 +40,8 @@
 
     SirTrevor.Blocks.Button = SirTrevor.Block.extend({
         type: 'button',
-        title: 'Button',
-        icon_name: 'image',
+        title: function() { return i18n.t('blocks:button:title'); },
+        icon_name: 'button',
 
         /**
             The indexes should be valid css property names.
@@ -27,11 +61,11 @@
             textAlign: 'center',
             // Dynamic Styles
             backgroundColor: {
-                label: 'Background Color',
+                label:  i18n.t('blocks:button:styles:backgroundColor'),
                 input: { type: 'color' }
             },
             borderWidth: {
-                label: 'Border Width',
+                label: i18n.t('blocks:button:styles:borderWidth'),
                 input: {
                     type: 'range',
                     min: 0,
@@ -41,11 +75,11 @@
                 },
             },
             borderColor: {
-                label: 'Border Color',
+                label: i18n.t('blocks:button:styles:borderColor'),
                 input: { type: 'color' }
             },
             borderRadius: {
-                label: 'Border Radius',
+                label: i18n.t('blocks:button:styles:borderRadius'),
                 input: {
                     type: 'range',
                     min: 0,
@@ -55,7 +89,7 @@
                 },
             },
             width: {
-                label: 'Width',
+                label: i18n.t('blocks:button:styles:width'),
                 input: {
                     type: 'range',
                     min: 10,
@@ -65,7 +99,7 @@
                 },
             },
             lineHeight: {
-                label: 'Height',
+                label: i18n.t('blocks:button:styles:height'),
                 input: {
                     type: 'range',
                     min: 0,
@@ -75,14 +109,14 @@
                 },
             },
             fontStyle: {
-                label: 'Italic',
+                label: i18n.t('blocks:button:styles:italic'),
                 input: {
                     type: 'checkbox',
                     value: 'italic'
                 }
             },
             fontWeight: {
-                label: 'Bold',
+                label: i18n.t('blocks:button:styles:bold'),
                 input: {
                     type: 'checkbox',
                     value: 'bold'
@@ -103,15 +137,15 @@
             var staticProperties = [
                 {
                     property: 'caption',
-                    text: 'Caption'
+                    text: i18n.t('blocks:button:styles:bold'),
                 },
                 {
                     property: 'href',
-                    text: 'href'
+                    text: i18n.t('blocks:button:styles:href'),
                 },
                 {
                     property: 'onclick',
-                    text: 'On Click'
+                    text: i18n.t('blocks:button:styles:onclick'),
                 }
             ];
 
@@ -295,6 +329,7 @@
 
     SirTrevor.Blocks.ImageEdit = SirTrevor.Blocks.Image.extend({
 
+        title: function() { return i18n.t('blocks:image:title') },
         type: "image_edit",
         cropTimeout: 1000,
 
@@ -365,7 +400,7 @@
     SirTrevor.Blocks.Map = SirTrevor.Block.extend({
 
         type: "map",
-        title: "Map",
+        title: function() { return i18n.t('blocks:map:title') },
         icon_name: "map",
 
         default_width: 600,
@@ -375,7 +410,7 @@
         map_link: "http://maps.google.com/maps?q=<%= address %>",
 
         editorHTML: function() {
-            var address = $('<input>', { type: 'text', name:'address', placeholder: 'Write an address here!' });
+            var address = $('<input>', { type: 'text', name:'address', placeholder: i18n.t('blocks:button:styles:hint') });
             var zoom = $('<input>', { type: 'hidden', name:'zoom', value: this.default_zoom });
             var width = $('<input>', { type: 'hidden', name:'width', value: this.default_width });
             var height = $('<input>', { type: 'hidden', name:'height', value: this.default_height });
@@ -507,12 +542,22 @@
     "use strict";
 
     if (!SirTrevor)
+        return console.error("SirTrevor.Blocks.VideoNoDrag could not load because SirTrevor wasn't found");
+
+    SirTrevor.Blocks.VideoNoDrag = SirTrevor.Blocks.Video.extend({
+        droppable: false,
+	});
+})();
+(function() {
+    "use strict";
+
+    if (!SirTrevor)
         return console.error("SirTrevor.Blocks.Widget could not load because SirTrevor wasn't found");
 
     SirTrevor.Blocks.Widget = SirTrevor.Block.extend({
 
       type: "widget",
-      title: "Widget",
+      title: function() { return i18n.t('blocks:widget:title') },
       icon_name: "code",
 
       pastable: true,
@@ -521,7 +566,7 @@
         html: [
                 '<div class="st-widget-editor-container">',
                 '  <span class="st-icon"></span>',
-                '  <textarea class="st-paste-block" placeholder="Paste your external Widget html here"></textarea>',
+                '  <textarea class="st-paste-block" placeholder="' + i18n.t('blocks:widget:hint') + '"></textarea>',
                 '</div>',
             ].join('\n')
       },
