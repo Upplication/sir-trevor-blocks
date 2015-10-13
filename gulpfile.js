@@ -39,7 +39,7 @@ gulp.task('tag-minor', function() { return inc('minor'); });
 gulp.task('tag-major', function() { return inc('major'); });
 
 gulp.task('css', function() {
-  gulp.src('./src/css/*.css')
+  gulp.src('./src/css/**/*.css')
       .pipe(concat('sir-trevor-blocks.css'))
       .pipe(gulp.dest("."))
       .pipe(rename('sir-trevor-blocks.min.css'))
@@ -48,7 +48,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function () {
-  gulp.src('./src/js/*.js')
+  gulp.src('./src/js/**/*.js')
       .pipe(concat("sir-trevor-blocks.js"))
       .pipe(gulp.dest("."))
       .pipe(rename('sir-trevor-blocks.min.js'))

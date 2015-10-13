@@ -7,7 +7,7 @@
     SirTrevor.Blocks.Widget = SirTrevor.Block.extend({
 
       type: "widget",
-      title: "Widget",
+      title: function() { return i18n.t('blocks:widget:title') },
       icon_name: "code",
 
       pastable: true,
@@ -16,7 +16,7 @@
         html: [
                 '<div class="st-widget-editor-container">',
                 '  <span class="st-icon"></span>',
-                '  <textarea class="st-paste-block" placeholder="Paste your external Widget html here"></textarea>',
+                '  <textarea class="st-paste-block" placeholder="' + i18n.t('blocks:widget:hint') + '"></textarea>',
                 '</div>',
             ].join('\n')
       },

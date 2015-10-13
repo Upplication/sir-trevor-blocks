@@ -7,7 +7,7 @@
     SirTrevor.Blocks.Map = SirTrevor.Block.extend({
 
         type: "map",
-        title: "Map",
+        title: function() { return i18n.t('blocks:map:title') },
         icon_name: "map",
 
         default_width: 600,
@@ -17,7 +17,7 @@
         map_link: "http://maps.google.com/maps?q=<%= address %>",
 
         editorHTML: function() {
-            var address = $('<input>', { type: 'text', name:'address', placeholder: 'Write an address here!' });
+            var address = $('<input>', { type: 'text', name:'address', placeholder: i18n.t('blocks:button:styles:hint') });
             var zoom = $('<input>', { type: 'hidden', name:'zoom', value: this.default_zoom });
             var width = $('<input>', { type: 'hidden', name:'width', value: this.default_width });
             var height = $('<input>', { type: 'hidden', name:'height', value: this.default_height });

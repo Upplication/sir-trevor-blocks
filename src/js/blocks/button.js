@@ -6,8 +6,8 @@
 
     SirTrevor.Blocks.Button = SirTrevor.Block.extend({
         type: 'button',
-        title: 'Button',
-        icon_name: 'image',
+        title: function() { return i18n.t('blocks:button:title'); },
+        icon_name: 'button',
 
         /**
             The indexes should be valid css property names.
@@ -27,11 +27,11 @@
             textAlign: 'center',
             // Dynamic Styles
             backgroundColor: {
-                label: 'Background Color',
+                label:  i18n.t('blocks:button:styles:backgroundColor'),
                 input: { type: 'color' }
             },
             borderWidth: {
-                label: 'Border Width',
+                label: i18n.t('blocks:button:styles:borderWidth'),
                 input: {
                     type: 'range',
                     min: 0,
@@ -41,11 +41,11 @@
                 },
             },
             borderColor: {
-                label: 'Border Color',
+                label: i18n.t('blocks:button:styles:borderColor'),
                 input: { type: 'color' }
             },
             borderRadius: {
-                label: 'Border Radius',
+                label: i18n.t('blocks:button:styles:borderRadius'),
                 input: {
                     type: 'range',
                     min: 0,
@@ -55,7 +55,7 @@
                 },
             },
             width: {
-                label: 'Width',
+                label: i18n.t('blocks:button:styles:width'),
                 input: {
                     type: 'range',
                     min: 10,
@@ -65,7 +65,7 @@
                 },
             },
             lineHeight: {
-                label: 'Height',
+                label: i18n.t('blocks:button:styles:height'),
                 input: {
                     type: 'range',
                     min: 0,
@@ -75,14 +75,14 @@
                 },
             },
             fontStyle: {
-                label: 'Italic',
+                label: i18n.t('blocks:button:styles:italic'),
                 input: {
                     type: 'checkbox',
                     value: 'italic'
                 }
             },
             fontWeight: {
-                label: 'Bold',
+                label: i18n.t('blocks:button:styles:bold'),
                 input: {
                     type: 'checkbox',
                     value: 'bold'
@@ -103,15 +103,15 @@
             var staticProperties = [
                 {
                     property: 'caption',
-                    text: 'Caption'
+                    text: i18n.t('blocks:button:styles:bold'),
                 },
                 {
                     property: 'href',
-                    text: 'href'
+                    text: i18n.t('blocks:button:styles:href'),
                 },
                 {
                     property: 'onclick',
-                    text: 'On Click'
+                    text: i18n.t('blocks:button:styles:onclick'),
                 }
             ];
 

@@ -6,6 +6,7 @@
 
     SirTrevor.Blocks.ImageEdit = SirTrevor.Blocks.Image.extend({
 
+        title: function() { return i18n.t('blocks:image:title') },
         type: "image_edit",
         cropTimeout: 1000,
 
