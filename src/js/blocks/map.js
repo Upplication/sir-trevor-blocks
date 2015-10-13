@@ -17,7 +17,7 @@
         map_link: "http://maps.google.com/maps?q=<%= address %>",
 
         editorHTML: function() {
-            var address = $('<input>', { type: 'text', name:'address', placeholder: i18n.t('blocks:button:styles:hint') });
+            var address = $('<input>', { type: 'text', name:'address', placeholder: i18n.t('blocks:map:hint') });
             var zoom = $('<input>', { type: 'hidden', name:'zoom', value: this.default_zoom });
             var width = $('<input>', { type: 'hidden', name:'width', value: this.default_width });
             var height = $('<input>', { type: 'hidden', name:'height', value: this.default_height });
