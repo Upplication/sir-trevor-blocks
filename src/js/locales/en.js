@@ -20,7 +20,7 @@
                 },
                 map: {
                     title: "Map",
-                    hint: "Write an address here!"
+                    hint: "Write an address here"
                 },
                 widget: {
                     title: "Widget",
@@ -30,5 +30,5 @@
         }
     };
 
-    jQuery.extend(SirTrevor.Locales, Locales);
+    jQuery.extend(true, SirTrevor.Locales, Locales);
 })();
