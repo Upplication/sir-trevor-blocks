@@ -48,7 +48,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function () {
-  gulp.src('./src/js/**/*.js')
+  gulp.src(['./src/js/locales/*.js', './src/js/**/*.js'])
       .pipe(concat("sir-trevor-blocks.js"))
       .pipe(gulp.dest("."))
       .pipe(rename('sir-trevor-blocks.min.js'))
