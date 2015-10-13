@@ -72,6 +72,7 @@
     if (!SirTrevor)
         return console.error("SirTrevor.Blocks.Button could not load because SirTrevor wasn't found");
 
+
     SirTrevor.Blocks.Button = SirTrevor.Block.extend({
         type: 'button',
         title: function() { return i18n.t('blocks:button:title'); },
@@ -95,11 +96,11 @@
             textAlign: 'center',
             // Dynamic Styles
             backgroundColor: {
-                label:  i18n.t('blocks:button:styles:backgroundColor'),
+                label:  function() { return i18n.t('blocks:button:styles:backgroundColor') },
                 input: { type: 'color' }
             },
             borderWidth: {
-                label: i18n.t('blocks:button:styles:borderWidth'),
+                label:  function() { return i18n.t('blocks:button:styles:borderWidth') },
                 input: {
                     type: 'range',
                     min: 0,
@@ -109,11 +110,11 @@
                 },
             },
             borderColor: {
-                label: i18n.t('blocks:button:styles:borderColor'),
+                label:  function() { return i18n.t('blocks:button:styles:borderColor') },
                 input: { type: 'color' }
             },
             borderRadius: {
-                label: i18n.t('blocks:button:styles:borderRadius'),
+                label:  function() { return i18n.t('blocks:button:styles:borderRadius') },
                 input: {
                     type: 'range',
                     min: 0,
@@ -123,7 +124,7 @@
                 },
             },
             width: {
-                label: i18n.t('blocks:button:styles:width'),
+                label:  function() { return i18n.t('blocks:button:styles:width') },
                 input: {
                     type: 'range',
                     min: 10,
@@ -133,7 +134,7 @@
                 },
             },
             lineHeight: {
-                label: i18n.t('blocks:button:styles:height'),
+                label:  function() { return i18n.t('blocks:button:styles:height') },
                 input: {
                     type: 'range',
                     min: 0,
@@ -143,14 +144,14 @@
                 },
             },
             fontStyle: {
-                label: i18n.t('blocks:button:styles:italic'),
+                label:  function() { return i18n.t('blocks:button:styles:italic') },
                 input: {
                     type: 'checkbox',
                     value: 'italic'
                 }
             },
             fontWeight: {
-                label: i18n.t('blocks:button:styles:bold'),
+                label:  function() { return i18n.t('blocks:button:styles:bold') },
                 input: {
                     type: 'checkbox',
                     value: 'bold'
@@ -171,15 +172,15 @@
             var staticProperties = [
                 {
                     property: 'caption',
-                    text: i18n.t('blocks:button:styles:bold'),
+                    text: i18n.t('blocks:button:caption'),
                 },
                 {
                     property: 'href',
-                    text: i18n.t('blocks:button:styles:href'),
+                    text: i18n.t('blocks:button:href'),
                 },
                 {
                     property: 'onclick',
-                    text: i18n.t('blocks:button:styles:onclick'),
+                    text: i18n.t('blocks:button:onclick'),
                 }
             ];
 
@@ -204,6 +205,10 @@
                     // given config. Each key represents an html tag needed in the css prop DOM editor
                     Object.keys(cssConfig).forEach(function (htmlTag) {
                         var propertyEditorConfig = cssConfig[htmlTag];
+
+                        if (_.isFunction(propertyEditorConfig))
+                            propertyEditorConfig = propertyEditorConfig();
+
                         var divTag = $('<' + htmlTag + '>');
 
                         // Here propertyEditorConfig might be a string or an object.
@@ -444,7 +449,7 @@
         map_link: "http://maps.google.com/maps?q=<%= address %>",
 
         editorHTML: function() {
-            var address = $('<input>', { type: 'text', name:'address', placeholder: i18n.t('blocks:button:styles:hint') });
+            var address = $('<input>', { type: 'text', name:'address', placeholder: i18n.t('blocks:map:hint') });
             var zoom = $('<input>', { type: 'hidden', name:'zoom', value: this.default_zoom });
             var width = $('<input>', { type: 'hidden', name:'width', value: this.default_width });
             var height = $('<input>', { type: 'hidden', name:'height', value: this.default_height });
@@ -600,7 +605,7 @@
         html: [
                 '<div class="st-widget-editor-container">',
                 '  <span class="st-icon"></span>',
-                '  <textarea class="st-paste-block" placeholder="' + i18n.t('blocks:widget:hint') + '"></textarea>',
+                '  <textarea class="st-paste-block" placeholder="<%= i18n.t("blocks:widget:hint") %>"></textarea>',
                 '</div>',
             ].join('\n')
       },
