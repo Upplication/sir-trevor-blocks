@@ -8,7 +8,11 @@ var gulp = require('gulp'),
     git = require('gulp-git'),
     bump = require('gulp-bump'),
     filter = require('gulp-filter'),
-    tag = require('gulp-tag-version');
+    tag = require('gulp-tag-version'),
+    fileinclude = require('gulp-file-include'),
+    htmlclean = require('gulp-htmlclean'),
+    runSequence = require('run-sequence'),
+    p = require('path');
 
 /**
  * Bumping version number and tagging the repository with it.
@@ -39,23 +43,36 @@ gulp.task('tag-minor', function() { return inc('minor'); });
 gulp.task('tag-major', function() { return inc('major'); });
 
 gulp.task('css', function() {
-  gulp.src('./src/css/**/*.css')
-      .pipe(concat('sir-trevor-blocks.css'))
-      .pipe(gulp.dest("."))
-      .pipe(rename('sir-trevor-blocks.min.css'))
-      .pipe(minifyCSS({keepBreaks: false}))
-      .pipe(gulp.dest("."));
+  return gulp.src('./src/css/**/*.css')
+              .pipe(concat('sir-trevor-blocks.css'))
+              .pipe(gulp.dest("."))
+              .pipe(rename('sir-trevor-blocks.min.css'))
+              .pipe(minifyCSS({keepBreaks: false}))
+              .pipe(gulp.dest("."));
 });
 
 gulp.task('js', function () {
-  gulp.src(['./src/js/locales/*.js', './src/js/**/*.js'])
-      .pipe(concat("sir-trevor-blocks.js"))
-      .pipe(gulp.dest("."))
-      .pipe(rename('sir-trevor-blocks.min.js'))
-      .pipe(uglify())
-      .pipe(gulp.dest("."));
+  return gulp.src(['./src/js/locales/*.js', './src/js/**/*.js'])
+              .pipe(fileinclude({
+                basepath: p.join(__dirname, '.templates/')
+              }))
+              .pipe(concat("sir-trevor-blocks.js"))
+              .pipe(gulp.dest("."))
+              .pipe(rename('sir-trevor-blocks.min.js'))
+              .pipe(uglify())
+              .pipe(gulp.dest("."));
 });
 
+gulp.task('templates', function() {
+  return gulp.src('./src/templates/**/*.html')
+              .pipe(fileinclude({
+                basepath: __dirname + '/src/templates'
+              }))
+              .pipe(htmlclean({
+                protect: /<% .*? %>/g
+              }))
+              .pipe(gulp.dest(p.join(__dirname, '.templates/')))
+})
 
 gulp.task('doc', function() {
     gulp.src("./src/*.js")
@@ -63,7 +80,10 @@ gulp.task('doc', function() {
 })
 gulp.task('docs', ['doc'])
 
-gulp.task('compile', ['js', 'css'])
+gulp.task('compile', function (cb) {
+  return runSequence('templates', ['js', 'css'], cb);
+})
+
 gulp.task('patch', ['compile', 'tag-patch'])
 gulp.task('feature', ['compile', 'tag-minor'])
 gulp.task('release', ['compile', 'tag-major'])
