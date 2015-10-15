@@ -1,3 +1,44 @@
+.st-block[data-type="button"] .st-preview {
+	text-align: center;
+	margin: 0 auto;
+	transition: opacity 0.25s ease-out;
+	border-style: solid;
+	box-sizing: border-box;
+	overflow: hidden;
+	color: #4D4D4D;
+	cursor: pointer;
+}
+
+.st-block[data-type="button"] .st-preview * {
+	color: inherit;
+	background-color: inherit;
+	width: 100%;
+	line-height: inherit;
+	border-color: inherit;
+	border-radius: inherit;
+	border-width: inherit;
+	min-height: auto;
+}
+
+.st-block[data-type="button"] .st-preview:hover {
+	opacity: 0.8;
+}
+
+.st-block[data-type="button"] .st-editor .st-column {
+	width: 50%;
+	float: left;
+}
+
+.st-block[data-type="button"] .st-editor .st-row:after {
+	clear: both;
+	display: block;
+	content: '';
+}
+
+.st-block[data-type="button"] .st-preview .st-text-bloc {
+    min-height: 1em;
+}
+
 .st-block[data-type="widget"] .st-widget-editor-container {
 	text-align: center;
 	color: #42474B;

@@ -13,12 +13,7 @@
       pastable: true,
 
       paste_options: {
-        html: [
-                '<div class="st-widget-editor-container">',
-                '  <span class="st-icon"></span>',
-                '  <textarea class="st-paste-block" placeholder="<%= i18n.t("blocks:widget:hint") %>"></textarea>',
-                '</div>',
-            ].join('\n')
+        html: '@@include("widget.html")'
       },
 
       _serializeData: function() {

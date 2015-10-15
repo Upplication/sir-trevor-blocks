@@ -11,12 +11,11 @@
                         borderRadius: "Border Radius",
                         width: "Width",
                         height: "Height",
-                        italic: "Italic",
-                        bold: "Bold"
                     },
-                    caption: "Caption",
-                    href: "Link",
-                    onclick: "On Click"
+                    hint: {
+                        text: '¡Escribe aqui el texto de tu Boton!',
+                        href: 'Enlace'
+                    }
                 },
                 map: {
                     title: "Map",

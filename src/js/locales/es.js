@@ -10,13 +10,12 @@
                         borderColor: "Color del borde",
                         borderRadius: "Radio del borde",
                         width: "Ancho",
-                        height: "Alto",
-                        italic: "Cursiva",
-                        bold: "Negrita"
+                        height: "Alto"
                     },
-                    caption: "Texto",
-                    href: "Enlace",
-                    onclick: "On Click"
+                    hint: {
+                        text: '¡Escribe aqui el texto de tu Boton!',
+                        href: 'Enlace'
+                    }
                 },
                 map: {
                     title: "Mapa",
