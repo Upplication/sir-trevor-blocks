@@ -11,12 +11,11 @@
                         borderRadius: "Border Radius",
                         width: "Width",
                         height: "Height",
-                        italic: "Italic",
-                        bold: "Bold"
                     },
-                    caption: "Caption",
-                    href: "Link",
-                    onclick: "On Click"
+                    hint: {
+                        text: '¡Escribe aqui el texto de tu Boton!',
+                        href: 'Enlace'
+                    }
                 },
                 map: {
                     title: "Map",
@@ -44,13 +43,12 @@
                         borderColor: "Color del borde",
                         borderRadius: "Radio del borde",
                         width: "Ancho",
-                        height: "Alto",
-                        italic: "Cursiva",
-                        bold: "Negrita"
+                        height: "Alto"
                     },
-                    caption: "Texto",
-                    href: "Enlace",
-                    onclick: "On Click"
+                    hint: {
+                        text: '¡Escribe aqui el texto de tu Boton!',
+                        href: 'Enlace'
+                    }
                 },
                 map: {
                     title: "Mapa",
@@ -72,292 +70,95 @@
     if (!SirTrevor)
         return console.error("SirTrevor.Blocks.Button could not load because SirTrevor wasn't found");
 
+    var defaults = {
+        "background-color": "#00CA6B".
+        "width": "100%",
+        "line-height": "initial",
+        "border-color": "#4D4D4D",
+        "border-radius": "2px",
+        "border-width": "2px"
+    };
 
     SirTrevor.Blocks.Button = SirTrevor.Block.extend({
         type: 'button',
         title: function() { return i18n.t('blocks:button:title'); },
         icon_name: 'button',
 
-        /**
-            The indexes should be valid css property names.
-            The values can be:
-                - A fixed value, which will be asigned to the given property
-                - An object containing the config for the input needed for its customization
-
-            NOTE: CSS Properties can be either way the name between ' or ", or its camelized version.
-        */
-        cssProperties: {
-            // a-Tag fixes
-            display: 'block',
-            textDecoration: 'none',
-            // Static styles
-            margin: '0 auto',
-            border: '2px solid',
-            textAlign: 'center',
-            // Dynamic Styles
-            backgroundColor: {
-                label:  function() { return i18n.t('blocks:button:styles:backgroundColor') },
-                input: { type: 'color' }
-            },
-            borderWidth: {
-                label:  function() { return i18n.t('blocks:button:styles:borderWidth') },
-                input: {
-                    type: 'range',
-                    min: 0,
-                    max: 6,
-                    step: 1,
-                    units: 'px'
-                },
-            },
-            borderColor: {
-                label:  function() { return i18n.t('blocks:button:styles:borderColor') },
-                input: { type: 'color' }
-            },
-            borderRadius: {
-                label:  function() { return i18n.t('blocks:button:styles:borderRadius') },
-                input: {
-                    type: 'range',
-                    min: 0,
-                    max: 100,
-                    step: 1,
-                    units: 'px'
-                },
-            },
-            width: {
-                label:  function() { return i18n.t('blocks:button:styles:width') },
-                input: {
-                    type: 'range',
-                    min: 10,
-                    max: 100,
-                    step: 1,
-                    units: '%'
-                },
-            },
-            lineHeight: {
-                label:  function() { return i18n.t('blocks:button:styles:height') },
-                input: {
-                    type: 'range',
-                    min: 0,
-                    max: 500,
-                    step: 1,
-                    units: '%'
-                },
-            },
-            fontStyle: {
-                label:  function() { return i18n.t('blocks:button:styles:italic') },
-                input: {
-                    type: 'checkbox',
-                    value: 'italic'
-                }
-            },
-            fontWeight: {
-                label:  function() { return i18n.t('blocks:button:styles:bold') },
-                input: {
-                    type: 'checkbox',
-                    value: 'bold'
-                }
-            }
-        },
-
-        _namePrepend: 'st-button',
-        _cssInputNamePrepend: 'css_',
-
-        // Dynamic generation of the editor layout
         editorHTML: function() {
-            var self = this;
-            var component = $('<div>', { class: 'st-button' }); 
-            var editor = $('<div>', { class: 'st-button-editor' });
-            var preview = $('<div>', { class: 'st-button-preview' });
-
-            var staticProperties = [
-                {
-                    property: 'caption',
-                    text: i18n.t('blocks:button:caption'),
-                },
-                {
-                    property: 'href',
-                    text: i18n.t('blocks:button:href'),
-                },
-                {
-                    property: 'onclick',
-                    text: i18n.t('blocks:button:onclick'),
-                }
-            ];
-
-            staticProperties.forEach(function (p) {
-                var propDiv = $('<div>');
-                propDiv.addClass(self._namePrepend + '-style');
-                propDiv.addClass(self._namePrepend + '-style-' + p.property);
-                propDiv.append($('<input>', { type: 'text', name: p.property, placeholder: p.text }));
-                editor.append(propDiv);
-            });
-
-            Object.keys(self.cssProperties).forEach(function (cssProperty) {
-                var div = $('<div>');
-                var cssConfig = self.cssProperties[cssProperty];
-                cssProperty = self._decamelize(cssProperty);
-                div.addClass(self._namePrepend + '-style');
-                div.addClass(self._namePrepend + '-style-' + cssProperty);
-
-                if (_.isObject(cssConfig)) {
-                    // We have an object instead of a direct value for the css property
-                    // This means this css property can be edited, and we need to parse the
-                    // given config. Each key represents an html tag needed in the css prop DOM editor
-                    Object.keys(cssConfig).forEach(function (htmlTag) {
-                        var propertyEditorConfig = cssConfig[htmlTag];
-
-                        if (_.isFunction(propertyEditorConfig))
-                            propertyEditorConfig = propertyEditorConfig();
-
-                        var divTag = $('<' + htmlTag + '>');
-
-                        // Here propertyEditorConfig might be a string or an object.
-                        // If it is a string is added as the inner html of to the given htmlTag
-                        // otherwise is parsed as attributes for the given html tag
-                        if (_.isObject(propertyEditorConfig)) {
-                            Object.keys(propertyEditorConfig).forEach(function (htmlTagAttr) {
-                                var htmlTagValue = propertyEditorConfig[htmlTagAttr];
-                                if (htmlTagAttr != 'html')
-                                    divTag.attr(htmlTagAttr, htmlTagValue);
-                                else
-                                    divTag.html(htmlTagValue);
-                            });
-
-                            if (!divTag.attr('name') || divTag.attr('name').length <= 0)
-                                divTag.attr('name', self._cssInputNamePrepend + cssProperty);
-                        } else
-                            divTag.html(propertyEditorConfig);
-
-                        div.append(divTag);
-                    })
-                } else // Its not a config object, its a direct css value
-                    div.append($('<input>', { type: 'hidden', name: self._cssInputNamePrepend + cssProperty, value: cssConfig}));
-
-                editor.append(div);
-            })
-
-            component.append(editor);
-            self.$preview = component.append(preview);;
-
-            return component.html();
-        },
-
-        // http://stackoverflow.com/questions/11867545
-        _getBackgroundColorForForegroundColor: function (hexcolor) {
-            hexcolor = hexcolor.substr(1);
-            var r = parseInt(hexcolor.substr(0,2), 16);
-            var g = parseInt(hexcolor.substr(2,2), 16);
-            var b = parseInt(hexcolor.substr(4,2), 16);
-            var yiq = ((r*299) + (g*587) + (b*114)) / 1000;
-            return (yiq >= 128) ? 'black' : 'white';
-        },
-
-        loadData: function(data) {
-            var self = this;
-
-            // Ignore these fields on the rebuild
-            delete data.text;
-            delete data.format;
-
-            Object.keys(data).forEach(function (key) {
-                var value = data[key];
-
-                if (_.isObject(value)) {
-                    Object.keys(value).forEach(function (childKey) {
-                        var childValue = value[childKey];
-                        var selector = '[class*="' + self._namePrepend + '-' +  key + '-' + childKey + '"] > input';
-                        var valueEditor = self.$editor.find(selector);
-                        if (valueEditor.attr('type') == 'range')
-                            valueEditor.val(parseInt(childValue));
-                        else if (valueEditor.attr('type') == 'checkbox')
-                            valueEditor.prop('checked', valueEditor.val() == childValue);
-                        else
-                            valueEditor.val(childValue);
-                    })
-                } else
-                    self.$editor.find('[name="' + key + '"]').val(value);
-            })
-
-            // Force the render call
-            self._renderPreview(self)();
+            return '<div class="st-editor"><div class="st-preview"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row"> <input name="href" type="text"></div><div class="st-row"><div class="st-column"><div class="st-control"><div class="st-icon">C</div> <input class="st-value" name="css-background-color" type="color"></div><div class="st-control"><div class="st-icon">W</div> <input class="st-value" name="css-width" type="range" units="%" step="1" max="100" min="10"></div><div class="st-control"><div class="st-icon">H</div> <input class="st-value" name="css-line-height" type="range" units="%" step="1" max="500" min="10"></div></div><div class="st-column"><div class="st-control"><div class="st-icon">B</div> <input class="st-value" name="css-border-color" type="color"></div><div class="st-control"><div class="st-icon">B</div> <input class="st-value" name="css-border-width" type="range" units="px" step="1" max="6" min="0"></div><div class="st-control"><div class="st-icon">B</div> <input class="st-value" name="css-border-radius" type="range" units="px" step="1" max="100" min="0"></div></div></div></div>';
         },
 
         onBlockRender: function() {
-            this.$editor.on('change', this._renderPreview(this));
-            this.$editor.on('input', this._renderPreview(this));
+            // Setup shortcuts
+            this.$preview = this.$el.find('.st-preview'); 
+            this.$css = this.$editor.find('[name^="css-"]');
+
+            // Set the default button text
+            this.$preview.find('[contenteditable="true"]').html(i18n.t("blocks:button:hint:text"));
+
+            // Listen for css inputs changes to refresh the preview
+            this.$css.on('change input', this._onCssPropertyChange.bind(this));
+            // Listen for the background-color changes to refresh the foreground color
+            this.$css.filter('[name="css-background-color"]').on('change input', this._onBackgroundColorChange.bind(this));
+
+            // Add the default class and a self destroying listener for removing it
+            this.$preview.addClass('default');
+            this._loadDefaultProperties();
         },
 
-        _renderPreview: function(self) {
-            return function (event) {
-                var previewHTML = self.toHTML();
-                self.$el.find('.st-button-preview').html(previewHTML);
+        _loadDefaultProperties: function() {
+            this.$css.each(function (i, el) {
+                var $el = $(el);
+                var property = $el.attr('name').replace(/^css\-/, '');
+
+                var rawValue = $el.val();
+                var units = $el.attr('units') || "";
+                var value = rawValue + units;
+
+                var defaultValue = defaults[property];
+                var defaultValueRaw = defaultValue.replace(units, '');
+
+                $el.val(defaultValueRaw);
+            }.bind(this));
+        },
+
+        _onCssPropertyChange: function (ev) {
+            var $target = $(ev.target);
+            // Get the css property from the name
+            var prop = $target.attr('name').replace(/^css\-/, '');
+            var val = $target.val();
+
+            if ($target.attr('units') && $target.attr('units').length > 0)
+                val += $target.attr('units');
+
+            this.$preview.css(prop, val);
+        },
+
+        _onBackgroundColorChange: function() {
+            this.$preview.css('color', (this._getFontColor.bind(this))());
+        },
+
+        _getFontColor: function (hexc) {
+            var hexPattern = /^#/;
+            var rgbPattern = /^rgb\(.*([0-9]+).*,.*([0-9]+),.*([0-9]+).*\)/;
+
+            var hexcolor = (hexc || this.$preview.css('background-color'));
+            var r, g, b;
+            if (hexPattern.test(hexcolor)) {
+                hexcolor = hexcolor.substr(1);
+                r = parseInt(hexcolor.substr(0,2), 16);
+                g = parseInt(hexcolor.substr(2,2), 16);
+                b = parseInt(hexcolor.substr(4,2), 16);
+            } else if (rgbPattern.test(hexcolor)) {
+                var rgbMatch = rgb.exec();
+                r = parseInt(rgbMatch[1]);
+                g = parseInt(rgbMatch[2]);
+                b = parseInt(rgbMatch[3]);
             }
+
+            var yiq = ((r*299) + (g*587) + (b*114)) / 1000;
+            return (yiq >= 128) ? 'inherit' : '#FFFFFF';
         },
-
-        _decamelize: function(str) {
-            return str.replace(/([A-Z])/g, '-' + '$1').toLowerCase();
-        },
-
-        // Override SirTrevor.Block default serialization of blocks for avoiding redundant data
-        _serializeData: function() {
-            var self = this;
-
-            var result = {};
-            result.caption = self.$el.find('input[name="caption"]').val();
-            result.href = self.$el.find('input[name="href"]').val();
-            result.onclick = self.$el.find('input[name="onclick"]').val();
-            result.style = {};
-
-            // Process the styles
-            var styles = self.$el.find('input[name^="' + self._cssInputNamePrepend + '"]');
-            styles.each(function (idx, elem) {
-                elem = $(elem);
-                var rgxCssPropName = new RegExp('^' + self._cssInputNamePrepend, 'i');
-                var name = elem.attr('name');
-                var units = elem.attr('units');
-                var property = name.replace(rgxCssPropName, '');
-
-                if (rgxCssPropName.test(name) && property.length > 0) {
-                    var cssValue = elem.val();
-
-                    if (!isNaN(cssValue)) { // If it is a number
-                        if (units && units.length > 0) // Check if we were given any options
-                            cssValue += units; 
-                        else // asume its a fixed px value
-                            cssValue += 'px';                
-                    }
-
-                    if ((elem.attr('type') == 'checkbox' || elem.attr('type') == 'radio') && !elem.is(':checked'))
-                        cssValue = "";
-                    
-                    result.style[property] = cssValue;
-                }
-            })
-
-            result.text = self.toHTML(result);
-            result.format = 'html';
-
-            return result;
-        },
-
-        toHTML: function(data) {
-            var self = this;
-            data = data || self.getBlockData();
-            var preview = $('<a>');
-
-            preview.attr('onclick', data.onclick);
-            preview.attr('href', data.href);
-            preview.html(data.caption);
-
-            Object.keys(data.style).forEach(function (key) {
-                preview.css(key, data.style[key]);
-            });
-
-            if (data.style['background-color'])
-                preview.css('color', self._getBackgroundColorForForegroundColor(data.style['background-color']));
-
-            return preview[0].outerHTML;
-        }
     })
 })();
 (function() {
@@ -602,12 +403,7 @@
       pastable: true,
 
       paste_options: {
-        html: [
-                '<div class="st-widget-editor-container">',
-                '  <span class="st-icon"></span>',
-                '  <textarea class="st-paste-block" placeholder="<%= i18n.t("blocks:widget:hint") %>"></textarea>',
-                '</div>',
-            ].join('\n')
+        html: '<div class="st-widget-editor-container"><span class="st-icon"></span><textarea class="st-paste-block" placeholder="<%= i18n.t("blocks:widget:hint") %>"></textarea></div>'
       },
 
       _serializeData: function() {
