@@ -1,4 +1,6 @@
 var gulp = require('gulp'),
+    plumber = require('gulp-plumber'),
+    gutil = require('gulp-util'),
     concat = require('gulp-concat'),
     addsrc = require('gulp-add-src'),
     rename = require('gulp-rename'),
@@ -13,6 +15,20 @@ var gulp = require('gulp'),
     htmlclean = require('gulp-htmlclean'),
     runSequence = require('run-sequence'),
     p = require('path');
+
+// Overwrite original gulpsrc for properly handling error events
+// https://www.timroes.de/2015/01/06/proper-error-handling-in-gulp-js/
+var gulp_src = gulp.src;
+gulp.src = function() {
+  return gulp_src.apply(gulp, arguments)
+    .pipe(plumber(function(error) {
+      // Output an error message
+      gutil.log(gutil.colors.red('Error (' + error.plugin + '): ' + error.message));
+      // emit the end event, to properly end the task
+      this.emit('end');
+    })
+  );
+};
 
 /**
  * Bumping version number and tagging the repository with it.
