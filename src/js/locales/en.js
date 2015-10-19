@@ -14,7 +14,7 @@
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
-                        href: 'Enlace'
+                        href: 'Write an email, phone number or web URL here'
                     }
                 },
                 map: {

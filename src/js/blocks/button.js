@@ -29,6 +29,10 @@
             if ($(this.getTextBlockHTML()).text().length <= 0)
                 this.setTextBlockHTML(i18n.t("blocks:button:hint:text"));
 
+            this.$editor.find('[name="user-href"]')
+                .attr('placeholder', i18n.t("blocks:button:hint:href"))
+                .on('change input', this._onHrefChange.bind(this));// Listen for suer href changes and update the actual href
+
             // Listen for css inputs changes to refresh the preview
             this.$css.on('change input', this._onCssPropertyChange.bind(this));
             // Listen for spectrum color changes (as they click on the color pallete)
@@ -46,6 +50,23 @@
             .forEach(function (key) {
                 this.$el.find('[name="'+ key + '"]').val(data[key]);
             }.bind(this))
+            // Hide controls and disable edit
+            this.$el.find('.st-control').hide();
+            this.$el.find('.st-text-block').attr('contenteditable', 'false');
+        },
+
+        _onHrefChange: function(ev) {
+            var $source = $(ev.target);
+            var value = $source.val();
+            var $target = this.$editor.find('[name="href"]');
+
+            // ref: http://www.regular-expressions.info/email.html
+            if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) 
+                $target.val('mailto:' + value);
+            else if (/^\+?[0-9\-]+$/.test(value))
+                $target.val('tel:' + value);
+            else
+                $target.val(value);
         },
 
         _onCssPropertyChange: function (ev, value) {
