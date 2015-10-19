@@ -70,63 +70,58 @@
     if (!SirTrevor)
         return console.error("SirTrevor.Blocks.Button could not load because SirTrevor wasn't found");
 
-    var defaults = {
-        "background-color": "#00CA6B".
-        "width": "100%",
-        "line-height": "initial",
-        "border-color": "#4D4D4D",
-        "border-radius": "2px",
-        "border-width": "2px"
-    };
-
     SirTrevor.Blocks.Button = SirTrevor.Block.extend({
         type: 'button',
         title: function() { return i18n.t('blocks:button:title'); },
         icon_name: 'button',
 
         editorHTML: function() {
-            return '<div class="st-editor"><div class="st-preview"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row"> <input name="href" type="text"></div><div class="st-row"><div class="st-column"><div class="st-control"><div class="st-icon">C</div> <input class="st-value" name="css-background-color" type="color"></div><div class="st-control"><div class="st-icon">W</div> <input class="st-value" name="css-width" type="range" units="%" step="1" max="100" min="10"></div><div class="st-control"><div class="st-icon">H</div> <input class="st-value" name="css-line-height" type="range" units="%" step="1" max="500" min="10"></div></div><div class="st-column"><div class="st-control"><div class="st-icon">B</div> <input class="st-value" name="css-border-color" type="color"></div><div class="st-control"><div class="st-icon">B</div> <input class="st-value" name="css-border-width" type="range" units="px" step="1" max="6" min="0"></div><div class="st-control"><div class="st-icon">B</div> <input class="st-value" name="css-border-radius" type="range" units="px" step="1" max="100" min="0"></div></div></div></div>';
+            return '<div class="st-editor"><div class="st-preview"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row"><div class="st-icon st-icon-link"></div> <input name="href" type="text"></div><div class="st-row"><div class="st-column"><div class="st-control"><div class="st-icon st-icon-color"></div> <input class="st-value" name="css-background-color" type="color" value="#00CA6B"></div><div class="st-control"><div class="st-icon st-icon-width"></div> <input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10"></div><div class="st-control"><div class="st-icon st-icon-height"></div> <input class="st-value" name="css-line-height" type="range" value="100" units="%" step="1" max="500" min="10"></div></div><div class="st-column"><div class="st-control"><div class="st-icon st-icon-color"></div> <input class="st-value" name="css-border-color" type="color" value="#4D4D4D"></div><div class="st-control"><div class="st-icon st-icon-border"></div> <input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0"></div><div class="st-control"><div class="st-icon st-icon-radius"></div> <input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0"></div></div></div></div>';
         },
 
         onBlockRender: function() {
             // Setup shortcuts
             this.$preview = this.$el.find('.st-preview'); 
-            this.$css = this.$editor.find('[name^="css-"]');
+            this.$css = this.$editor.find('[name^="css-"]'); 
+
+            // setup spectrum
+            this.$editor.find('[type="color"]').spectrum({
+                showInput: true,
+                showButtons: false,
+                preferredFormat: "hex",
+            });
 
             // Set the default button text
-            this.$preview.find('[contenteditable="true"]').html(i18n.t("blocks:button:hint:text"));
+            if ($(this.getTextBlockHTML()).text().length <= 0)
+                this.setTextBlockHTML(i18n.t("blocks:button:hint:text"));
 
             // Listen for css inputs changes to refresh the preview
             this.$css.on('change input', this._onCssPropertyChange.bind(this));
+            // Listen for spectrum color changes (as they click on the color pallete)
+            this.$css.filter('[name*="color"]').on('move.spectrum', this._onCssPropertyChange.bind(this));
             // Listen for the background-color changes to refresh the foreground color
-            this.$css.filter('[name="css-background-color"]').on('change input', this._onBackgroundColorChange.bind(this));
-
-            // Add the default class and a self destroying listener for removing it
-            this.$preview.addClass('default');
-            this._loadDefaultProperties();
+            this.$css.filter('[name="css-background-color"]').on('change input', this._onBackgroundColorChange.bind(this))
+            this.$css.filter('[name="css-background-color"]').on('move.spectrum', this._onBackgroundColorChange.bind(this));
+            // Refresh the preview
+            this.$css.trigger('change');
         },
 
-        _loadDefaultProperties: function() {
-            this.$css.each(function (i, el) {
-                var $el = $(el);
-                var property = $el.attr('name').replace(/^css\-/, '');
-
-                var rawValue = $el.val();
-                var units = $el.attr('units') || "";
-                var value = rawValue + units;
-
-                var defaultValue = defaults[property];
-                var defaultValueRaw = defaultValue.replace(units, '');
-
-                $el.val(defaultValueRaw);
-            }.bind(this));
+        loadData: function(data) {
+            this.setTextBlockHTML(data.text);
+            Object.keys(data)
+            .forEach(function (key) {
+                this.$el.find('[name="'+ key + '"]').val(data[key]);
+            }.bind(this))
         },
 
-        _onCssPropertyChange: function (ev) {
+        _onCssPropertyChange: function (ev, value) {
             var $target = $(ev.target);
             // Get the css property from the name
             var prop = $target.attr('name').replace(/^css\-/, '');
-            var val = $target.val();
+            var val = value ? value.toString() : $target.val();
+
+            if (value)
+                $target.val(value);
 
             if ($target.attr('units') && $target.attr('units').length > 0)
                 val += $target.attr('units');
@@ -134,31 +129,23 @@
             this.$preview.css(prop, val);
         },
 
-        _onBackgroundColorChange: function() {
-            this.$preview.css('color', (this._getFontColor.bind(this))());
+        _onBackgroundColorChange: function(c) {
+            this.$preview.css('color', (this._getFontColor.bind(this))(c));
         },
 
-        _getFontColor: function (hexc) {
+        _getFontColor: function (c) {
             var hexPattern = /^#/;
             var rgbPattern = /^rgb\(.*([0-9]+).*,.*([0-9]+),.*([0-9]+).*\)/;
 
-            var hexcolor = (hexc || this.$preview.css('background-color'));
-            var r, g, b;
-            if (hexPattern.test(hexcolor)) {
-                hexcolor = hexcolor.substr(1);
-                r = parseInt(hexcolor.substr(0,2), 16);
-                g = parseInt(hexcolor.substr(2,2), 16);
-                b = parseInt(hexcolor.substr(4,2), 16);
-            } else if (rgbPattern.test(hexcolor)) {
-                var rgbMatch = rgb.exec();
-                r = parseInt(rgbMatch[1]);
-                g = parseInt(rgbMatch[2]);
-                b = parseInt(rgbMatch[3]);
-            }
+            var color = $(c.target).spectrum('get').toHex();
+
+            var r = parseInt(color.substr(0,2), 16);
+            var g = parseInt(color.substr(2,2), 16);
+            var b = parseInt(color.substr(4,2), 16);
 
             var yiq = ((r*299) + (g*587) + (b*114)) / 1000;
             return (yiq >= 128) ? 'inherit' : '#FFFFFF';
-        },
+        }
     })
 })();
 (function() {
