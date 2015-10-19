@@ -14,7 +14,7 @@
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
-                        href: 'Enlace'
+                        href: 'Write an email, phone number or web URL here'
                     }
                 },
                 map: {
@@ -47,7 +47,7 @@
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
-                        href: 'Enlace'
+                        href: 'Escribe aqui un email, un telefono o una web'
                     }
                 },
                 map: {
@@ -76,7 +76,7 @@
         icon_name: 'button',
 
         editorHTML: function() {
-            return '<div class="st-editor"><div class="st-preview"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row"><div class="st-icon st-icon-link"></div> <input name="href" type="text"></div><div class="st-row"><div class="st-column"><div class="st-control"><div class="st-icon st-icon-color"></div> <input class="st-value" name="css-background-color" type="color" value="#00CA6B"></div><div class="st-control"><div class="st-icon st-icon-width"></div> <input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10"></div><div class="st-control"><div class="st-icon st-icon-height"></div> <input class="st-value" name="css-line-height" type="range" value="100" units="%" step="1" max="500" min="10"></div></div><div class="st-column"><div class="st-control"><div class="st-icon st-icon-color"></div> <input class="st-value" name="css-border-color" type="color" value="#4D4D4D"></div><div class="st-control"><div class="st-icon st-icon-border"></div> <input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0"></div><div class="st-control"><div class="st-icon st-icon-radius"></div> <input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0"></div></div></div></div>';
+            return '<div class="st-editor"><div class="st-preview"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row"><div class="st-control"><div class="st-icon st-icon-link"></div><div class="st-input-container"> <input name="href" type="hidden"> <input name="user-href" type="text"></div></div></div><div class="st-row"><div class="st-column"><div class="st-control"><div class="st-icon st-icon-color"></div><div class="st-input-container"> <input class="st-value" name="css-background-color" type="color" value="#00CA6B"></div></div><div class="st-control"><div class="st-icon st-icon-width"></div><div class="st-input-container"> <input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10"></div></div><div class="st-control"><div class="st-icon st-icon-height"></div><div class="st-input-container"> <input class="st-value" name="css-line-height" type="range" value="100" units="%" step="1" max="500" min="10"></div></div></div><div class="st-column"><div class="st-control"><div class="st-icon st-icon-color"></div><div class="st-input-container"> <input class="st-value" name="css-border-color" type="color" value="#4D4D4D"></div></div><div class="st-control"><div class="st-icon st-icon-border"></div><div class="st-input-container"> <input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0"></div></div><div class="st-control"><div class="st-icon st-icon-radius"></div><div class="st-input-container"> <input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0"></div></div></div></div></div>';
         },
 
         onBlockRender: function() {
@@ -95,6 +95,10 @@
             if ($(this.getTextBlockHTML()).text().length <= 0)
                 this.setTextBlockHTML(i18n.t("blocks:button:hint:text"));
 
+            this.$editor.find('[name="user-href"]')
+                .attr('placeholder', i18n.t("blocks:button:hint:href"))
+                .on('change input', this._onHrefChange.bind(this));// Listen for suer href changes and update the actual href
+
             // Listen for css inputs changes to refresh the preview
             this.$css.on('change input', this._onCssPropertyChange.bind(this));
             // Listen for spectrum color changes (as they click on the color pallete)
@@ -112,6 +116,23 @@
             .forEach(function (key) {
                 this.$el.find('[name="'+ key + '"]').val(data[key]);
             }.bind(this))
+            // Hide controls and disable edit
+            this.$el.find('.st-control').hide();
+            this.$el.find('.st-text-block').attr('contenteditable', 'false');
+        },
+
+        _onHrefChange: function(ev) {
+            var $source = $(ev.target);
+            var value = $source.val();
+            var $target = this.$editor.find('[name="href"]');
+
+            // ref: http://www.regular-expressions.info/email.html
+            if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) 
+                $target.val('mailto:' + value);
+            else if (/^\+?[0-9\-]+$/.test(value))
+                $target.val('tel:' + value);
+            else
+                $target.val(value);
         },
 
         _onCssPropertyChange: function (ev, value) {
