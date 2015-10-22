@@ -137,9 +137,7 @@
 
             this.$('input').each(function(index, input){
                 if (input.getAttribute('name')) {
-                    console.log(input);
                     var val = input.value;
-                    console.log(input.getAttribute('units'));
                     if (input.getAttribute('units'))
                         val += input.getAttribute('units');
                     data[input.getAttribute('name')] = val;
