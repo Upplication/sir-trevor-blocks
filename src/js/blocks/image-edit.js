@@ -37,12 +37,17 @@
                         // If we have a timer cache means user is cropping, cancel the previous timer
                         if (timerCache)
                             clearTimeout(timerCache);
-                        else
-                            SirTrevor.EventBus.trigger('image_edit:crop:start', [e]);
+                        else {
+                            var e2 = jQuery.Event('crop:start');
+                            e2.originalEvent = e;
+                            this.$el.triggerHandler(e2, [this.$inputs.first()]);
+                        }
 
                         timerCache = setTimeout(function () {
                             timerCache = null;
-                            SirTrevor.EventBus.trigger('image_edit:crop:finish', [e]);
+                            var e2 = jQuery.Event('crop:finish');
+                            e2.originalEvent = e;
+                            this.$el.triggerHandler(e2, [this.$inputs.first()]);
                         }.bind(this), this.cropTimeout);
                     }.bind(this)
                 });
