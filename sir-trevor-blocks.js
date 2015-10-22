@@ -145,7 +145,7 @@
             });
 
             // Save also the color
-            data['css-color'] = this._getFontColor();
+            data['css-color'] = this.$preview.css('color');
 
             return data;
         },
