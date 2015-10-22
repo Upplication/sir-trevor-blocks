@@ -121,6 +121,28 @@
             this.$el.find('.st-text-block').attr('contenteditable', 'false');
         },
 
+        _serializeData: function() {
+            var data = {};
+
+            if (this.hasTextBlock()) {
+                data.text = this.getTextBlockHTML();
+                data.format = 'html';
+            }
+
+            this.$('input').each(function(index, input){
+                if (input.getAttribute('name')) {
+                    console.log(input);
+                    var val = input.value;
+                    console.log(input.getAttribute('units'));
+                    if (input.getAttribute('units'))
+                        val += input.getAttribute('units');
+                    data[input.getAttribute('name')] = val;
+                }
+            });
+
+            return data;
+        },
+
         _onHrefChange: function(ev) {
             var $source = $(ev.target);
             var value = $source.val();
@@ -208,12 +230,17 @@
                         // If we have a timer cache means user is cropping, cancel the previous timer
                         if (timerCache)
                             clearTimeout(timerCache);
-                        else
-                            SirTrevor.EventBus.trigger('image_edit:crop:start', [e]);
+                        else {
+                            var e2 = jQuery.Event('crop:start');
+                            e2.originalEvent = e;
+                            this.$el.triggerHandler(e2, [this.$inputs.first()]);
+                        }
 
                         timerCache = setTimeout(function () {
                             timerCache = null;
-                            SirTrevor.EventBus.trigger('image_edit:crop:finish', [e]);
+                            var e2 = jQuery.Event('crop:finish');
+                            e2.originalEvent = e;
+                            this.$el.triggerHandler(e2, [this.$inputs.first()]);
                         }.bind(this), this.cropTimeout);
                     }.bind(this)
                 });
