@@ -55,6 +55,28 @@
             this.$el.find('.st-text-block').attr('contenteditable', 'false');
         },
 
+        _serializeData: function() {
+            var data = {};
+
+            if (this.hasTextBlock()) {
+                data.text = this.getTextBlockHTML();
+                data.format = 'html';
+            }
+
+            this.$('input').each(function(index, input){
+                if (input.getAttribute('name')) {
+                    console.log(input);
+                    var val = input.value;
+                    console.log(input.getAttribute('units'));
+                    if (input.getAttribute('units'))
+                        val += input.getAttribute('units');
+                    data[input.getAttribute('name')] = val;
+                }
+            });
+
+            return data;
+        },
+
         _onHrefChange: function(ev) {
             var $source = $(ev.target);
             var value = $source.val();
