@@ -145,7 +145,8 @@
             });
 
             // Save also the color
-            data['css-color'] = this.$preview.css('color');
+            if (this.$preview)
+                data['css-color'] = this.$preview.css('color');
 
             return data;
         },
