@@ -15,7 +15,9 @@
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
                         href: 'Escribe aqui un email, un telefono o una web'
-                    }
+                    },
+                    accept: 'Aceptar',
+                    cancel: 'Cancelar'
                 },
                 map: {
                     title: "Mapa",

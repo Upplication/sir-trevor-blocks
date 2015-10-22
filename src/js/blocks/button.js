@@ -21,8 +21,10 @@
             // setup spectrum
             this.$editor.find('[type="color"]').spectrum({
                 showInput: true,
-                showButtons: false,
                 preferredFormat: "hex",
+                showButtons: true,
+                chooseText: i18n.t('blocks:button:accept'),
+                cancelText: i18n.t('blocks:button:cancel')
             });
 
             // Set the default button text
