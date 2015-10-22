@@ -74,6 +74,9 @@
                 }
             });
 
+            // Save also the color
+            data['css-color'] = this._getFontColor();
+
             return data;
         },
 
