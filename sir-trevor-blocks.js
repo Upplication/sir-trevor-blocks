@@ -15,7 +15,9 @@
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
                         href: 'Write an email, phone number or web URL here'
-                    }
+                    },
+                    accept: 'Accept',
+                    cancel: 'Cancel'
                 },
                 map: {
                     title: "Map",
@@ -48,7 +50,9 @@
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
                         href: 'Escribe aqui un email, un telefono o una web'
-                    }
+                    },
+                    accept: 'Aceptar',
+                    cancel: 'Cancelar'
                 },
                 map: {
                     title: "Mapa",
@@ -87,8 +91,10 @@
             // setup spectrum
             this.$editor.find('[type="color"]').spectrum({
                 showInput: true,
-                showButtons: false,
                 preferredFormat: "hex",
+                showButtons: true,
+                chooseText: i18n.t('blocks:button:accept'),
+                cancelText: i18n.t('blocks:button:cancel')
             });
 
             // Set the default button text
