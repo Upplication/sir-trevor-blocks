@@ -19,6 +19,9 @@
                     accept: 'Aceptar',
                     cancel: 'Cancelar'
                 },
+                image_edit: {
+                    finish: 'Confirma el recorte de la imagen para poder guardar'
+                },
                 map: {
                     title: "Mapa",
                     hint: "Escribe una direccion aquí"

@@ -19,6 +19,9 @@
                     accept: 'Accept',
                     cancel: 'Cancel'
                 },
+                image_edit: {
+                    finish: 'Confirm the crop for being able to save'
+                },
                 map: {
                     title: "Map",
                     hint: "Write an address here"
