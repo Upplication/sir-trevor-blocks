@@ -126,7 +126,13 @@
             this.setTextBlockHTML(data.text);
             Object.keys(data)
             .forEach(function (key) {
-                this.$el.find('[name="'+ key + '"]').val(data[key]);
+                var val = data[key];
+                var $ell = this.$el.find('[name="'+ key + '"]');
+
+                if ($ell.attr('units') && $ell.attr('units').length > 0)
+                    val = val.replace($ell.attr('units'), '');
+
+                this.$el.find('[name="'+ key + '"]').val(val);
             }.bind(this))
             // Hide controls and disable edit
             this.$el.find('.st-control').hide();
@@ -263,7 +269,6 @@
         validations: [ '_checkCropFinished' ],
 
         _isImageUploaded: function() {
-            var data = this._getData();
             if (data && data.file && data.file.url.length > 0)
                 return !/^data:image\/png;base64/.test(data.file.url);
             else
@@ -569,7 +574,10 @@
       },
 
       onContentPasted: function(ev) {
-        this.loadPastedContent($(ev.target).val());
+        // If there is any content means the user is editing on the textarea itself,
+        // so dont trigger the paste event for preventing higlighting/formatting
+        if (this.$el.find('textarea').val().length <= 0)
+          this.loadPastedContent($(ev.target).val());
       },
 
       loadPastedContent: function(code) {
