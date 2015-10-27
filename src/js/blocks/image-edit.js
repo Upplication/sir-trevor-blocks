@@ -24,9 +24,9 @@
 
                 var handleError = function(err) {
                     if (err && err.cause !== undefined)
-                        this.setError(err.cause);
+                        this.setError(this.$inputs, err.cause);
                     else
-                        this.setError(err);
+                        this.setError(this.$inputs, err);
                 }.bind(this);
 
                 $.ajax({
