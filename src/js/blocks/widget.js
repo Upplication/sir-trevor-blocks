@@ -32,7 +32,10 @@
       },
 
       onContentPasted: function(ev) {
-        this.loadPastedContent($(ev.target).val());
+        // If there is any content means the user is editing on the textarea itself,
+        // so dont trigger the paste event for preventing higlighting/formatting
+        if (this.$el.find('textarea').val().length <= 0)
+          this.loadPastedContent($(ev.target).val());
       },
 
       loadPastedContent: function(code) {
