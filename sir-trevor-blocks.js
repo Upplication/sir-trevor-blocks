@@ -221,7 +221,7 @@
         controls: {
             save: function() {
                 var data = {
-                    name: this.__fixFilename(this.filename + '.png'),
+                    name: this.filename + '.png',
                     folder: 'img',
                     base64content: this.$cropper('getCroppedCanvas').toDataURL()
                 };
