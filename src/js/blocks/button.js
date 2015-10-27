@@ -50,7 +50,13 @@
             this.setTextBlockHTML(data.text);
             Object.keys(data)
             .forEach(function (key) {
-                this.$el.find('[name="'+ key + '"]').val(data[key]);
+                var val = data[key];
+                var $ell = this.$el.find('[name="'+ key + '"]');
+
+                if ($ell.attr('units') && $ell.attr('units').length > 0)
+                    val = val.replace($ell.attr('units'), '');
+
+                this.$el.find('[name="'+ key + '"]').val(val);
             }.bind(this))
             // Hide controls and disable edit
             this.$el.find('.st-control').hide();
