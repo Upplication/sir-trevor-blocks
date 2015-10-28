@@ -40,13 +40,14 @@
                     complete: function() {
                         this.ready();
                         this.performValidations();
-                        this.mediator.trigger('blocks:image_edit:uploaded');
                     }.bind(this)
 
                 })
                 .then(function (res) {
                     if (res.result == 'success') {
                         this.setAndLoadData({ file: { url: res.url } });
+                        var $img = this.$editor.find('>img');
+                        this.mediator.trigger('blocks:image_edit:uploaded', $img);
                     } else
                         handleError(res);
                 }.bind(this))
