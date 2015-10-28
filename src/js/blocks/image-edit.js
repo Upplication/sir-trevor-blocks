@@ -46,8 +46,11 @@
                 .then(function (res) {
                     if (res.result == 'success') {
                         this.setAndLoadData({ file: { url: res.url } });
-                        var $img = this.$editor.find('>img');
-                        this.mediator.trigger('blocks:image_edit:uploaded', $img);
+                        // event
+                        var eventType = 'blocks:image_edit:uploaded';
+                        var ev = jQuery.Event(ev);
+                        ev.target = this.$editor.find('>img')[0];
+                        this.mediator.trigger(eventType, ev);
                     } else
                         handleError(res);
                 }.bind(this))
