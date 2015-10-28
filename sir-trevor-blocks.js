@@ -209,6 +209,13 @@
             var yiq = ((r*299) + (g*587) + (b*114)) / 1000;
             return (yiq >= 128) ? '#000000' : '#FFFFFF';
         }
+
+        controllable: true,
+        controls: {
+            'align-left': function() {
+                this.
+            }
+        }
     })
 })();
 (function() {
@@ -253,13 +260,14 @@
                     complete: function() {
                         this.ready();
                         this.performValidations();
-                        this.mediator.trigger('blocks:image_edit:uploaded');
                     }.bind(this)
 
                 })
                 .then(function (res) {
                     if (res.result == 'success') {
                         this.setAndLoadData({ file: { url: res.url } });
+                        var $img = this.$editor.find('>img');
+                        this.mediator.trigger('blocks:image_edit:uploaded', $img);
                     } else
                         handleError(res);
                 }.bind(this))
