@@ -31,6 +31,6 @@
         });
     };
 
-    SirTrevor.Blocks.TextAlign = makeAlignable(SirTrevor.Blocks.Text, 'text_align');
-    SirTrevor.Blocks.HeadingAlign = makeAlignable(SirTrevor.Blocks.Heading, 'heading_align');
+    //SirTrevor.Blocks.TextAlign = makeAlignable(SirTrevor.Blocks.Text, 'text_align');
+    //SirTrevor.Blocks.HeadingAlign = makeAlignable(SirTrevor.Blocks.Heading, 'heading_align');
 })();
