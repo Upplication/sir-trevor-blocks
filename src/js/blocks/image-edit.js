@@ -56,6 +56,7 @@
         validations: [ '_checkCropFinished' ],
 
         _isImageUploaded: function() {
+            var data = this._getData();
             if (data && data.file && data.file.url.length > 0)
                 return !/^data:image\/png;base64/.test(data.file.url);
             else
@@ -63,7 +64,6 @@
         },
 
         _checkCropFinished: function() {
-            var data = this._getData();
             if (!this._isImageUploaded())
                 this.setError(this.$inputs, i18n.t('blocks:image_edit:finish'));
         },
