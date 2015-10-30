@@ -97,8 +97,10 @@
                 $target.val('mailto:' + value);
             else if (/^\+?[0-9\-]+$/.test(value))
                 $target.val('tel:' + value);
-            else
+            else if (/^(ftp|http|https):\/\/[^ "]+$/.test(value))
                 $target.val(value);
+            else
+                $target.val('http://' + value);
         },
 
         _onCssPropertyChange: function (ev, value) {
