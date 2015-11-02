@@ -284,7 +284,7 @@
         },
 
         _checkCropFinished: function() {
-            if (!this._isImageUploaded())
+            if (!this.isEmpty() && !this._isImageUploaded())
                 this.setError(this.$inputs, i18n.t('blocks:image_edit:finish'));
         },
 
@@ -319,6 +319,9 @@
         },
 
         onBlockRender: function() {
+            // Make the whole element a dropable zone
+            this.$el.dropArea()
+                .bind('drop', this._handleDrop.bind(this));
             /* Setup the upload button */
             this.$inputs.find('button').bind('click', function(ev){ ev.preventDefault(); });
             this.$inputs.find('input').on('change', (function(ev) {
@@ -335,6 +338,7 @@
                 this.filename = file.name;
                 this.$control_ui.show();
                 this.$inputs.hide();
+                this.$el.noDropArea();
                 this.$editor.html($('<img>', { src: urlAPI.createObjectURL(file) })).show();
                 this.loading();
                 var timerCache = null;
