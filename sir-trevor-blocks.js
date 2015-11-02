@@ -319,14 +319,23 @@
         },
 
         onBlockRender: function() {
+            // Remove the default dropzone (from the dropable mixin)
+            this.$dropzone
+                .noDropArea()
+                .unbind('drop');
+
             // Make the whole element a dropable zone
-            this.$el.dropArea()
-                .bind('drop', this._handleDrop.bind(this));
+            this.$inner
+                .dropArea()
+                .bind('drop', this.__handleDrop.bind(this));
+
             /* Setup the upload button */
-            this.$inputs.find('button').bind('click', function(ev){ ev.preventDefault(); });
-            this.$inputs.find('input').on('change', (function(ev) {
-                this.onDrop(ev.currentTarget);
-            }).bind(this));
+            this.$inputs.find('button')
+                .bind('click', function (ev){ ev.preventDefault(); });
+            this.$inputs.find('input')
+                .on('change', (function (ev) { this.onDrop(ev.currentTarget); }).bind(this));
+
+            // By default, hide the confirm crop button
             this.$control_ui.hide();
         },
 
@@ -373,7 +382,7 @@
         },
 
         isEmpty: function() {
-            return this.$editor.find('img').length <= 0;
+            return this.$editor.find('img').length <= 0 || _.isEmpty(this._getData());
         },
 
         _serializeData: function() {
@@ -387,6 +396,44 @@
             else
                 return null;
         },
+
+        /*
+            Fix for FFox upload.
+            These two methods should be removed when updated to a new version of ST (current 0.5.0)
+            ST fixed it on : d612cd6ce4b267677c40fd1ceea88820b382f5e4
+         */
+        // https://github.com/madebymany/sir-trevor-js/commit/d612cd6ce4b267677c40fd1ceea88820b382f5e4
+        __handleDrop: function(e) {
+            e.preventDefault();
+            e = e.originalEvent;
+
+            var el = $(e.target),
+            types = this._toArray(e.dataTransfer.types);
+            el.removeClass('st-dropzone--dragover');
+
+            /*
+            Check the type we just received,
+            delegate it away to our blockTypes to process
+            */
+            if (types && types.some(function(type) { return this.valid_drop_file_types.includes(type) }, this))
+                this.onDrop(e.dataTransfer);
+
+            SirTrevor.EventBus.trigger('block:content:dropped', this.blockID);
+        },
+
+        // https://github.com/madebymany/sir-trevor-js/commit/d612cd6ce4b267677c40fd1ceea88820b382f5e4
+        _toArray: function(obj) {
+            if (Array.isArray(obj))
+                return obj;
+
+            var array = [];
+
+            // iterate backwards ensuring that length is an UInt32
+            for (var i = obj.length >>> 0; i--;)
+                array[i] = obj[i];
+
+            return array;
+        }
     });
 })();
 (function() {
