@@ -134,6 +134,16 @@
 
             var yiq = ((r*299) + (g*587) + (b*114)) / 1000;
             return (yiq >= 128) ? '#000000' : '#FFFFFF';
-        }
+        },
+
+        alignable: true,
+        align_options: {
+            justify: false,
+            handler: function(align) {
+                if (align == 'center')
+                    align = 'none';
+                this.$preview.css('float', align);
+            },
+        },
     })
 })();
