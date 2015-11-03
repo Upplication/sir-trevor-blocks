@@ -30,6 +30,13 @@
     cursor: pointer;
 }
 
+.st-block[data-type="button"] .st-row:before,
+.st-block[data-type="button"] .st-row:after {
+    display: block;
+    clear: both;
+    content: ' ';
+}
+
 .st-block[data-type="button"] .st-preview * {
     color: inherit;
     background-color: inherit;
