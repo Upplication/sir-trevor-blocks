@@ -6,9 +6,9 @@
     var defaultAlignConfig = {
         aligns : {
             left: true,
-            right: true,
             center: true,
-            justify: true
+            justify: true,
+            right: true
         },
         handler: function(align) {
             this.getTextBlock().find('> *').css('text-align', align);
