@@ -1,0 +1,20 @@
+.st-block__control-ui .st-block-control-ui-btn--align-left:before,
+.st-block__control-ui .st-block-control-ui-btn--align-right:before,
+.st-block__control-ui .st-block-control-ui-btn--align-center:before,
+.st-block__control-ui .st-block-control-ui-btn--align-justify:before {
+	display: block;
+	font-family: 'ST-Icons-Upplication-Align' !important;
+}
+
+.st-block__control-ui .st-block-control-ui-btn--align-left:before {
+	content: "\e900";
+}
+.st-block__control-ui .st-block-control-ui-btn--align-center:before {
+	content: "\e901";
+}
+.st-block__control-ui .st-block-control-ui-btn--align-right:before {
+	content: "\e902";
+}
+.st-block__control-ui .st-block-control-ui-btn--align-justify:before {
+	content: "\e903";
+}
