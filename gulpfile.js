@@ -100,7 +100,16 @@ gulp.task('compile', function (cb) {
   return runSequence('templates', ['js', 'css'], cb);
 })
 
-gulp.task('patch', ['compile', 'tag-patch'])
-gulp.task('feature', ['compile', 'tag-minor'])
-gulp.task('release', ['compile', 'tag-major'])
+gulp.task('patch', function (cb) {
+  return runSequence('compile', 'tag-patch', cb)
+});
+
+gulp.task('feature', function (cb) {
+  return runSequence('compile', 'tag-minor', cb)
+});
+
+gulp.task('release', function (cb) {
+  return runSequence('compile', 'tag-major', cb)
+});
+
 gulp.task('default', ['compile'])
