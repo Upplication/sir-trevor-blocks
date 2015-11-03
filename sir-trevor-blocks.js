@@ -217,6 +217,17 @@
     "use strict";
 
     if (!SirTrevor)
+        return console.error("SirTrevor.Blocks.HeaderAlign could not load because SirTrevor wasn't found");
+
+    SirTrevor.Blocks.HeaderAlign = SirTrevor.Blocks.Header.extend({
+        type: 'header_align',
+        alignable: true
+    });
+})();
+(function() {
+    "use strict";
+
+    if (!SirTrevor)
         return console.error("SirTrevor.Blocks.ImageEdit could not load because SirTrevor wasn't found");
 
     SirTrevor.Blocks.ImageEdit = SirTrevor.Blocks.Image.extend({
@@ -666,9 +677,9 @@
     var defaultAlignConfig = {
         aligns : {
             left: true,
-            right: true,
             center: true,
-            justify: true
+            justify: true,
+            right: true
         },
         handler: function(align) {
             this.getTextBlock().find('> *').css('text-align', align);
