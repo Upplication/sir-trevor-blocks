@@ -6,6 +6,11 @@
 	font-family: 'ST-Icons-Upplication-Align' !important;
 }
 
+.st-align-left { text-align: left; }
+.st-align-center { text-align: center; }
+.st-align-justify { text-align: justify; }
+.st-align-right { text-align: right; }
+
 .st-block__control-ui .st-block-control-ui-btn--align-left:before {
 	content: "\e900";
 }

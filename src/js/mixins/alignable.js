@@ -11,7 +11,12 @@
             right: true
         },
         handler: function(align) {
-            this.getTextBlock().find('> *').css('text-align', align);
+            this.getTextBlock().removeClass(function(index, classes) {
+                return classes.split(' ')
+                                .filter(function(a) { return /^st\-align-/.test(a) })
+                                .join(' ');
+            });
+            this.getTextBlock().addClass('st-align-' + align);
         }
     };
 
@@ -48,10 +53,28 @@
                 if (!handler || !(handler instanceof Function))
                     throw new Error('AlignableMixin: No valid handler function found for ' + align);
 
-                if (val === true)
-                    this.addUiControl('align-' + align, function() { (handler.bind(this))(align) }.bind(this));
-
+                if (val === true) {
+                    this.addUiControl('align-' + align, function(e) {
+                        this._getData().align = align;
+                        (handler.bind(this))(align);
+                        if (e.originalEvent) { // Check if we were triggered by a human or not
+                            // If we were triggered by a human, raise the event, otherwise dont.
+                            // This allows us to use the handler click event for setting the initial
+                            // align in the block.
+                            console.log("raising block:aligned event");
+                            var ev = jQuery.Event();
+                            ev.originalEvent = e;
+                            ev.target = this.$el;
+                            ev.align = align;
+                            this.mediator.trigger('block:aligned', ev);
+                        }
+                    }.bind(this));
+                }
             }.bind(this));
+
+            var data = this._getData();
+            if (data && data.align)
+                this.$control_ui.find('[class*="align-' + data.align + '"]').click();
         },
     }
 })();
