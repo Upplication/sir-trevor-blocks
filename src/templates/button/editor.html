@@ -10,13 +10,33 @@
 		</div>
 	</div>
 	<div class="st-row">
-		<div class="st-column">
+		<div class="st-column st-column-33">
 			<div class="st-control">
 				<div class="st-icon st-icon-color"></div>
 				<div class="st-input-container">
 					<input class="st-value" name="css-background-color" type="color" value="#00CA6B">
 				</div>
 			</div>
+		</div>
+		<div class="st-column st-column-33">
+			<div class="st-control">
+				<div class="st-icon st-icon-color"></div>
+				<div class="st-input-container">
+					<input class="st-value" name="css-border-color" type="color" value="#4D4D4D">
+				</div>
+			</div>
+		</div>
+		<div class="st-column st-column-33">
+			<div class="st-control">
+				<div class="st-icon st-icon-color"></div>
+				<div class="st-input-container">
+					<input class="st-value" name="css-color" type="color" value="#4D4D4D">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="st-row">
+		<div class="st-column st-column-50">
 			<div class="st-control">
 				<div class="st-icon st-icon-width"></div>
 				<div class="st-input-container">
@@ -26,17 +46,11 @@
 			<div class="st-control">
 				<div class="st-icon st-icon-height"></div>
 				<div class="st-input-container">
-					<input class="st-value" name="css-line-height" type="range" value="100" units="%" step="1" max="500" min="10">
+					<input class="st-value" name="css-padding-top_padding-bottom" type="range" value="1" units="em" step="0.1" max="5" min="0.2">
 				</div>
 			</div>
 		</div>
-		<div class="st-column">
-			<div class="st-control">
-				<div class="st-icon st-icon-color"></div>
-				<div class="st-input-container">
-					<input class="st-value" name="css-border-color" type="color" value="#4D4D4D">
-				</div>
-			</div>
+		<div class="st-column st-column-50">
 			<div class="st-control">
 				<div class="st-icon st-icon-border"></div>
 				<div class="st-input-container">
@@ -47,6 +61,28 @@
 				<div class="st-icon st-icon-radius"></div>
 				<div class="st-input-container">
 					<input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0">
+				</div>
+			</div>
+		</div>
+		<div class="st-column st-column-50">
+			<div class="st-control">
+				<div class="st-icon st-icon-font-size"></div>
+				<div class="st-input-container">
+					<input class="st-value" name="css-font-size" type="range" value="2" units="em" step="0.1" max="5" min="0.2">
+				</div>
+			</div>
+		</div>
+		<div class="st-column st-column-50">
+			<div class="st-control">
+				<div class="st-icon st-icon-font-family"></div>
+				<div class="st-input-container">
+					<select class="st-value" name="css-font-family">
+						<option value="sans-serif">Sans Serif</option>
+						<option value="cursive">Cursive</option>
+						<option value="fantasy">Fantasy</option>
+						<option value="serif">Serif</option>
+						<option value="monospace">Monospace</option>
+					</select>
 				</div>
 			</div>
 		</div>

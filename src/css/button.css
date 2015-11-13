@@ -36,10 +36,17 @@
 }
 
 .st-block[data-type="button"] .st-editor .st-column {
-    width: 50%;
     box-sizing: border-box;
     float: left;
     padding: 0 0.5em;
+}
+
+.st-block[data-type="button"] .st-editor .st-column.st-column-50 {
+    width: 50%;
+}
+
+.st-block[data-type="button"] .st-editor .st-column.st-column-33 {
+    width: 33.33%;
 }
 
 .st-block[data-type="button"] .st-editor .st-row:after {
@@ -58,7 +65,7 @@
 }
 
 .st-block[data-type="button"] .st-editor .st-control .st-input-container {
-    padding-left: 20px;
+    padding: 0 20px;
 }
 
 .st-block[data-type="button"] .st-editor .st-icon:before {

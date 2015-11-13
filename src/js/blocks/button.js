@@ -39,9 +39,6 @@
             this.$css.on('change input', this._onCssPropertyChange.bind(this));
             // Listen for spectrum color changes (as they click on the color pallete)
             this.$css.filter('[name*="color"]').on('move.spectrum', this._onCssPropertyChange.bind(this));
-            // Listen for the background-color changes to refresh the foreground color
-            this.$css.filter('[name="css-background-color"]').on('change input', this._onBackgroundColorChange.bind(this))
-            this.$css.filter('[name="css-background-color"]').on('move.spectrum', this._onBackgroundColorChange.bind(this));
             // Refresh the preview
             this.$css.trigger('change');
         },
@@ -58,9 +55,6 @@
 
                 this.$el.find('[name="'+ key + '"]').val(val);
             }.bind(this))
-            // Hide controls and disable edit
-            this.$el.find('.st-control').hide();
-            this.$el.find('.st-text-block').attr('contenteditable', 'false');
         },
 
         _serializeData: function() {
@@ -71,7 +65,7 @@
                 data.format = 'html';
             }
 
-            this.$('input').each(function(index, input){
+            this.$('input, select').each(function(index, input){
                 if (input.getAttribute('name')) {
                     var val = input.value;
                     if (input.getAttribute('units'))
@@ -79,10 +73,6 @@
                     data[input.getAttribute('name')] = val;
                 }
             });
-
-            // Save also the color
-            if (this.$preview)
-                data['css-color'] = this.$preview.css('color');
 
             return data;
         },
@@ -106,7 +96,7 @@
         _onCssPropertyChange: function (ev, value) {
             var $target = $(ev.target);
             // Get the css property from the name
-            var prop = $target.attr('name').replace(/^css\-/, '');
+            var props = $target.attr('name').replace(/^css\-/, '');
             var val = value ? value.toString() : $target.val();
 
             if (value)
@@ -115,25 +105,9 @@
             if ($target.attr('units') && $target.attr('units').length > 0)
                 val += $target.attr('units');
 
-            this.$preview.css(prop, val);
-        },
-
-        _onBackgroundColorChange: function(c) {
-            this.$preview.css('color', (this._getFontColor.bind(this))(c));
-        },
-
-        _getFontColor: function (c) {
-            var hexPattern = /^#/;
-            var rgbPattern = /^rgb\(.*([0-9]+).*,.*([0-9]+),.*([0-9]+).*\)/;
-
-            var color = $(c.target).spectrum('get').toHex();
-
-            var r = parseInt(color.substr(0,2), 16);
-            var g = parseInt(color.substr(2,2), 16);
-            var b = parseInt(color.substr(4,2), 16);
-
-            var yiq = ((r*299) + (g*587) + (b*114)) / 1000;
-            return (yiq >= 128) ? '#000000' : '#FFFFFF';
+            props.split('_').forEach(function (prop) {
+                this.$preview.css(prop, val);
+            }, this);
         },
 
         alignable: true,
