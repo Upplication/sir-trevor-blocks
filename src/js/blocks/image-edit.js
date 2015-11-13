@@ -16,7 +16,7 @@
                 var data = {
                     name: this.filename + '.png',
                     folder: 'img',
-                    base64content: this.$cropper('getCroppedCanvas').toDataURL()
+                    base64content: this.$cropper('getCroppedCanvas').toDataURL(this.type)
                 };
 
                 this.resetErrors();
@@ -63,7 +63,7 @@
         _isImageUploaded: function() {
             var data = this._getData();
             if (data && data.file && data.file.url.length > 0)
-                return !/^data:image\/png;base64/.test(data.file.url);
+                return !/^data:image\/[a-z]{1,};base64/.test(data.file.url);
             else
                 return false;
         },
@@ -130,6 +130,7 @@
 
             if (/image/.test(file.type)) {
                 this.filename = file.name;
+                this.type = file.type;
                 this.$control_ui.show();
                 this.$inputs.hide();
                 this.$el.noDropArea();
@@ -174,7 +175,7 @@
             var url = this.$editor.find('img').attr('src');
 
             if (this.$cropper && !/^http/.test(url))
-                url = this.$cropper('getCroppedCanvas').toDataURL();
+                url = this.$cropper('getCroppedCanvas').toDataURL(this.type);
 
             if (url && url.length > 0)
                 return  { file: { url: url } };
