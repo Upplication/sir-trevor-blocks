@@ -1,0 +1,20 @@
+.st-block[data-type="spacer"] .st-control {
+    position: absolute;
+    margin-bottom: 10px;
+}
+
+.st-block[data-type="spacer"] .st-control:after {
+    clear: both;
+    display: block;
+    content: '';
+}
+
+.st-block[data-type="spacer"] .st-value {
+	margin-right: 20px;
+}
+
+.st-block[data-type="spacer"] .st-output {
+    float: right;
+    position: absolute;
+    padding: 6px 0;
+}
