@@ -64,6 +64,9 @@
                     title: "Mapa",
                     hint: "Escribe una direccion aquí"
                 },
+                spacer: {
+                    title: "Espacio en blanco"
+                },
                 widget: {
                     title: "Widget",
                     hint: "Pega el html de tu widget externo aquí"
@@ -86,7 +89,7 @@
         icon_name: 'button',
 
         editorHTML: function() {
-            return '<div class="st-editor"><div class="st-preview"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row"><div class="st-control"><div class="st-icon st-icon-link"></div><div class="st-input-container"> <input name="href" type="hidden"> <input name="user-href" type="text"></div></div></div><div class="st-row"><div class="st-column"><div class="st-control"><div class="st-icon st-icon-color"></div><div class="st-input-container"> <input class="st-value" name="css-background-color" type="color" value="#00CA6B"></div></div><div class="st-control"><div class="st-icon st-icon-width"></div><div class="st-input-container"> <input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10"></div></div><div class="st-control"><div class="st-icon st-icon-height"></div><div class="st-input-container"> <input class="st-value" name="css-line-height" type="range" value="100" units="%" step="1" max="500" min="10"></div></div></div><div class="st-column"><div class="st-control"><div class="st-icon st-icon-color"></div><div class="st-input-container"> <input class="st-value" name="css-border-color" type="color" value="#4D4D4D"></div></div><div class="st-control"><div class="st-icon st-icon-border"></div><div class="st-input-container"> <input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0"></div></div><div class="st-control"><div class="st-icon st-icon-radius"></div><div class="st-input-container"> <input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0"></div></div></div></div></div>';
+            return '<div class="st-editor"><div class="st-preview"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row"><div class="st-control"><div class="st-icon st-icon-link"></div><div class="st-input-container"> <input name="href" type="hidden"> <input name="user-href" type="text"></div></div></div><div class="st-row"><div class="st-column st-column-33"><div class="st-control"><div class="st-icon st-icon-color"></div><div class="st-input-container"> <input class="st-value" name="css-background-color" type="color" value="#00CA6B"></div></div></div><div class="st-column st-column-33"><div class="st-control"><div class="st-icon st-icon-color"></div><div class="st-input-container"> <input class="st-value" name="css-border-color" type="color" value="#4D4D4D"></div></div></div><div class="st-column st-column-33"><div class="st-control"><div class="st-icon st-icon-color"></div><div class="st-input-container"> <input class="st-value" name="css-color" type="color" value="#4D4D4D"></div></div></div></div><div class="st-row"><div class="st-column st-column-50"><div class="st-control"><div class="st-icon st-icon-width"></div><div class="st-input-container"> <input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10"></div></div><div class="st-control"><div class="st-icon st-icon-height"></div><div class="st-input-container"> <input class="st-value" name="css-padding" type="range" value="1" units="em 0" step="0.1" max="5" min="0.2"></div></div></div><div class="st-column st-column-50"><div class="st-control"><div class="st-icon st-icon-border"></div><div class="st-input-container"> <input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0"></div></div><div class="st-control"><div class="st-icon st-icon-radius"></div><div class="st-input-container"> <input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0"></div></div></div><div class="st-column st-column-50"><div class="st-control"><div class="st-icon st-icon-font-size"></div><div class="st-input-container"> <input class="st-value" name="css-font-size" type="range" value="2" units="em" step="0.1" max="5" min="0.2"></div></div></div><div class="st-column st-column-50"><div class="st-control"><div class="st-icon st-icon-font-family"></div><div class="st-input-container"> <select class="st-value" name="css-font-family"><option value="sans-serif">Sans Serif</option><option value="cursive">Cursive</option><option value="fantasy">Fantasy</option><option value="serif">Serif</option><option value="monospace">Monospace</option></select></div></div></div></div></div>';
         },
 
         onBlockRender: function() {
@@ -115,9 +118,6 @@
             this.$css.on('change input', this._onCssPropertyChange.bind(this));
             // Listen for spectrum color changes (as they click on the color pallete)
             this.$css.filter('[name*="color"]').on('move.spectrum', this._onCssPropertyChange.bind(this));
-            // Listen for the background-color changes to refresh the foreground color
-            this.$css.filter('[name="css-background-color"]').on('change input', this._onBackgroundColorChange.bind(this))
-            this.$css.filter('[name="css-background-color"]').on('move.spectrum', this._onBackgroundColorChange.bind(this));
             // Refresh the preview
             this.$css.trigger('change');
         },
@@ -134,9 +134,17 @@
 
                 this.$el.find('[name="'+ key + '"]').val(val);
             }.bind(this))
-            // Hide controls and disable edit
-            this.$el.find('.st-control').hide();
-            this.$el.find('.st-text-block').attr('contenteditable', 'false');
+            var $preview = this.$el.find('.st-preview');
+            var $rows = this.$el.find('.st-row');
+            $rows.hide();
+            $preview.attr('contenteditable', 'false');
+            this.$control_ui.hide();
+            $preview.click(function() {
+                $rows.show();
+                $preview.attr('contenteditable', 'true');
+                $preview.unbind('click');
+                this.$control_ui.show();
+            }.bind(this));
         },
 
         _serializeData: function() {
@@ -147,7 +155,7 @@
                 data.format = 'html';
             }
 
-            this.$('input').each(function(index, input){
+            this.$('input, select').each(function(index, input){
                 if (input.getAttribute('name')) {
                     var val = input.value;
                     if (input.getAttribute('units'))
@@ -155,10 +163,6 @@
                     data[input.getAttribute('name')] = val;
                 }
             });
-
-            // Save also the color
-            if (this.$preview)
-                data['css-color'] = this.$preview.css('color');
 
             return data;
         },
@@ -182,7 +186,7 @@
         _onCssPropertyChange: function (ev, value) {
             var $target = $(ev.target);
             // Get the css property from the name
-            var prop = $target.attr('name').replace(/^css\-/, '');
+            var props = $target.attr('name').replace(/^css\-/, '');
             var val = value ? value.toString() : $target.val();
 
             if (value)
@@ -191,34 +195,20 @@
             if ($target.attr('units') && $target.attr('units').length > 0)
                 val += $target.attr('units');
 
-            this.$preview.css(prop, val);
-        },
-
-        _onBackgroundColorChange: function(c) {
-            this.$preview.css('color', (this._getFontColor.bind(this))(c));
-        },
-
-        _getFontColor: function (c) {
-            var hexPattern = /^#/;
-            var rgbPattern = /^rgb\(.*([0-9]+).*,.*([0-9]+),.*([0-9]+).*\)/;
-
-            var color = $(c.target).spectrum('get').toHex();
-
-            var r = parseInt(color.substr(0,2), 16);
-            var g = parseInt(color.substr(2,2), 16);
-            var b = parseInt(color.substr(4,2), 16);
-
-            var yiq = ((r*299) + (g*587) + (b*114)) / 1000;
-            return (yiq >= 128) ? '#000000' : '#FFFFFF';
+            props.split('_').forEach(function (prop) {
+                this.$preview.css(prop, val);
+            }, this);
         },
 
         alignable: true,
         align_options: {
-            justify: false,
+            aligns: {
+                justify: false
+            },
             handler: function(align) {
                 if (align == 'center')
                     align = 'none';
-                this.$preview.css('float', align);
+                (this.$preview || this.$el.find('.st-preview')).css('float', align);
             },
         },
     })
@@ -252,7 +242,7 @@
                 var data = {
                     name: this.filename + '.png',
                     folder: 'img',
-                    base64content: this.$cropper('getCroppedCanvas').toDataURL()
+                    base64content: this.$cropper('getCroppedCanvas').toDataURL(this.type)
                 };
 
                 this.resetErrors();
@@ -299,7 +289,7 @@
         _isImageUploaded: function() {
             var data = this._getData();
             if (data && data.file && data.file.url.length > 0)
-                return !/^data:image\/png;base64/.test(data.file.url);
+                return !/^data:image\/[a-z]{1,};base64/.test(data.file.url);
             else
                 return false;
         },
@@ -366,6 +356,7 @@
 
             if (/image/.test(file.type)) {
                 this.filename = file.name;
+                this.type = file.type;
                 this.$control_ui.show();
                 this.$inputs.hide();
                 this.$el.noDropArea();
@@ -410,7 +401,7 @@
             var url = this.$editor.find('img').attr('src');
 
             if (this.$cropper && !/^http/.test(url))
-                url = this.$cropper('getCroppedCanvas').toDataURL();
+                url = this.$cropper('getCroppedCanvas').toDataURL(this.type);
 
             if (url && url.length > 0)
                 return  { file: { url: url } };
@@ -604,7 +595,42 @@
         }
     });
 })();
+(function() {
+    "use strict";
 
+    if (!SirTrevor)
+        return console.error("SirTrevor.Blocks.Spacer could not load because SirTrevor wasn't found");
+
+    SirTrevor.Blocks.Spacer = SirTrevor.Block.extend({
+
+      type: "spacer",
+      title: function() { return i18n.t('blocks:spacer:title') },
+      editorHTML: '<div class="st-control"><div class="st-icon st-icon-height"></div><div class="st-value-container"> <input class="st-value" name="height" type="range" value="5" units="vw" step="0.1" max="50" min="0" /></div><span class="st-output"></span></div>',
+
+      loadData: function(data) {
+        this.$height = this.$height || this.$editor.find('[name="height"]');
+        this.$height.val(data.height);
+        this.$height.attr('units', data.units);
+      },
+
+      onBlockRender: function() {
+        this.$height = this.$height || this.$editor.find('[name="height"]');
+        this.$height.on('change input', function(ev) {
+          var $target = this.$(ev.target);
+          var val = $target.val();
+          this.$('.st-output').html(val);
+        }.bind(this));
+        this.$height.trigger('change');
+      },
+
+      _serializeData: function() {
+        return {
+          height: this.$height ? this.$height.val() : 0,
+          units: this.$height ? this.$height.attr('units') : ''
+        };
+      }
+    });
+})();
 (function() {
     "use strict";
 
@@ -622,60 +648,71 @@
     if (!SirTrevor)
         return console.error("SirTrevor.Blocks.Widget could not load because SirTrevor wasn't found");
 
-    SirTrevor.Blocks.Widget = SirTrevor.Block.extend({
+    SirTrevor.Blocks.Widget = SirTrevor.Blocks.Text.extend({
 
-      type: "widget",
-      title: function() { return i18n.t('blocks:widget:title') },
-      icon_name: "code",
+        type: "widget",
+        title: function() { return i18n.t('blocks:widget:title') },
+        icon_name: "code",
+        editorHTML: '<div class="st-widget-editor-container"><div class="editor"><span class="st-icon"></span><textarea></textarea></div><div style="display: none" class="preview"><pre><code class="lang-html"></code></pre></div></div>',
 
-      pastable: true,
+        loadData: function(data) {
+            this.loadPastedContent(data.text);
+        },
 
-      paste_options: {
-        html: '<div class="st-widget-editor-container"><span class="st-icon"></span><textarea class="st-paste-block" placeholder="<%= i18n.t("blocks:widget:hint") %>"></textarea></div>'
-      },
+        onBlockRender: function() {
+            var $textarea = this.$el.find('textarea');
+            var textarea = $textarea[0];
 
-      _serializeData: function() {
-        return {
-            format: 'html',
-            text: this.$el.find('textarea').val()
+            var offset = textarea.offsetHeight - textarea.clientHeight;
+         
+            $textarea.attr('placeholder', i18n.t('blocks:widget:hint'));
+            $textarea.on('keyup input', function() {
+                $textarea
+                    .css('height', 'auto')
+                    .css('height', textarea.scrollHeight + offset);
+            });
+        },
+
+        onContentPasted: function(ev) {
+            // If there is any content means the user is editing on the textarea itself,
+            // so dont trigger the paste event for preventing higlighting/formatting
+            if (this.$el.find('textarea').val().length <= 0)
+                this.loadPastedContent($(ev.target).val());
+        },
+
+        loadPastedContent: function(code) {
+            code = code || "";
+
+            var $find = this.$el.find.bind(this.$el);
+            var $preview = $find('.preview');
+            var $code = $preview.find('code');
+            var $editor = $find('.editor');
+            var $textarea = $find('textarea');
+            var $icon = $find('.st-icon');
+
+            // First load the code into the text area
+            $textarea.val(code);
+
+            // Replace < / > for its html chars
+            code = code.replace(/</g, '&lt;');
+            code = code.replace(/>/g, '&gt;');
+
+            // Add the code to the container and highlight it
+            $code.html(code);
+            hljs.highlightBlock($code[0]);
+
+            // Hide the editor
+            $icon.hide();
+            $editor.hide();
+            $preview.show();
+
+            // Add listener for editing the content
+            $preview.dblclick(function () {
+                $editor.show();
+                $preview.hide();
+                $textarea.trigger('input');
+            })
         }
-      },
-
-      isEmpty: function() {
-        return !(this.$el && this.$el.find('textarea').length > 0 && this.$el.find('textarea').val().length > 0);
-      },
-
-      loadData: function(data) {
-        this.loadPastedContent(data.text);
-      },
-
-      onContentPasted: function(ev) {
-        // If there is any content means the user is editing on the textarea itself,
-        // so dont trigger the paste event for preventing higlighting/formatting
-        if (this.$el.find('textarea').val().length <= 0)
-          this.loadPastedContent($(ev.target).val());
-      },
-
-      loadPastedContent: function(code) {
-        code = code || "";
-
-        // First load the code into the text area
-        this.$el.find('textarea').val(code);
-
-        // Replace < / > for its html chars
-        code = code.replace(/</g, '&lt;');
-        code = code.replace(/>/g, '&gt;');
-        // Prepare the containers
-        var preTag = $('<pre>');
-        var codeTag = $('<code>', { class: 'lang-html' });
-        // Add the code to the container and highlight it
-        codeTag.html(code);
-        hljs.highlightBlock(codeTag.get()[0]);
-        preTag.append(codeTag);
-        // Add the highlighted code to the editor and remove the input box
-        this.$editor.html(preTag);
-        this.$inputs.hide();
-      }
 
     });
 })();
@@ -714,7 +751,7 @@
                 this.controllable = false; // This will prevent from double initing the controllable ui
             }
 
-            this.align_options = Object.assign({}, defaultAlignConfig, this.align_options);
+            this.align_options = jQuery.extend(true, {}, defaultAlignConfig, this.align_options);
             Object.keys(this.align_options.aligns).forEach(function (align) {
                 /*
                  val might be:
@@ -724,7 +761,7 @@
                 */
                 var val = this.align_options.aligns[align];
 
-                if (val === false) // Do not even show this on the control ui
+                if (val == false) // Do not even show this on the control ui
                     return;
 
                 var handler = this.align_options.handler;
