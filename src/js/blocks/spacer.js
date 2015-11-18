@@ -10,19 +10,26 @@
       title: function() { return i18n.t('blocks:spacer:title') },
       editorHTML: '@@include("spacer.html")',
 
+      loadData: function(data) {
+        this.$height = this.$height || this.$editor.find('[name="height"]');
+        this.$height.val(data.height);
+        this.$height.attr('units', data.units);
+      },
+
       onBlockRender: function() {
-        this.$editor.on('change input', function(ev) {
+        this.$height = this.$height || this.$editor.find('[name="height"]');
+        this.$height.on('change input', function(ev) {
           var $target = this.$(ev.target);
           var val = $target.val();
           this.$('.st-output').html(val);
         }.bind(this));
-        this.$editor.trigger('change');
+        this.$height.trigger('change');
       },
 
       _serializeData: function() {
         return {
-          height: this.$editor.val(),
-          units: this.$editor.attr('units')
+          height: this.$height ? this.$height.val() : 0,
+          units: this.$height ? this.$height.attr('units') : ''
         };
       }
     });

@@ -1,5 +1,4 @@
 .st-block[data-type="spacer"] .st-control {
-    position: absolute;
     margin-bottom: 10px;
 }
 
@@ -9,12 +8,28 @@
     content: '';
 }
 
-.st-block[data-type="spacer"] .st-value {
-	margin-right: 20px;
+.st-block[data-type="spacer"] .st-value-container {
+    padding-left: 20px;
+    padding-right: 40px;
+
 }
 
-.st-block[data-type="spacer"] .st-output {
-    float: right;
-    position: absolute;
-    padding: 6px 0;
+.st-block[data-type="spacer"] .st-control {
+    position: relative;
 }
+
+.st-block[data-type="spacer"] .st-control .st-output {
+    position: absolute;
+    right: 0;
+    top: 8px;
+}
+
+.st-block[data-type="spacer"] .st-control .st-icon:before {
+    display: block;
+    font-family: 'ST-Icons-Button-Upplication' !important;
+    font-size: 1.5em;
+    position: absolute;
+    left: 0;
+    top: 5px;
+}
+.st-block[data-type="spacer"] .st-control .st-icon.st-icon-height:before { content: '\e811'; }
