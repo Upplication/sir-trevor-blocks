@@ -253,10 +253,10 @@
     SirTrevor.Blocks.CkEditor = SirTrevor.Block.extend({
         type: 'ck_editor',
         title:  function() { return i18n.t('blocks:ck_editor:title'); },
-        icon_name: 'ckeditor',
+        icon_name: 'text',
         editorHTML: "<textarea class='st-text-block' rows='10' cols='80'></textarea>",
         loadData: function(data) {
-            this.$editor.find('textarea').val(data.text);
+            this.$editor.val(data.text);
         },
 
         onBlockRender: function(){
