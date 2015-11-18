@@ -55,6 +55,17 @@
 
                 this.$el.find('[name="'+ key + '"]').val(val);
             }.bind(this))
+            var $preview = this.$el.find('.st-preview');
+            var $rows = this.$el.find('.st-row');
+            $rows.hide();
+            $preview.attr('contenteditable', 'false');
+            this.$control_ui.hide();
+            $preview.click(function() {
+                $rows.show();
+                $preview.attr('contenteditable', 'true');
+                $preview.unbind('click');
+                this.$control_ui.show();
+            }.bind(this));
         },
 
         _serializeData: function() {
@@ -112,11 +123,13 @@
 
         alignable: true,
         align_options: {
-            justify: false,
+            aligns: {
+                justify: false
+            },
             handler: function(align) {
                 if (align == 'center')
                     align = 'none';
-                this.$preview.css('float', align);
+                (this.$preview || this.$el.find('.st-preview')).css('float', align);
             },
         },
     })
