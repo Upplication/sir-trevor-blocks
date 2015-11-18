@@ -243,7 +243,7 @@
      * Example Usage:
      * @example
      * SirTrevor.setBlockOptions('CkEditor', {
-     *      ckeditor: {
+     *      config: {
      *          basePath: 'http://localhost:8080/dist/ckeditor/'
      *      }
      *  });
@@ -254,18 +254,18 @@
         type: 'ck_editor',
         title:  function() { return i18n.t('blocks:ck_editor:title'); },
         icon_name: 'text',
-        editorHTML: "<textarea class='st-text-block' rows='10' cols='80'></textarea>",
+        editorHTML: '<textarea class="st-text-block" rows="10" cols="80"></textarea>',
         loadData: function(data) {
             this.$editor.val(data.text);
         },
 
         onBlockRender: function(){
             //
-            if (this.ckeditor && this.ckeditor.basePath) {
-                CKEDITOR.basePath = this.ckeditor.basePath;
+            if (this.config && this.config.basePath) {
+                CKEDITOR.basePath = this.config.basePath;
             }
 
-            this._ckeditor = CKEDITOR.replace(this.getTextBlock()[0], {
+            this.ckeditor = CKEDITOR.replace(this.getTextBlock()[0], {
                 extraPlugins: 'colorbutton,colordialog,font,justify',
                 // http://stackoverflow.com/questions/23538462/how-to-remove-buttons-from-ckeditor-4
                 toolbarGroups: [
@@ -278,6 +278,16 @@
                 ],
                 removeButtons: 'CreateDiv,Styles,Flash,Iframe,Image,HorizontalRule,Smiley,PageBreak,Anchor'
             });
+
+            // block event on change ckeditor
+            this.ckeditor.on('change', function(ckEvent) {
+                // event
+                var eventType = 'blocks:ck_editor:change';
+                var ev = jQuery.Event(ckEvent);
+                ev.target = this.$editor[0];
+                this.mediator.trigger(eventType, ev);
+            }.bind(this));
+
             // FIXME: reorder problems :(
             this.$editor.parent().find('.st-block-ui-btn--reorder').hide();
         },
@@ -285,7 +295,7 @@
         _serializeData: function() {
             return {
                 type: 'html',
-                text: this._ckeditor ? this._ckeditor.getData() : ''
+                text: this.ckeditor ? this.ckeditor.getData() : ''
             }
         }
     });
