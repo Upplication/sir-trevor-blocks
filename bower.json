@@ -1,9 +1,10 @@
 {
   "name": "sir-trevor-blocks",
-  "version": "1.5.25",
+  "version": "1.6.2",
   "homepage": "https://github.com/Upplication/sir-trevor-blocks",
   "authors": [
-    "Souler <juanjo.herrero@upplication.com>"
+    "Souler <juanjo.herrero@upplication.com>",
+    "Jarnaiz <javier.arnaiz@upplication.com>"
   ],
   "description": "Collection of blocks used by Upplication apps for SirTrevor",
   "main": "sir-trevor-blocks.min.js",

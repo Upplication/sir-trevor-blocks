@@ -1,6 +1,6 @@
 {
   "name": "sir-trevor-blocks",
-  "version": "1.5.25",
+  "version": "1.6.2",
   "description": "Collection of blocks used by Upplication apps for SirTrevor",
   "main": "gulpfile.js",
   "scripts": {
@@ -26,6 +26,7 @@
   "homepage": "https://github.com/Upplication/sir-trevor-blocks#readme",
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-add-src": "^0.2.0",
     "gulp-bump": "^1.0.0",
     "gulp-concat": "^2.6.0",
     "gulp-file-include": "^0.13.7",

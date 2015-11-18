@@ -91,7 +91,7 @@ gulp.task('templates', function() {
 })
 
 gulp.task('doc', function() {
-    gulp.src("./src/*.js")
+    gulp.src("./src/**/*.js")
       .pipe(jsdoc('./doc'))
 })
 gulp.task('docs', ['doc'])

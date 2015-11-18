@@ -29,6 +29,9 @@
                 widget: {
                     title: "Widget",
                     hint: "Paste your external Widget html here"
+                },
+                ck_editor: {
+                    title: "Text"
                 }
             }
         }
