@@ -26,6 +26,9 @@
                     title: "Mapa",
                     hint: "Escribe una direccion aquí"
                 },
+                spacer: {
+                    title: "Espacio en blanco"
+                },
                 widget: {
                     title: "Widget",
                     hint: "Pega el html de tu widget externo aquí"

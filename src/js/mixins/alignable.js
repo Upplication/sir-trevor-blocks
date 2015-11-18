@@ -33,7 +33,7 @@
                 this.controllable = false; // This will prevent from double initing the controllable ui
             }
 
-            this.align_options = Object.assign({}, defaultAlignConfig, this.align_options);
+            this.align_options = jQuery.extend(true, {}, defaultAlignConfig, this.align_options);
             Object.keys(this.align_options.aligns).forEach(function (align) {
                 /*
                  val might be:
@@ -43,7 +43,7 @@
                 */
                 var val = this.align_options.aligns[align];
 
-                if (val === false) // Do not even show this on the control ui
+                if (val == false) // Do not even show this on the control ui
                     return;
 
                 var handler = this.align_options.handler;
