@@ -100,6 +100,20 @@
     top: 2px;
 }
 
+.st-block[data-type="button"] .st-editor input[type="range"] {
+    position: relative
+}
+
+.st-block[data-type="button"] .st-editor input[type="range"]:after {
+    position: absolute;
+    display: block;
+    content: attr(st-value);
+    font-size: 0.8em;
+    text-align: right;
+    top: 8px;
+    right: -27px;
+}
+
 .st-block[data-type="button"] .st-editor .st-icon.st-icon-color:before { content: '\e810'; top: 5px; }
 .st-block[data-type="button"] .st-editor .st-icon.st-icon-link:before { content: '\e815'; top: 10px; }
 .st-block[data-type="button"] .st-editor .st-icon.st-icon-border:before { content: '\e814'; }

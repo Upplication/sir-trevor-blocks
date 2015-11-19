@@ -26,9 +26,13 @@
                     title: "Map",
                     hint: "Write an address here"
                 },
+                spacer: {
+                    title: "Blank space"
+                },
                 widget: {
                     title: "Widget",
-                    hint: "Paste your external Widget html here"
+                    hint: "Paste your external Widget html here",
+                    edit: "Double click for edit"
                 },
                 ck_editor: {
                     title: "Text"
@@ -195,8 +199,16 @@
             var props = $target.attr('name').replace(/^css\-/, '');
             var val = value ? value.toString() : $target.val();
 
+            // This is used for number indicator in range input
+            $target.attr('st-value', val);
+
             if (value)
                 $target.val(value);
+
+            if ($target.attr('type') == 'range') {
+                var _after = $target.next();
+                _after.css('content', val);
+            }
 
             if ($target.attr('units') && $target.attr('units').length > 0)
                 val += $target.attr('units');
@@ -730,7 +742,7 @@
         type: "widget",
         title: function() { return i18n.t('blocks:widget:title') },
         icon_name: "code",
-        editorHTML: '<div class="st-widget-editor-container"><div class="editor"><span class="st-icon"></span><textarea></textarea></div><div style="display: none" class="preview"><pre><code class="lang-html"></code></pre></div></div>',
+        editorHTML: '<div class="st-widget-editor-container"><div class="editor"><span class="st-icon"></span><textarea name="text" class="st-required"></textarea></div><div style="display: none" class="preview"><pre><code class="lang-html"></code></pre></div></div>',
 
         loadData: function(data) {
             this.loadPastedContent(data.text);
@@ -739,9 +751,11 @@
         onBlockRender: function() {
             var $textarea = this.$el.find('textarea');
             var textarea = $textarea[0];
+            var $preview =  this.$el.find('.preview');
 
             var offset = textarea.offsetHeight - textarea.clientHeight;
          
+            $preview.attr('title', i18n.t('blocks:widget:edit'))
             $textarea.attr('placeholder', i18n.t('blocks:widget:hint'));
             $textarea.on('keyup input', function() {
                 $textarea
@@ -765,7 +779,7 @@
             var $code = $preview.find('code');
             var $editor = $find('.editor');
             var $textarea = $find('textarea');
-            var $icon = $find('.st-icon');
+            var $icon = $editor.find('.st-icon');
 
             // First load the code into the text area
             $textarea.val(code);
