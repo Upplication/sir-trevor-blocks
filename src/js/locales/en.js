@@ -26,9 +26,13 @@
                     title: "Map",
                     hint: "Write an address here"
                 },
+                spacer: {
+                    title: "Blank space"
+                },
                 widget: {
                     title: "Widget",
-                    hint: "Paste your external Widget html here"
+                    hint: "Paste your external Widget html here",
+                    edit: "Double click for edit"
                 },
                 ck_editor: {
                     title: "Text"
