@@ -24,6 +24,7 @@
 	content: "\e903";
 }
 
+/* Preview */
 .st-block[data-type="button"] .st-preview {
     text-align: center;
     margin: 0 auto;
@@ -33,16 +34,6 @@
     overflow: hidden;
     color: #4D4D4D;
     cursor: pointer;
-}
-
-.st-block[data-type="button"] .st-editor:after,
-.st-block[data-type="button"] .st-preview:before,
-.st-block[data-type="button"] .st-preview:after,
-.st-block[data-type="button"] .st-row:before,
-.st-block[data-type="button"] .st-row:after {
-    display: block;
-    clear: both;
-    content: ' ';
 }
 
 .st-block[data-type="button"] .st-preview * {
@@ -56,8 +47,24 @@
     padding: 0;
 }
 
+.st-block[data-type="button"] .st-preview .st-text-block {
+    min-height: 1em;
+}
+
 .st-block[data-type="button"] .st-preview:hover {
     opacity: 0.8;
+}
+
+/* Editor */
+.st-block[data-type="button"] .st-editor:after,
+.st-block[data-type="button"] .st-control:after,
+.st-block[data-type="button"] .st-preview:before,
+.st-block[data-type="button"] .st-preview:after,
+.st-block[data-type="button"] .st-row:before,
+.st-block[data-type="button"] .st-row:after {
+    display: block;
+    clear: both;
+    content: ' ';
 }
 
 
@@ -65,61 +72,76 @@
     margin-bottom: 18px;
 }
 
-.st-block[data-type="button"] .st-editor .st-column {
+.st-block[data-type="button"] .st-column {
     box-sizing: border-box;
     float: left;
     padding: 0 0.5em;
 }
 
-.st-block[data-type="button"] .st-editor .st-column.st-column-50 {
+.st-block[data-type="button"] .st-column.st-column-50 {
     width: 50%;
 }
 
-.st-block[data-type="button"] .st-editor .st-column.st-column-33 {
+.st-block[data-type="button"] .st-column.st-column-33 {
     width: 33.33%;
 }
 
-.st-block[data-type="button"] .st-preview .st-text-block {
-    min-height: 1em;
+.st-block[data-type="button"] .st-column.st-column-25 {
+    width: 50%;
 }
 
-.st-block[data-type="button"] .st-editor .st-control {
+.st-block[data-type="button"] .st-control {
     position: relative;
     margin-top: 0.4em;
 }
 
-.st-block[data-type="button"] .st-editor .st-control .st-input-container {
-    padding: 0 20px;
+.st-block[data-type="button"] .st-control > * {
+    float: left;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.st-block[data-type="button"] .st-editor .st-icon:before {
-    font-family: 'ST-Icons-Button-Upplication' !important;
-    display: inline-block;
-    position: absolute;
-    left: 0px;
-    top: 2px;
+.st-block[data-type="button"] .st-control .st-field-name {
+    width: 15%;
+    padding: 9px 0;
 }
 
-.st-block[data-type="button"] .st-editor input[type="range"] {
+.st-block[data-type="button"] .st-control .st-input-container {
+    width: 85%;
+}
+
+.st-block[data-type="button"] .st-control .st-input-container.st-color,
+.st-block[data-type="button"] .st-control .st-input-container.st-select {
+    text-align: right;
+}
+
+.st-block[data-type="button"] .st-control .st-input-container.st-color .sp-preview {
+    width: 6em;
+}
+
+.st-block[data-type="button"] select {
+    padding: 5px 10px;
+}
+
+.st-block[data-type="button"] input[type="range"] {
     position: relative
 }
 
-.st-block[data-type="button"] .st-editor input[type="range"]:after {
+.st-block[data-type="button"] input[type="range"]:after {
     position: absolute;
     display: block;
     content: attr(st-value);
     font-size: 0.8em;
     text-align: right;
     top: 8px;
-    right: -27px;
+    right: -28px;
 }
 
-.st-block[data-type="button"] .st-editor .st-icon.st-icon-color:before { content: '\e810'; top: 5px; }
-.st-block[data-type="button"] .st-editor .st-icon.st-icon-link:before { content: '\e815'; top: 10px; }
-.st-block[data-type="button"] .st-editor .st-icon.st-icon-border:before { content: '\e814'; }
-.st-block[data-type="button"] .st-editor .st-icon.st-icon-radius:before { content: '\e80b'; }
-.st-block[data-type="button"] .st-editor .st-icon.st-icon-height:before { content: '\e811'; }
-.st-block[data-type="button"] .st-editor .st-icon.st-icon-width:before { content: '\e811'; transform: rotate(90deg);}
+/* Give room for the output value */
+.st-block[data-type="button"] input[type="range"] {
+    width: 92%;
+}
 
 @font-face {
     font-family: 'ST-Icons-Upplication';

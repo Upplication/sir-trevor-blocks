@@ -4,13 +4,17 @@
             blocks: {
                 button: {
                     title: "Button",
-                    styles: {
-                        backgroundColor: "Background Color",
-                        borderWidth: "Border Width",
-                        borderColor: "Border Color",
-                        borderRadius: "Border Radius",
+                    controls: {
+                        action: "Action",
+                        dimensions: "Dimensions",
+                        border: "Border",
+                        font: "Font",
                         width: "Width",
                         height: "Height",
+                        radius: "Radius",
+                        size: "Size",
+                        type: "Type",
+                        background: "Background"
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
@@ -49,13 +53,17 @@
             blocks: {
                 button: {
                     title: "Botón",
-                    styles: {
-                        backgroundColor: "Color de fondo",
-                        borderWidth: "Ancho del borde",
-                        borderColor: "Color del borde",
-                        borderRadius: "Radio del borde",
+                    controls: {
+                        action: "Acción",
+                        dimensions: "Dimensiones",
+                        border: "Borde",
+                        font: "Fuente",
                         width: "Ancho",
-                        height: "Alto"
+                        height: "Alto",
+                        radius: "Radio",
+                        size: "Tamaño",
+                        type: "Tipo",
+                        background: "Fondo"
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
@@ -76,7 +84,8 @@
                 },
                 widget: {
                     title: "Widget",
-                    hint: "Pega el html de tu widget externo aquí"
+                    hint: "Pega el html de tu widget externo aquí",
+                    edit: "Haz doble clic para editar"
                 },
                 ck_editor: {
                     title: "Texto"
@@ -86,6 +95,86 @@
     };
 
     jQuery.extend(true, SirTrevor.Locales, Locales);
+})();
+(function() {
+    var BlockMixins = SirTrevor.BlockMixins;
+    var Block = SirTrevor.Block;
+    Block.prototype.availableMixins.push('alignable');
+
+    var defaultAlignConfig = {
+        aligns : {
+            left: true,
+            center: true,
+            justify: true,
+            right: true
+        },
+        handler: function(align) {
+            this.getTextBlock().removeClass(function(index, classes) {
+                return classes.split(' ')
+                                .filter(function(a) { return /^st\-align-/.test(a) })
+                                .join(' ');
+            });
+            this.getTextBlock().addClass('st-align-' + align);
+        }
+    };
+
+    BlockMixins.Alignable = {
+        mixinName: 'Alignable',
+
+        initializeAlignable: function() {
+            // For this mixin to work we need to also have the controllable mixin available.
+            // Lets do some security checks
+            if ((this.controllable === true && !this.$control_ui) || // controllable is enabled here but not yet initialized
+                !this.controllable) { // we were not even marked as controllable
+                this.controls = this.controls || {};
+                this.withMixin(BlockMixins.Controllable);
+                this.controllable = false; // This will prevent from double initing the controllable ui
+            }
+
+            this.align_options = jQuery.extend(true, {}, defaultAlignConfig, this.align_options);
+            Object.keys(this.align_options.aligns).forEach(function (align) {
+                /*
+                 val might be:
+                    * `false`: Meaning this align should NOT be shown in the align controls.
+                    * `true`: Meaning this align will be shown on the align controls, but its behaviour will be handled by `align_options.handler` or the default `align_options.handler`.
+                    * `function() { ... } ` : A function that will be responsible for handling the click. It will be passed the align in css format (left, right, center, justify)
+                */
+                var val = this.align_options.aligns[align];
+
+                if (val == false) // Do not even show this on the control ui
+                    return;
+
+                var handler = this.align_options.handler;
+                if (val instanceof Function)
+                    handler = val;
+
+                if (!handler || !(handler instanceof Function))
+                    throw new Error('AlignableMixin: No valid handler function found for ' + align);
+
+                if (val === true) {
+                    this.addUiControl('align-' + align, function(e) {
+                        this._getData().align = align;
+                        (handler.bind(this))(align);
+                        if (e.originalEvent) { // Check if we were triggered by a human or not
+                            // If we were triggered by a human, raise the event, otherwise dont.
+                            // This allows us to use the handler click event for setting the initial
+                            // align in the block.
+                            console.log("raising block:aligned event");
+                            var ev = jQuery.Event();
+                            ev.originalEvent = e;
+                            ev.target = this.$el;
+                            ev.align = align;
+                            this.mediator.trigger('block:aligned', ev);
+                        }
+                    }.bind(this));
+                }
+            }.bind(this));
+
+            var data = this._getData();
+            if (data && data.align)
+                this.$control_ui.find('[class*="align-' + data.align + '"]').click();
+        },
+    }
 })();
 (function() {
     "use strict";
@@ -99,7 +188,7 @@
         icon_name: 'button',
 
         editorHTML: function() {
-            return '<div class="st-editor"><div class="st-preview"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row"><div class="st-control"><div class="st-icon st-icon-link"></div><div class="st-input-container"> <input name="href" type="hidden"> <input name="user-href" type="text"></div></div></div><div class="st-row"><div class="st-column st-column-33"><div class="st-control"><div class="st-icon st-icon-color"></div><div class="st-input-container"> <input class="st-value" name="css-background-color" type="color" value="#00CA6B"></div></div></div><div class="st-column st-column-33"><div class="st-control"><div class="st-icon st-icon-color"></div><div class="st-input-container"> <input class="st-value" name="css-border-color" type="color" value="#4D4D4D"></div></div></div><div class="st-column st-column-33"><div class="st-control"><div class="st-icon st-icon-color"></div><div class="st-input-container"> <input class="st-value" name="css-color" type="color" value="#4D4D4D"></div></div></div></div><div class="st-row"><div class="st-column st-column-50"><div class="st-control"><div class="st-icon st-icon-width"></div><div class="st-input-container"> <input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10"></div></div><div class="st-control"><div class="st-icon st-icon-height"></div><div class="st-input-container"> <input class="st-value" name="css-padding" type="range" value="1" units="em 0" step="0.1" max="5" min="0.2"></div></div></div><div class="st-column st-column-50"><div class="st-control"><div class="st-icon st-icon-border"></div><div class="st-input-container"> <input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0"></div></div><div class="st-control"><div class="st-icon st-icon-radius"></div><div class="st-input-container"> <input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0"></div></div></div><div class="st-column st-column-50"><div class="st-control"><div class="st-icon st-icon-font-size"></div><div class="st-input-container"> <input class="st-value" name="css-font-size" type="range" value="2" units="em" step="0.1" max="5" min="0.2"></div></div></div><div class="st-column st-column-50"><div class="st-control"><div class="st-icon st-icon-font-family"></div><div class="st-input-container"> <select class="st-value" name="css-font-family"><option value="sans-serif">Sans Serif</option><option value="cursive">Cursive</option><option value="fantasy">Fantasy</option><option value="serif">Serif</option><option value="monospace">Monospace</option></select></div></div></div></div></div>';
+            return _.template('<div class="st-editor"><div class="st-preview"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row"><div class="st-control"><h4 class="st-field-name"><%= i18n.t("blocks:button:controls:action") %></h4><div class="st-input-container"> <input name="href" type="hidden"> <input name="user-href" type="text"></div></div></div><div class="st-row"><div class="st-column st-column-33"><h4><%= i18n.t("blocks:button:controls:dimensions") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5><div class="st-input-container"> <input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:height") %></h5><div class="st-input-container"> <input class="st-value" name="css-padding" type="range" value="1" units="em 0" step="0.1" max="5" min="0.2"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:background") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-background-color" type="color" value="#00CA6B"></div></div></div><div class="st-column st-column-33"><h4><%= i18n.t("blocks:button:controls:border") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5><div class="st-input-container"> <input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:radius") %></h5><div class="st-input-container"> <input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-border-color" type="color" value="#4D4D4D"></div></div></div><div class="st-column st-column-33"><h4><%= i18n.t("blocks:button:controls:font") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:size") %></h5><div class="st-input-container"> <input class="st-value" name="css-font-size" type="range" value="2" units="em" step="0.1" max="5" min="0.2"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:type") %></h5><div class="st-input-container st-select"> <select class="st-value" name="css-font-family"><option value="sans-serif">Sans Serif</option><option value="cursive">Cursive</option><option value="fantasy">Fantasy</option><option value="serif">Serif</option><option value="monospace">Monospace</option></select></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-color" type="color" value="#4D4D4D"></div></div></div></div></div>', { imports: { i18n: i18n } });
         },
 
         onBlockRender: function() {
@@ -806,84 +895,4 @@
         }
 
     });
-})();
-(function() {
-    var BlockMixins = SirTrevor.BlockMixins;
-    var Block = SirTrevor.Block;
-    Block.prototype.availableMixins.push('alignable');
-
-    var defaultAlignConfig = {
-        aligns : {
-            left: true,
-            center: true,
-            justify: true,
-            right: true
-        },
-        handler: function(align) {
-            this.getTextBlock().removeClass(function(index, classes) {
-                return classes.split(' ')
-                                .filter(function(a) { return /^st\-align-/.test(a) })
-                                .join(' ');
-            });
-            this.getTextBlock().addClass('st-align-' + align);
-        }
-    };
-
-    BlockMixins.Alignable = {
-        mixinName: 'Alignable',
-
-        initializeAlignable: function() {
-            // For this mixin to work we need to also have the controllable mixin available.
-            // Lets do some security checks
-            if ((this.controllable === true && !this.$control_ui) || // controllable is enabled here but not yet initialized
-                !this.controllable) { // we were not even marked as controllable
-                this.controls = this.controls || {};
-                this.withMixin(BlockMixins.Controllable);
-                this.controllable = false; // This will prevent from double initing the controllable ui
-            }
-
-            this.align_options = jQuery.extend(true, {}, defaultAlignConfig, this.align_options);
-            Object.keys(this.align_options.aligns).forEach(function (align) {
-                /*
-                 val might be:
-                    * `false`: Meaning this align should NOT be shown in the align controls.
-                    * `true`: Meaning this align will be shown on the align controls, but its behaviour will be handled by `align_options.handler` or the default `align_options.handler`.
-                    * `function() { ... } ` : A function that will be responsible for handling the click. It will be passed the align in css format (left, right, center, justify)
-                */
-                var val = this.align_options.aligns[align];
-
-                if (val == false) // Do not even show this on the control ui
-                    return;
-
-                var handler = this.align_options.handler;
-                if (val instanceof Function)
-                    handler = val;
-
-                if (!handler || !(handler instanceof Function))
-                    throw new Error('AlignableMixin: No valid handler function found for ' + align);
-
-                if (val === true) {
-                    this.addUiControl('align-' + align, function(e) {
-                        this._getData().align = align;
-                        (handler.bind(this))(align);
-                        if (e.originalEvent) { // Check if we were triggered by a human or not
-                            // If we were triggered by a human, raise the event, otherwise dont.
-                            // This allows us to use the handler click event for setting the initial
-                            // align in the block.
-                            console.log("raising block:aligned event");
-                            var ev = jQuery.Event();
-                            ev.originalEvent = e;
-                            ev.target = this.$el;
-                            ev.align = align;
-                            this.mediator.trigger('block:aligned', ev);
-                        }
-                    }.bind(this));
-                }
-            }.bind(this));
-
-            var data = this._getData();
-            if (data && data.align)
-                this.$control_ui.find('[class*="align-' + data.align + '"]').click();
-        },
-    }
 })();
