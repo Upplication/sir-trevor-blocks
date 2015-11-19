@@ -14,7 +14,8 @@
                         radius: "Radius",
                         size: "Size",
                         type: "Type",
-                        background: "Background"
+                        background: "Background",
+                        color: "Color"
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',

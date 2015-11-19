@@ -14,7 +14,8 @@
                         radius: "Radio",
                         size: "Tamaño",
                         type: "Tipo",
-                        background: "Fondo"
+                        background: "Fondo",
+                        color: "Color"
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
