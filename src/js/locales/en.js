@@ -4,13 +4,17 @@
             blocks: {
                 button: {
                     title: "Button",
-                    styles: {
-                        backgroundColor: "Background Color",
-                        borderWidth: "Border Width",
-                        borderColor: "Border Color",
-                        borderRadius: "Border Radius",
+                    controls: {
+                        action: "Action",
+                        dimensions: "Dimensions",
+                        border: "Border",
+                        font: "Font",
                         width: "Width",
                         height: "Height",
+                        radius: "Radius",
+                        size: "Size",
+                        type: "Type",
+                        background: "Background"
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',

@@ -4,13 +4,17 @@
             blocks: {
                 button: {
                     title: "Botón",
-                    styles: {
-                        backgroundColor: "Color de fondo",
-                        borderWidth: "Ancho del borde",
-                        borderColor: "Color del borde",
-                        borderRadius: "Radio del borde",
+                    controls: {
+                        action: "Acción",
+                        dimensions: "Dimensiones",
+                        border: "Borde",
+                        font: "Fuente",
                         width: "Ancho",
-                        height: "Alto"
+                        height: "Alto",
+                        radius: "Radio",
+                        size: "Tamaño",
+                        type: "Tipo",
+                        background: "Fondo"
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
@@ -31,7 +35,8 @@
                 },
                 widget: {
                     title: "Widget",
-                    hint: "Pega el html de tu widget externo aquí"
+                    hint: "Pega el html de tu widget externo aquí",
+                    edit: "Haz doble clic para editar"
                 },
                 ck_editor: {
                     title: "Texto"

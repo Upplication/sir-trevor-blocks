@@ -10,7 +10,7 @@
         icon_name: 'button',
 
         editorHTML: function() {
-            return '@@include("button/editor.html")';
+            return _.template('@@include("button/editor.html")', { imports: { i18n: i18n } });
         },
 
         onBlockRender: function() {

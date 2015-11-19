@@ -2,7 +2,7 @@
 	@@include('button/preview.html')
 	<div class="st-row">
 		<div class="st-control">
-			<div class="st-icon st-icon-link"></div>
+			<h4 class="st-field-name"><%= i18n.t("blocks:button:controls:action") %></h4>
 			<div class="st-input-container">
 				<input name="href" type="hidden">
 				<input name="user-href" type="text">
@@ -11,71 +11,58 @@
 	</div>
 	<div class="st-row">
 		<div class="st-column st-column-33">
+			<h4><%= i18n.t("blocks:button:controls:dimensions") %></h4>
 			<div class="st-control">
-				<div class="st-icon st-icon-color"></div>
-				<div class="st-input-container">
-					<input class="st-value" name="css-background-color" type="color" value="#00CA6B">
-				</div>
-			</div>
-		</div>
-		<div class="st-column st-column-33">
-			<div class="st-control">
-				<div class="st-icon st-icon-color"></div>
-				<div class="st-input-container">
-					<input class="st-value" name="css-border-color" type="color" value="#4D4D4D">
-				</div>
-			</div>
-		</div>
-		<div class="st-column st-column-33">
-			<div class="st-control">
-				<div class="st-icon st-icon-color"></div>
-				<div class="st-input-container">
-					<input class="st-value" name="css-color" type="color" value="#4D4D4D">
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="st-row">
-		<div class="st-column st-column-50">
-			<div class="st-control">
-				<div class="st-icon st-icon-width"></div>
+				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5>
 				<div class="st-input-container">
 					<input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10">
 				</div>
 			</div>
 			<div class="st-control">
-				<div class="st-icon st-icon-height"></div>
+				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:height") %></h5>
 				<div class="st-input-container">
 					<input class="st-value" name="css-padding" type="range" value="1" units="em 0" step="0.1" max="5" min="0.2">
 				</div>
 			</div>
-		</div>
-		<div class="st-column st-column-50">
 			<div class="st-control">
-				<div class="st-icon st-icon-border"></div>
+				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:background") %></h5>
+				<div class="st-input-container st-color">
+					<input class="st-value" name="css-background-color" type="color" value="#00CA6B">
+				</div>
+			</div>
+		</div>
+		<div class="st-column st-column-33">
+			<h4><%= i18n.t("blocks:button:controls:border") %></h4>
+			<div class="st-control">
+				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5>
 				<div class="st-input-container">
 					<input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0">
 				</div>
 			</div>
 			<div class="st-control">
-				<div class="st-icon st-icon-radius"></div>
+				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:radius") %></h5>
 				<div class="st-input-container">
 					<input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0">
 				</div>
 			</div>
-		</div>
-		<div class="st-column st-column-50">
 			<div class="st-control">
-				<div class="st-icon st-icon-font-size"></div>
+				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5>
+				<div class="st-input-container st-color">
+					<input class="st-value" name="css-border-color" type="color" value="#4D4D4D">
+				</div>
+			</div>
+		</div>
+		<div class="st-column st-column-33">
+			<h4><%= i18n.t("blocks:button:controls:font") %></h4>
+			<div class="st-control">
+				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:size") %></h5>
 				<div class="st-input-container">
 					<input class="st-value" name="css-font-size" type="range" value="2" units="em" step="0.1" max="5" min="0.2">
 				</div>
 			</div>
-		</div>
-		<div class="st-column st-column-50">
 			<div class="st-control">
-				<div class="st-icon st-icon-font-family"></div>
-				<div class="st-input-container">
+				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:type") %></h5>
+				<div class="st-input-container st-select">
 					<select class="st-value" name="css-font-family">
 						<option value="sans-serif">Sans Serif</option>
 						<option value="cursive">Cursive</option>
@@ -83,6 +70,12 @@
 						<option value="serif">Serif</option>
 						<option value="monospace">Monospace</option>
 					</select>
+				</div>
+			</div>
+			<div class="st-control">
+				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5>
+				<div class="st-input-container st-color">
+					<input class="st-value" name="css-color" type="color" value="#4D4D4D">
 				</div>
 			</div>
 		</div>
