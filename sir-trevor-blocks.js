@@ -15,7 +15,8 @@
                         size: "Size",
                         type: "Type",
                         background: "Background",
-                        color: "Color"
+                        color: "Color",
+                        align: "Align"
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
@@ -65,7 +66,8 @@
                         size: "Tamaño",
                         type: "Tipo",
                         background: "Fondo",
-                        color: "Color"
+                        color: "Color",
+                        align: "Alineado"
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
@@ -110,7 +112,7 @@
         icon_name: 'button',
 
         editorHTML: function() {
-            return _.template('<div class="st-editor"><div class="st-preview"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row"><div class="st-control"><h4 class="st-field-name"><%= i18n.t("blocks:button:controls:action") %></h4><div class="st-input-container"> <input name="href" type="hidden"> <input name="user-href" type="text"></div></div></div><div class="st-row"><div class="st-column st-column-33"><h4><%= i18n.t("blocks:button:controls:dimensions") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5><div class="st-input-container"> <input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:height") %></h5><div class="st-input-container"> <input class="st-value" name="css-padding" type="range" value="1" units="em 0" step="0.1" max="5" min="0.2"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:background") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-background-color" type="color" value="#00CA6B"></div></div></div><div class="st-column st-column-33"><h4><%= i18n.t("blocks:button:controls:border") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5><div class="st-input-container"> <input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:radius") %></h5><div class="st-input-container"> <input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-border-color" type="color" value="#4D4D4D"></div></div></div><div class="st-column st-column-33"><h4><%= i18n.t("blocks:button:controls:font") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:size") %></h5><div class="st-input-container"> <input class="st-value" name="css-font-size" type="range" value="2" units="em" step="0.1" max="5" min="0.2"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:type") %></h5><div class="st-input-container st-select"> <select class="st-value" name="css-font-family"><option value="sans-serif">Sans Serif</option><option value="cursive">Cursive</option><option value="fantasy">Fantasy</option><option value="serif">Serif</option><option value="monospace">Monospace</option></select></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-color" type="color" value="#4D4D4D"></div></div></div></div></div>', { imports: { i18n: i18n } });
+            return _.template('<div class="st-editor"><div class="st-preview"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row"><div class="st-column st-column-66"><div class="st-control"><h4 class="st-field-name"><%= i18n.t("blocks:button:controls:action") %></h4><div class="st-input-container"> <input name="href" type="hidden"> <input name="user-href" type="text"></div></div></div><div class="st-column st-column-33"><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:align") %></h5><div class="st-input-container st-select"> <select class="st-value" name="css-float"><option value="none">Center</option><option value="left">Left</option><option value="right">Right</option></select></div></div></div></div><div class="st-row"><div class="st-column st-column-33"><h4><%= i18n.t("blocks:button:controls:dimensions") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5><div class="st-input-container"> <input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:height") %></h5><div class="st-input-container"> <input class="st-value" name="css-padding" type="range" value="1" units="em 0" step="0.1" max="5" min="0.2"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:background") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-background-color" type="color" value="#00CA6B"></div></div></div><div class="st-column st-column-33"><h4><%= i18n.t("blocks:button:controls:border") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5><div class="st-input-container"> <input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:radius") %></h5><div class="st-input-container"> <input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-border-color" type="color" value="#4D4D4D"></div></div></div><div class="st-column st-column-33"><h4><%= i18n.t("blocks:button:controls:font") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:size") %></h5><div class="st-input-container"> <input class="st-value" name="css-font-size" type="range" value="2" units="em" step="0.1" max="5" min="0.2"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:type") %></h5><div class="st-input-container st-select"> <select class="st-value" name="css-font-family"><option value="sans-serif">Sans Serif</option><option value="cursive">Cursive</option><option value="fantasy">Fantasy</option><option value="serif">Serif</option><option value="monospace">Monospace</option></select></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-color" type="color" value="#4D4D4D"></div></div></div></div></div>', { imports: { i18n: i18n } });
         },
 
         onBlockRender: function() {
@@ -159,13 +161,11 @@
             var $rows = this.$el.find('.st-row');
             $rows.hide();
             $preview.attr('contenteditable', 'false');
-            this.$control_ui.hide();
             $preview.click(function() {
                 $rows.show();
                 $preview.attr('contenteditable', 'true');
                 $preview.unbind('click');
-                this.$control_ui.show();
-            }.bind(this));
+            });
         },
 
         _serializeData: function() {
@@ -227,19 +227,7 @@
             props.split('_').forEach(function (prop) {
                 this.$preview.css(prop, val);
             }, this);
-        },
-
-        alignable: true,
-        align_options: {
-            aligns: {
-                justify: false
-            },
-            handler: function(align) {
-                if (align == 'center')
-                    align = 'none';
-                (this.$preview || this.$el.find('.st-preview')).css('float', align);
-            },
-        },
+        }
     })
 })();
 (function() {

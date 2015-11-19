@@ -78,8 +78,8 @@
     padding: 0 0.5em;
 }
 
-.st-block[data-type="button"] .st-column.st-column-50 {
-    width: 50%;
+.st-block[data-type="button"] .st-column.st-column-66 {
+    width: 66.66%;
 }
 
 .st-block[data-type="button"] .st-column.st-column-33 {
