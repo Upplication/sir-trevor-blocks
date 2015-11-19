@@ -59,13 +59,11 @@
             var $rows = this.$el.find('.st-row');
             $rows.hide();
             $preview.attr('contenteditable', 'false');
-            this.$control_ui.hide();
             $preview.click(function() {
                 $rows.show();
                 $preview.attr('contenteditable', 'true');
                 $preview.unbind('click');
-                this.$control_ui.show();
-            }.bind(this));
+            });
         },
 
         _serializeData: function() {
@@ -127,18 +125,6 @@
             props.split('_').forEach(function (prop) {
                 this.$preview.css(prop, val);
             }, this);
-        },
-
-        alignable: true,
-        align_options: {
-            aligns: {
-                justify: false
-            },
-            handler: function(align) {
-                if (align == 'center')
-                    align = 'none';
-                (this.$preview || this.$el.find('.st-preview')).css('float', align);
-            },
-        },
+        }
     })
 })();

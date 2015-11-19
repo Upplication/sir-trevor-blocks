@@ -15,7 +15,8 @@
                         size: "Tamaño",
                         type: "Tipo",
                         background: "Fondo",
-                        color: "Color"
+                        color: "Color",
+                        align: "Alineado"
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',

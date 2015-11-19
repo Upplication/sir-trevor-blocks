@@ -1,11 +1,25 @@
 <div class="st-editor">
 	@@include('button/preview.html')
 	<div class="st-row">
-		<div class="st-control">
-			<h4 class="st-field-name"><%= i18n.t("blocks:button:controls:action") %></h4>
-			<div class="st-input-container">
-				<input name="href" type="hidden">
-				<input name="user-href" type="text">
+		<div class="st-column st-column-66">
+			<div class="st-control">
+				<h4 class="st-field-name"><%= i18n.t("blocks:button:controls:action") %></h4>
+				<div class="st-input-container">
+					<input name="href" type="hidden">
+					<input name="user-href" type="text">
+				</div>
+			</div>
+		</div>
+		<div class="st-column st-column-33">
+			<div class="st-control">
+				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:align") %></h5>
+				<div class="st-input-container st-select">
+					<select class="st-value" name="css-float">
+						<option value="none">Center</option>
+						<option value="left">Left</option>
+						<option value="right">Right</option>
+					</select>
+				</div>
 			</div>
 		</div>
 	</div>
