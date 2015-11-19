@@ -110,8 +110,16 @@
             var props = $target.attr('name').replace(/^css\-/, '');
             var val = value ? value.toString() : $target.val();
 
+            // This is used for number indicator in range input
+            $target.attr('st-value', val);
+
             if (value)
                 $target.val(value);
+
+            if ($target.attr('type') == 'range') {
+                var _after = $target.next();
+                _after.css('content', val);
+            }
 
             if ($target.attr('units') && $target.attr('units').length > 0)
                 val += $target.attr('units');
