@@ -18,9 +18,11 @@
         onBlockRender: function() {
             var $textarea = this.$el.find('textarea');
             var textarea = $textarea[0];
+            var $preview =  this.$el.find('.preview');
 
             var offset = textarea.offsetHeight - textarea.clientHeight;
          
+            $preview.attr('title', i18n.t('blocks:widget:edit'))
             $textarea.attr('placeholder', i18n.t('blocks:widget:hint'));
             $textarea.on('keyup input', function() {
                 $textarea
@@ -44,7 +46,7 @@
             var $code = $preview.find('code');
             var $editor = $find('.editor');
             var $textarea = $find('textarea');
-            var $icon = $find('.st-icon');
+            var $icon = $editor.find('.st-icon');
 
             // First load the code into the text area
             $textarea.val(code);
