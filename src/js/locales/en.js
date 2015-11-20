@@ -16,7 +16,10 @@
                         type: "Type",
                         background: "Background",
                         color: "Color",
-                        align: "Align"
+                        align: "Align",
+                        center: "Center",
+                        left: "Left",
+                        right: "Right"
                     },
                     hint: {
                         text: '¡Escribe aqui el texto de tu Boton!',
