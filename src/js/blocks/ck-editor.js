@@ -48,6 +48,12 @@
                 removeButtons: 'CreateDiv,Styles,Flash,Iframe,Image,HorizontalRule,Smiley,PageBreak,Anchor'
             });
 
+            this.loading();
+            // hide the loadign effect
+            this.ckeditor.on('instanceReady', function(ckEvent) {
+                this.ready();
+            }.bind(this));
+
             // block event on change ckeditor
             this.ckeditor.on('change', function(ckEvent) {
                 // event
