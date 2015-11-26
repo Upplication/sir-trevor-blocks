@@ -36,7 +36,7 @@
                     hint: "Write an address here"
                 },
                 spacer: {
-                    title: "Blank space"
+                    title: "Spacer"
                 },
                 widget: {
                     title: "Widget",
@@ -90,7 +90,7 @@
                     hint: "Escribe una direccion aquí"
                 },
                 spacer: {
-                    title: "Espacio en blanco"
+                    title: "Separador"
                 },
                 widget: {
                     title: "Widget",
