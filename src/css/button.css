@@ -116,3 +116,107 @@
 .st-block[data-type="button"] input[type="range"] {
     width: 92%;
 }
+
+/* Container resert */
+.st-block[data-type="button"] .st-input-container:not(.st-input-container-resert) {
+    width: inherit !important;
+}
+
+/* Inputs */
+.st-block[data-type="button"] h5.st-field-name {
+    min-width: 80px;
+}
+
+.st-block[data-type="button"] h5.st-field-name.st-align-name {
+    font-size: 17px;
+}
+
+.st-block[data-type="button"] .st-input-long {
+    min-width: 450px;
+}
+
+.st-block[data-type="button"] .st-column.st-column-33 .st-input-container input {
+    max-width: 150px;
+}
+
+/* Selects */
+.st-block[data-type="button"] .st-input-container.st-color .sp-replacer {
+    border: 1px solid transparent !important;
+    background: #eeeeee !important;
+    min-width: 122px !important;
+}
+
+.st-block[data-type="button"] .st-input-container.st-select select.st-value {
+    border: none;
+    background: #eee;
+    min-width: 132px;
+}
+
+.st-block[data-type="button"] .sp-dd {
+    position: relative;
+    left: 8px;
+}
+
+.st-color .sp-preview {
+    border-color: #999999;
+}
+
+/* Padding and Margin */
+.st-block[data-type="button"] .st-padding-right-25 {
+    padding-right: 25px;
+}
+
+.st-block[data-type="button"] .st-padding-sides-25 {
+    padding: 0 25px;
+}
+
+.st-block[data-type="button"] .st-padding-left-25 {
+    padding-left: 25px;
+}
+
+.st-block[data-type="button"] .st-margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 1565px) {
+    .st-block[data-type="button"] h5.st-field-name {
+        min-width: 180px;
+    }
+    .st-block[data-type="button"] .st-column.st-column-66.st-padding-right-25 .st-input-container {
+        width: 100%;
+    }
+    .st-block[data-type="button"] h5.st-field-name.st-align-name {
+        min-width: 100% !important;
+    }
+    .st-block[data-type="button"] .st-input-container.st-input-container-resert {
+        width: 100% !important;
+    }
+    .st-block[data-type=button] .st-input-container-resert .st-input-long {
+        min-width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .st-block[data-type="button"] .st-column.st-column-66,
+    .st-block[data-type="button"] .st-column.st-column-33,
+    .st-block[data-type="button"] .st-column.st-column-25 {
+        width: 100%;
+    }
+    .st-block[data-type="button"] .st-padding-right-25 {
+        padding-right: 0;
+    }
+
+    .st-block[data-type="button"] .st-padding-sides-25 {
+        padding: 0;
+    }
+
+    .st-block[data-type="button"] .st-padding-left-25 {
+        padding-left: 0;
+    }
+
+    .st-block[data-type=button] .st-column {
+        padding: 0;
+    }
+}

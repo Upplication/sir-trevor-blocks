@@ -1,18 +1,18 @@
 <div class="st-editor">
 	@@include('button/preview.html')
-	<div class="st-row">
-		<div class="st-column st-column-66">
+	<div class="st-row st-margin-bottom-20">
+		<div class="st-column st-column-66 st-padding-right-25">
 			<div class="st-control">
 				<h4 class="st-field-name"><%= i18n.t("blocks:button:controls:action") %></h4>
-				<div class="st-input-container">
+				<div class="st-input-container st-input-container-resert">
 					<input name="href" type="hidden">
-					<input name="user-href" type="text">
+					<input class="st-input-long" name="user-href" type="text">
 				</div>
 			</div>
 		</div>
-		<div class="st-column st-column-33">
+		<div class="st-column st-column-33 st-padding-left-25">
 			<div class="st-control">
-				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:align") %></h5>
+				<h5 class="st-field-name st-align-name"><%= i18n.t("blocks:button:controls:align") %></h5>
 				<div class="st-input-container st-select">
 					<select class="st-value" name="css-float">
 						<option value="none"><%= i18n.t("blocks:button:controls:center") %></option>
@@ -24,7 +24,7 @@
 		</div>
 	</div>
 	<div class="st-row">
-		<div class="st-column st-column-33">
+		<div class="st-column st-column-33 st-padding-right-25">
 			<h4><%= i18n.t("blocks:button:controls:dimensions") %></h4>
 			<div class="st-control">
 				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5>
@@ -45,7 +45,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="st-column st-column-33">
+		<div class="st-column st-column-33 st-padding-sides-25">
 			<h4><%= i18n.t("blocks:button:controls:border") %></h4>
 			<div class="st-control">
 				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5>
@@ -66,7 +66,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="st-column st-column-33">
+		<div class="st-column st-column-33 st-padding-left-25">
 			<h4><%= i18n.t("blocks:button:controls:font") %></h4>
 			<div class="st-control">
 				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:size") %></h5>
