@@ -10,6 +10,7 @@
 }
 
 .st-block-control[data-type="text"]:before { content: '\e807'; }
+.st-block-control[data-type="ck_editor"]:before { content: '\e807'; }
 .st-block-control[data-type="text_align"]:before { content: '\e807'; }
 .st-block-control[data-type="quote"]:before { content: '\e805'; }
 .st-block-control[data-type="image"]:before { content: '\e801'; }
@@ -21,3 +22,8 @@
 .st-block-control[data-type="button"]:before { content: '\e803'; }
 .st-block-control[data-type="widget"]:before { content: '\e800'; }
 .st-block-control[data-type="map"]:before { content: '\e802'; }
+
+.st-block-control[data-type="spacer"]:before {
+	font-family: 'ST-Icons-Upplication-Spacer' !important;
+	content: '\e803';
+}
