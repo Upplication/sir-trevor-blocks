@@ -36,7 +36,7 @@
                     hint: "Escribe una direccion aquí"
                 },
                 spacer: {
-                    title: "Espacio en blanco"
+                    title: "Separador"
                 },
                 widget: {
                     title: "Widget",
