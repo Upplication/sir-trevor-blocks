@@ -1,0 +1,73 @@
+/* Top Main buttons */
+.cke_top {
+    border-bottom: 1px solid transparent !important;
+    white-space: normal !important;
+    box-shadow: 0 0 0 #fff inset !important;
+    background: #eeeeee !important;
+    background-image: none !important;
+}
+
+/* Body */
+.cke_chrome {
+    border: 1px solid #eeeeee !important;
+    box-shadow: 0 0 0 rgba(0,0,0,0) !important;
+}
+
+/* Bottom */
+.cke_bottom {
+    border-top: 1px solid transparent !important;
+    box-shadow: 0 0 0 #fff inset;
+    background: transparent !important;
+    background-image: none !important;
+}
+
+/* Buttons */
+.cke_ltr .cke_button:first-child,
+.cke_rtl .cke_button:last-child {
+    border-radius: 0 !important;
+}
+
+.cke_toolgroup {
+    border: 1px solid transparent !important;
+    border-bottom-color: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #eeeeee !important;
+    background-image: none !important;
+}
+
+a.cke_button_off:hover,
+a.cke_button_off:focus,
+a.cke_button_off:active,
+a.cke_button_disabled:hover,
+a.cke_button_disabled:focus,
+a.cke_button_disabled:active {
+    background-color: #cccccc !important;
+    box-shadow: none !important;
+    background-image: none !important;
+}
+
+a.cke_button_on,
+a.cke_button_on:hover,
+a.cke_button_on:focus,
+a.cke_button_on:active {
+    background-color: #cccccc !important;
+    box-shadow: none !important;
+    background-image: none !important;
+}
+
+a.cke_combo_button {
+    border: 1px solid transparent !important;
+    border-bottom-color: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #dddddd !important;
+    background-image: none !important;
+    width: 100px;
+}
+
+.cke_combo_text {
+    color: #484848 !important;
+    text-shadow: 0 0 0 rgba(255,255,255,0) !important;
+    font-weight: 600 !important;
+}
