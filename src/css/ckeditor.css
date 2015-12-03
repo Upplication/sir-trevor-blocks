@@ -1,3 +1,4 @@
+/* CKEDITOR */
 /* Top Main buttons */
 .cke_top {
     border-bottom: 1px solid transparent !important;
@@ -27,13 +28,19 @@
     border-radius: 0 !important;
 }
 
-.cke_toolgroup {
+.cke_toolgroup,
+.cke_dialog_title,
+.cke_dialog_footer {
     border: 1px solid transparent !important;
     border-bottom-color: transparent !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     background: #eeeeee !important;
     background-image: none !important;
+}
+
+.cke_dialog_footer {
+    border: 0 !important;
 }
 
 a.cke_button_off:hover,
@@ -71,3 +78,137 @@ a.cke_combo_button {
     text-shadow: 0 0 0 rgba(255,255,255,0) !important;
     font-weight: 600 !important;
 }
+
+/* Modals dialogs - Frame */
+
+.cke_dialog_body {
+    background: #ffffff !important;
+    border: 1px solid #cccccc !important;
+    border-bottom-color: #cccccc !important;
+    border-radius: 0 !important;
+}
+
+/* Modals dialogs - Texts & Labels */
+
+.cke_dialog_title {
+    font-size: 14px !important;
+    text-shadow: none !important;
+}
+
+.cke_dialog_body label {
+    font-size: 14px !important;
+    font-family: lato,serif !important;
+    line-height: 26px !important;
+    color: #555555 !important;
+}
+
+/* Modals dialogs - Inputs & Text Areas */
+
+input.cke_dialog_ui_input_text,
+input.cke_dialog_ui_input_password,
+textarea.cke_dialog_ui_input_textarea {
+    border: 1px solid #cccccc !important;
+    padding: 5px 6px !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    min-width: 115px !important;
+}
+
+select.cke_dialog_ui_input_select {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    max-width: 115px !important;
+}
+
+/* Modals dialogs - Tabs */
+
+.cke_dialog_contents {
+    border-top: none !important;
+}
+
+.cke_dialog_tabs {
+    left: 1px !important;
+    margin: 5px !important;
+}
+
+a.cke_dialog_tab {
+    font-size: 14px !important;
+    letter-spacing: 0.02em !important;
+    font-family: "Lato", serif !important;
+    height: 25px !important;
+    line-height: 25px !important;
+    color: #484848 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: #eeeeee !important;
+    background-image: none !important;
+    min-width: 159px !important;
+}
+
+a.cke_dialog_tab:hover {
+    background: #dddddd !important;
+}
+
+a.cke_dialog_tab_selected,
+a.cke_dialog_tab_selected:hover {
+    background: #ffffff !important;
+}
+
+/* Modals dialogs - Buttons */
+
+a.cke_dialog_ui_button {
+    border-radius: 0 !important;
+    text-shadow: none !important;
+    border: none !important;
+    background-image: none !important;
+    padding: 8px 5px !important;
+    -webkit-transition: all 150ms ease-in;
+    -moz-transition: all 150ms ease-in;
+    -o-transition: all 150ms ease-in;
+    -ms-transition: all 150ms ease-in;
+    transition: all 150ms ease-in;
+}
+
+a.cke_dialog_ui_button_ok {
+    text-shadow: none !important;
+    border: none !important;
+    background: #00c86b !important;
+    background-image: none !important;
+}
+
+a.cke_dialog_ui_button_ok:hover {
+    border: none !important;
+    background: #009550 !important;
+}
+
+a.cke_dialog_ui_button_cancel {
+    background: #b81f0d !important;
+}
+
+a.cke_dialog_ui_button_cancel:hover {
+    border: none !important;
+    background: #791409 !important;
+}
+
+a.cke_dialog_ui_button span,
+a.cke_dialog_ui_button_ok span,
+a.cke_dialog_ui_button_cancel span {
+    text-shadow: none !important;
+    letter-spacing: 0.04em !important;
+    font-weight: 500 !important;
+    font-family: "lato", serif !important;
+    font-size: 14px !important;
+}
+
+a.cke_dialog_ui_button_ok span,
+a.cke_dialog_ui_button_cancel span {
+    color: #ffffff !important;
+}
+
+/* Modals dialogs - Resizer */
+
+.cke_dialog .cke_resizer {
+    margin-top: 29px !important;
+}
+
+/* end ckeditor */
