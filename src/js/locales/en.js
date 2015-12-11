@@ -36,7 +36,8 @@
                     hint: "Write an address here"
                 },
                 spacer: {
-                    title: "Spacer"
+                    title: "Spacer",
+                    size: "Size"
                 },
                 widget: {
                     title: "Widget",
