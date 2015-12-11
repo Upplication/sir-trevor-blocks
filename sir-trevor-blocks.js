@@ -36,7 +36,8 @@
                     hint: "Write an address here"
                 },
                 spacer: {
-                    title: "Spacer"
+                    title: "Spacer",
+                    size: "Size"
                 },
                 widget: {
                     title: "Widget",
@@ -90,7 +91,8 @@
                     hint: "Escribe una direccion aquí"
                 },
                 spacer: {
-                    title: "Separador"
+                    title: "Separador",
+                    size: "Tamaño"
                 },
                 widget: {
                     title: "Widget",
@@ -281,7 +283,8 @@
                     {"name":"paragraph","groups":["list","blocks", "align"]},
                     {"name":"insert", "groups": ['Table']},
                     {"name":"styles"},
-                    {"name":"colors"}
+                    {"name":"colors"},
+                    {"name":"source", "groups": ['Source'] }
                 ],
                 removeButtons: 'CreateDiv,Styles,Flash,Iframe,Image,HorizontalRule,Smiley,PageBreak,Anchor'
             });
@@ -705,7 +708,7 @@
 
       type: "spacer",
       title: function() { return i18n.t('blocks:spacer:title') },
-      editorHTML: '<div class="st-control"><div class="st-icon st-icon-height"></div><div class="st-value-container"> <input class="st-value" name="height" type="range" value="5" units="vw" step="0.1" max="50" min="0" /></div><span class="st-output"></span></div>',
+      editorHTML: '<div class="st-control"><div class="st-value-container"> <span><%= i18n.t("blocks:spacer:size") %></span> <input class="st-value" name="height" type="range" value="5" units="vw" step="0.1" max="50" min="0" /></div><span class="st-output"></span></div>',
 
       loadData: function(data) {
         this.$height = this.$height || this.$editor.find('[name="height"]');
