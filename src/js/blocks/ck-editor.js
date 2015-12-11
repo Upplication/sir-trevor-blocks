@@ -43,7 +43,8 @@
                     {"name":"paragraph","groups":["list","blocks", "align"]},
                     {"name":"insert", "groups": ['Table']},
                     {"name":"styles"},
-                    {"name":"colors"}
+                    {"name":"colors"},
+                    {"name":"source", "groups": ['Source'] }
                 ],
                 removeButtons: 'CreateDiv,Styles,Flash,Iframe,Image,HorizontalRule,Smiley,PageBreak,Anchor'
             });
