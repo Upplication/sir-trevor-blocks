@@ -310,7 +310,7 @@
 
         _serializeData: function() {
             return {
-                type: 'html',
+                format: 'html',
                 text: this.ckeditor ? this.ckeditor.getData() : ''
             }
         }
@@ -708,7 +708,9 @@
 
       type: "spacer",
       title: function() { return i18n.t('blocks:spacer:title') },
-      editorHTML: '<div class="st-control"><div class="st-value-container"> <span><%= i18n.t("blocks:spacer:size") %></span> <input class="st-value" name="height" type="range" value="5" units="vw" step="0.1" max="50" min="0" /></div><span class="st-output"></span></div>',
+      editorHTML: function() {
+          return _.template('<div class="st-control"><div class="st-value-container"> <span><%= i18n.t("blocks:spacer:size") %></span> <input class="st-value" name="height" type="range" value="5" units="vw" step="0.1" max="50" min="0" /></div><span class="st-output"></span></div>', { imports: { i18n: i18n } });
+      },
 
       loadData: function(data) {
         this.$height = this.$height || this.$editor.find('[name="height"]');
@@ -783,6 +785,13 @@
             // so dont trigger the paste event for preventing higlighting/formatting
             if (this.$el.find('textarea').val().length <= 0)
                 this.loadPastedContent($(ev.target).val());
+        },
+
+        _serializeData: function() {
+            return {
+                format: 'html',
+                text: this.$el.find('textarea').val()
+            }
         },
 
         loadPastedContent: function(code) {
