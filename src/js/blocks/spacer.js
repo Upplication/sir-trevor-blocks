@@ -8,7 +8,9 @@
 
       type: "spacer",
       title: function() { return i18n.t('blocks:spacer:title') },
-      editorHTML: '@@include("spacer.html")',
+      editorHTML: function() {
+          return _.template('@@include("spacer.html")', { imports: { i18n: i18n } });
+      },
 
       loadData: function(data) {
         this.$height = this.$height || this.$editor.find('[name="height"]');
