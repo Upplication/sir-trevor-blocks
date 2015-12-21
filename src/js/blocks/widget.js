@@ -38,6 +38,13 @@
                 this.loadPastedContent($(ev.target).val());
         },
 
+        _serializeData: function() {
+            return {
+                format: 'html',
+                text: this.$el.find('textarea').val()
+            }
+        },
+
         loadPastedContent: function(code) {
             code = code || "";
 

@@ -70,7 +70,7 @@
 
         _serializeData: function() {
             return {
-                type: 'html',
+                format: 'html',
                 text: this.ckeditor ? this.ckeditor.getData() : ''
             }
         }
