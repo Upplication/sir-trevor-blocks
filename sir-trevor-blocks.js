@@ -503,7 +503,7 @@
         _serializeData: function() {
             var url = this.$editor.find('img').attr('src');
 
-            if (this.$cropper && !/^http/.test(url))
+            if (this.$cropper && (/^http/.test(url) || /^\/\//.test(url)))
                 url = this.$cropper('getCroppedCanvas').toDataURL(this.type);
 
             if (url && url.length > 0)
@@ -551,6 +551,7 @@
         }
     });
 })();
+
 (function() {
     "use strict";
 
@@ -709,7 +710,7 @@
       type: "spacer",
       title: function() { return i18n.t('blocks:spacer:title') },
       editorHTML: function() {
-          return _.template('<div class="st-control"><div class="st-value-container"> <span><%= i18n.t("blocks:spacer:size") %></span> <input class="st-value" name="height" type="range" value="5" units="vw" step="0.1" max="50" min="0" /></div><span class="st-output"></span></div>', { imports: { i18n: i18n } });
+          return _.template('<div class="st-control"><div class="st-value-container"> <span><%= i18n.t("blocks:spacer:size") %></span> <input class="st-value" name="height" type="range" value="5" units="vw" step="0.1" max="50" min="0"/></div><span class="st-output"></span></div>', { imports: { i18n: i18n } });
       },
 
       loadData: function(data) {
