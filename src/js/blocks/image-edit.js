@@ -174,7 +174,7 @@
         _serializeData: function() {
             var url = this.$editor.find('img').attr('src');
 
-            if (this.$cropper && !/^http/.test(url))
+            if (this.$cropper && (/^http/.test(url) || /^\/\//.test(url)))
                 url = this.$cropper('getCroppedCanvas').toDataURL(this.type);
 
             if (url && url.length > 0)
