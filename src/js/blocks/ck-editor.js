@@ -44,7 +44,7 @@
                     {"name":"insert", "groups": ['Table']},
                     {"name":"styles"},
                     {"name":"colors"},
-                    {"name":"source", "groups": ['Source'] }
+                    {"name":"document", "groups": [ 'mode', 'document', 'doctools' ] },
                 ],
                 removeButtons: 'CreateDiv,Styles,Flash,Iframe,Image,HorizontalRule,Smiley,PageBreak,Anchor'
             });
