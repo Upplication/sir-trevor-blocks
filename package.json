@@ -1,6 +1,6 @@
 {
   "name": "sir-trevor-blocks",
-  "version": "1.7.14",
+  "version": "1.7.15",
   "description": "Collection of blocks used by Upplication apps for SirTrevor",
   "main": "gulpfile.js",
   "scripts": {
