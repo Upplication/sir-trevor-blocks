@@ -275,6 +275,7 @@
             }
 
             this.ckeditor = CKEDITOR.replace(this.getTextBlock()[0], {
+                allowedContent: true, // Do not filter any html tags or styles(see CkEditor docs)
                 extraPlugins: 'colorbutton,colordialog,font,justify',
                 // http://stackoverflow.com/questions/23538462/how-to-remove-buttons-from-ckeditor-4
                 toolbarGroups: [
