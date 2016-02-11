@@ -158,6 +158,10 @@
             Object.keys(data)
             .forEach(function (key) {
                 var val = data[key];
+
+                if (key.indexOf('color') >= 0 && val.indexOf('rgb') >= 0) // colors: rgb -> hex
+                    val = this._rgbToHex(val);
+
                 var $ell = this.$el.find('[name="'+ key + '"]');
 
                 if ($ell.attr('units') && $ell.attr('units').length > 0)
@@ -235,6 +239,29 @@
             props.split('_').forEach(function (prop) {
                 this.$preview.css(prop, val);
             }, this);
+        },
+
+        _rgbToHex: function(color) {
+            color = String(color).trim();
+
+            if (color.indexOf('rgb(') != 0 || color.charAt(color.length - 1) != ')') // Dont even know what is this, do nothing
+                return color;
+
+            var rgbVals = color
+                            .replace(/^rgb\(/, '')
+                            .replace(/\)$/, '')
+                            .split(/[\s,]+/)
+                            .filter(function(n) { return !isNaN(n) })
+
+            if (rgbVals.length != 3) // Don't know what is this, return the original silently
+                return color;
+
+            return rgbVals.reduce(function(c, val) {
+                var hex = Number(val).toString(16);
+                if (hex.length == 1)
+                    hex = '0' + hex
+                return c + val
+            }, '#')
         }
     })
 })();
