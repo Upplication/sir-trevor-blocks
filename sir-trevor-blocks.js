@@ -260,7 +260,7 @@
                 var hex = Number(val).toString(16);
                 if (hex.length == 1)
                     hex = '0' + hex
-                return c + val
+                return c + hex
             }, '#')
         }
     })
