@@ -9,6 +9,8 @@
         title: function() { return i18n.t('blocks:button:title'); },
         icon_name: 'button',
 
+        clonable: true,
+
         editorHTML: function() {
             return _.template('@@include("button/editor.html")', { imports: { i18n: i18n } });
         },
