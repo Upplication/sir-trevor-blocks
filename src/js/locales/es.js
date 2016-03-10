@@ -22,14 +22,15 @@
                         right: "Derecha"
                     },
                     hint: {
-                        text: '¡Escribe aqui el texto de tu Boton!',
-                        href: 'Escribe aqui un email, un telefono o una web'
+                        text: "¡Escribe aqui el texto de tu Boton!",
+                        href: "Escribe aqui un email, un telefono o una web"
                     },
-                    accept: 'Aceptar',
-                    cancel: 'Cancelar'
+                    accept: "Aceptar",
+                    cancel: "Cancelar"
                 },
                 image_edit: {
-                    finish: 'Confirma el recorte de la imagen para poder guardar'
+                    href: "Enlace o acción",
+                    finish: "Confirma el recorte de la imagen para poder guardar"
                 },
                 map: {
                     title: "Mapa",
