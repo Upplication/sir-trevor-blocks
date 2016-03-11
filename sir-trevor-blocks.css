@@ -473,6 +473,9 @@ a.cke_dialog_ui_button_cancel span {
   font-weight: normal;
   font-style: normal;
 }
+.st-block[data-type="image_edit"] .image-href {
+	margin-top: 5px;
+}
 .st-block[data-type="spacer"] .st-control {
     margin-bottom: 10px;
 }

@@ -22,14 +22,15 @@
                         right: "Right"
                     },
                     hint: {
-                        text: '¡Escribe aqui el texto de tu Boton!',
-                        href: 'Write an email, phone number or web URL here'
+                        text: "¡Escribe aqui el texto de tu Boton!",
+                        href: "Write an email, phone number or web URL here"
                     },
-                    accept: 'Accept',
-                    cancel: 'Cancel'
+                    accept: "Accept",
+                    cancel: "Cancel"
                 },
                 image_edit: {
-                    finish: 'Confirm the crop for being able to save'
+                    href: "Link or action",
+                    finish: "Confirm the crop for being able to save"
                 },
                 map: {
                     title: "Map",
@@ -77,14 +78,15 @@
                         right: "Derecha"
                     },
                     hint: {
-                        text: '¡Escribe aqui el texto de tu Boton!',
-                        href: 'Escribe aqui un email, un telefono o una web'
+                        text: "¡Escribe aqui el texto de tu Boton!",
+                        href: "Escribe aqui un email, un telefono o una web"
                     },
-                    accept: 'Aceptar',
-                    cancel: 'Cancelar'
+                    accept: "Aceptar",
+                    cancel: "Cancelar"
                 },
                 image_edit: {
-                    finish: 'Confirma el recorte de la imagen para poder guardar'
+                    href: "Enlace o acción",
+                    finish: "Confirma el recorte de la imagen para poder guardar"
                 },
                 map: {
                     title: "Mapa",
@@ -435,6 +437,15 @@
         loadData: function(data){
             // Create our image tag
             this.$editor.html($('<img>', { src: data.file.url })).show();
+
+            this.$href = $('<input>', {
+                class: 'image-href',
+                type: 'text',
+                placeholder: i18n.t('blocks:image_edit:href')
+            })
+            .val(data.href)
+            .appendTo(this.$editor);
+
             this.$control_ui.hide();
         },
 
@@ -532,12 +543,16 @@
 
         _serializeData: function() {
             var url = this.$editor.find('img').attr('src');
+            var href = this.$href ? this.$href.val() : null;
 
             if (this.$cropper && !(/^http/.test(url) || /^\/\//.test(url)))
                 url = this.$cropper('getCroppedCanvas').toDataURL(this.type);
 
             if (url && url.length > 0)
-                return  { file: { url: url } };
+                return  {
+                    href: href,
+                    file: { url: url }
+                };
             else
                 return null;
         },
