@@ -119,6 +119,8 @@
         title: function() { return i18n.t('blocks:button:title'); },
         icon_name: 'button',
 
+        clonable: true,
+
         editorHTML: function() {
             return _.template('<div class="st-editor"><div class="st-preview st-margin-bottom-20"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row st-margin-bottom-20"><div class="st-column st-column-66 st-padding-right-25"><div class="st-control"><h4 class="st-field-name"><%= i18n.t("blocks:button:controls:action") %></h4><div class="st-input-container st-input-container-resert"> <input name="href" type="hidden"> <input class="st-input-long" name="user-href" type="text"></div></div></div><div class="st-column st-column-33 st-padding-left-25"><div class="st-control"><h5 class="st-field-name st-align-name"><%= i18n.t("blocks:button:controls:align") %></h5><div class="st-input-container st-select"> <select class="st-value" name="css-float"><option value="none"><%= i18n.t("blocks:button:controls:center") %></option><option value="left"><%= i18n.t("blocks:button:controls:left") %></option><option value="right"><%= i18n.t("blocks:button:controls:right") %></option></select></div></div></div></div><div class="st-row"><div class="st-column st-column-33 st-padding-right-25"><h4><%= i18n.t("blocks:button:controls:dimensions") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5><div class="st-input-container"> <input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:height") %></h5><div class="st-input-container"> <input class="st-value" name="css-padding" type="range" value="1" units="em 0" step="0.1" max="5" min="0.2"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:background") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-background-color" type="color" value="#00CA6B"></div></div></div><div class="st-column st-column-33 st-padding-sides-25"><h4><%= i18n.t("blocks:button:controls:border") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5><div class="st-input-container"> <input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:radius") %></h5><div class="st-input-container"> <input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-border-color" type="color" value="#4D4D4D"></div></div></div><div class="st-column st-column-33 st-padding-left-25"><h4><%= i18n.t("blocks:button:controls:font") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:size") %></h5><div class="st-input-container"> <input class="st-value" name="css-font-size" type="range" value="2" units="em" step="0.1" max="5" min="0.2"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:type") %></h5><div class="st-input-container st-select"> <select class="st-value" name="css-font-family"><option value="sans-serif">Sans Serif</option><option value="cursive">Cursive</option><option value="fantasy">Fantasy</option><option value="serif">Serif</option><option value="monospace">Monospace</option></select></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-color" type="color" value="#4D4D4D"></div></div></div></div></div>', { imports: { i18n: i18n } });
         },
@@ -936,6 +938,37 @@
             var data = this._getData();
             if (data && data.align)
                 this.$control_ui.find('[class*="align-' + data.align + '"]').click();
+        },
+    }
+})();
+(function() {
+    var SirTrevor = window.SirTrevor;
+    var BlockMixins = SirTrevor.BlockMixins;
+    var Block = SirTrevor.Block;
+    Block.prototype.availableMixins.push('clonable');
+
+    BlockMixins.Clonable = {
+        mixinName: 'Clonable',
+
+        initializeClonable: function() {
+            // For this mixin to work we need to also have the controllable mixin available.
+            // Lets do some security checks
+            if ((this.controllable === true && !this.$control_ui) || // controllable is enabled here but not yet initialized
+                !this.controllable) { // we were not even marked as controllable
+                this.controls = this.controls || {};
+                this.withMixin(BlockMixins.Controllable);
+                this.controllable = false; // This will prevent from double initing the controllable ui
+            }
+
+            var stInstance = SirTrevor.getInstance(this.instanceID);
+
+            this.addUiControl('clone', function(e) {
+                var blockData = this.getData();
+                var blocks = stInstance.block_manager.blocks;
+                stInstance.block_controls.currentContainer = this.$el; // This will determine where the new block is added
+                stInstance.block_manager.createBlock(blockData.type, blockData.data);
+                SirTrevor.EventBus.trigger('block:cloned', blocks[blocks.length - 1]);
+            }.bind(this))
         },
     }
 })();
