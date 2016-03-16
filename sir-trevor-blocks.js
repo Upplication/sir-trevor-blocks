@@ -216,8 +216,10 @@
                 $target.val('tel:' + value);
             else if (/^(ftp|http|https):\/\/[^ "]+$/.test(value))
                 $target.val(value);
-            else
+            else if (value.length > 0)
                 $target.val('http://' + value);
+            else
+                $target.val(value);
         },
 
         _onCssPropertyChange: function (ev, value) {
