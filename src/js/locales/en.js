@@ -22,7 +22,7 @@
                         right: "Right"
                     },
                     hint: {
-                        text: "¡Escribe aqui el texto de tu Boton!",
+                        text: "Write here a caption for your button!",
                         href: "Write an email, phone number or web URL here"
                     },
                     accept: "Accept",
