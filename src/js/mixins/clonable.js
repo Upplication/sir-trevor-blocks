@@ -1,4 +1,5 @@
 (function() {
+    var _ = window._;
     var SirTrevor = window.SirTrevor;
     var BlockMixins = SirTrevor.BlockMixins;
     var Block = SirTrevor.Block;
@@ -20,7 +21,7 @@
             var stInstance = SirTrevor.getInstance(this.instanceID);
 
             this.addUiControl('clone', function(e) {
-                var blockData = this.getData();
+                var blockData = _.cloneDeep(this.getData());
                 var blocks = stInstance.block_manager.blocks;
                 stInstance.block_controls.currentContainer = this.$el; // This will determine where the new block is added
                 stInstance.block_manager.createBlock(blockData.type, blockData.data);
