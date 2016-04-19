@@ -47,6 +47,9 @@
                 },
                 ck_editor: {
                     title: "Texto"
+                },
+                columns: {
+                    title: "Columnas"
                 }
             }
         }
