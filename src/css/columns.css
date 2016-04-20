@@ -10,3 +10,13 @@
 	clear: both;
 	content: "";
 }
+
+.st-block[data-type="columns"]:hover .st-block .st-block__ui,
+.st-block[data-type="columns"]:hover .st-block .st-block__control-ui {
+	display: none;
+}
+
+.st-block[data-type="columns"] .st-block:hover .st-block__ui,
+.st-block[data-type="columns"] .st-block:hover .st-block__control-ui {
+	display: block;
+}
