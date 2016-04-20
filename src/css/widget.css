@@ -8,9 +8,9 @@
 .st-block[data-type="widget"] .st-widget-editor-container .st-icon:before {
     font-size: 3em;
     text-align: center;
-    font-family: 'ST-Icons-Upplication' !important;
+    font-family: 'upplication-icons' !important;
     display: block;
-    content: '\e800';
+    content: '\ea18';
 }
 
 .st-block[data-type="widget"] textarea {

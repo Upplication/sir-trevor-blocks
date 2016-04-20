@@ -36,6 +36,7 @@
     "jquery": "~2.1.4",
     "lodash": "~3.10.1",
     "cropper": "~2.0.1",
-    "ckeditor": "4.5.5"
+    "ckeditor": "4.5.5",
+    "upplication-icons": "upplication/icons#~1.0.7"
   }
 }

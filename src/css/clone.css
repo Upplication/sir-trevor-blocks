@@ -1,8 +1,8 @@
 .st-block__control-ui .st-block-control-ui-btn--clone:before {
 	display: block;
-	font-family: 'ST-Icons-Upplication-Clone' !important;
+	font-family: 'upplication-icons' !important;
 }
 
 .st-block__control-ui .st-block-control-ui-btn--clone:before {
-	content: "\e900";
+	content: "\ea17";
 }

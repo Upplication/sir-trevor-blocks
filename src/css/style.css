@@ -3,27 +3,34 @@
     display: none;
 }
 
-.st-block-control:before{
-    font-size: 2.25em;
-    font-family: 'ST-Icons-Upplication' !important;
+.st-block-control:before,
+.st-block__ui > .st-icon:before,
+.st-block__ui-delete-controls > .st-icon:before {
+    font-family: 'upplication-icons' !important;
     display: block;
 }
 
-.st-block-control[data-type="text"]:before { content: '\e807'; }
-.st-block-control[data-type="ck_editor"]:before { content: '\e807'; }
-.st-block-control[data-type="text_align"]:before { content: '\e807'; }
-.st-block-control[data-type="quote"]:before { content: '\e805'; }
-.st-block-control[data-type="image"]:before { content: '\e801'; }
-.st-block-control[data-type="image_edit"]:before { content: '\e801'; }
-.st-block-control[data-type="Heading"]:before { content: '\e808'; }
-.st-block-control[data-type="heading_align"]:before { content: '\e808'; }
-.st-block-control[data-type="list"]:before { content: '\e806'; }
-.st-block-control[data-type="video"]:before { content: '\e809'; }
-.st-block-control[data-type="button"]:before { content: '\e803'; }
-.st-block-control[data-type="widget"]:before { content: '\e800'; }
-.st-block-control[data-type="map"]:before { content: '\e802'; }
+/* Icons on the block add secion */
+.st-block-control:before { font-size: 2.25em; }
+.st-block-control[data-type="text"]:before { content: '\ea51'; }
+.st-block-control[data-type="ck_editor"]:before { content: '\ea51'; }
+.st-block-control[data-type="text_align"]:before { content: '\ea51'; }
+.st-block-control[data-type="quote"]:before { content: '\ea59'; }
+.st-block-control[data-type="image"]:before { content: '\ea54'; }
+.st-block-control[data-type="image_edit"]:before { content: '\ea54'; }
+.st-block-control[data-type="Heading"]:before { content: '\ea38'; }
+.st-block-control[data-type="heading_align"]:before { content: '\ea38'; }
+.st-block-control[data-type="list"]:before { content: '\ea65'; }
+.st-block-control[data-type="video"]:before { content: '\ea6f'; }
+.st-block-control[data-type="button"]:before { content: '\ea11'; }
+.st-block-control[data-type="widget"]:before { content: '\ea18'; }
+.st-block-control[data-type="map"]:before { content: '\ea48'; }
+.st-block-control[data-type="spacer"]:before { content: '\ea60'; }
+.st-block-control[data-type="columns"]:before { content: '\ea1a'; }
 
-.st-block-control[data-type="spacer"]:before {
-	font-family: 'ST-Icons-Upplication-Spacer' !important;
-	content: '\e803';
-}
+.st-block__ui .st-icon.st-block-ui-btn--delete:before { content: '\ea66'; }
+.st-block__ui .st-icon.st-block-ui-btn--delete:hover:before { content: '\ea67'; }
+.st-block__ui .st-icon.st-block-ui-btn--reorder:before { content: '\ea07'; }
+
+.st-block__ui-delete-controls .st-icon.st-block-ui-btn--confirm-delete:before { content: '\ea1e'; }
+.st-block__ui-delete-controls .st-icon.st-block-ui-btn--deny-delete:before { content: '\ea4e'; }
