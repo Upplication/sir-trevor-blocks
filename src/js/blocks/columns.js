@@ -42,19 +42,22 @@
 
       _serializeData: function() {
         var self = this;
-        return {
+        var result = {
             columns: (self._editors || []).map(function(st) {
                 return {
                     blocks: self._retrieveEditorData(st)
                 }
             })
         };
+        if (result.columns.length > 0)
+            return result;
+        else
+            return {};
       },
 
       _retrieveEditorData: function(editor) {
         // Force SirTrevor to update its internal data store
         editor.store.reset();
-        editor.validateBlocks(false);
         return editor.store.retrieve().data;
       }
     });
