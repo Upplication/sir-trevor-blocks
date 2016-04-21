@@ -63,6 +63,7 @@
       _retrieveEditorData: function(editor) {
         // Force SirTrevor to update its internal data store
         editor.store.reset();
+        editor.validateBlocks(false);
         return editor.store.retrieve().data;
       }
     });
