@@ -563,8 +563,8 @@ a.cke_dialog_ui_button_cancel span {
 .st-block__ui .st-icon.st-block-ui-btn--delete:hover:before { content: '\ea67'; }
 .st-block__ui .st-icon.st-block-ui-btn--reorder:before { content: '\ea07'; }
 
-.st-block__ui-delete-controls .st-icon.st-block-ui-btn--confirm-delete:before { content: '\ea1e'; }
-.st-block__ui-delete-controls .st-icon.st-block-ui-btn--deny-delete:before { content: '\ea4e'; }
+.st-block__ui-delete-controls .st-icon.st-block-ui-btn--confirm-delete:before { content: '\ea4e'; }
+.st-block__ui-delete-controls .st-icon.st-block-ui-btn--deny-delete:before { content: '\ea1e'; }
 .st-block[data-type="widget"] .st-widget-editor-container {
     color: #42474B;
     padding: 0 20px;
