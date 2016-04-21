@@ -401,19 +401,22 @@
 
       _serializeData: function() {
         var self = this;
-        return {
+        var result = {
             columns: (self._editors || []).map(function(st) {
                 return {
                     blocks: self._retrieveEditorData(st)
                 }
             })
         };
+        if (result.columns.length > 0)
+            return result;
+        else
+            return {};
       },
 
       _retrieveEditorData: function(editor) {
         // Force SirTrevor to update its internal data store
         editor.store.reset();
-        editor.validateBlocks(false);
         return editor.store.retrieve().data;
       }
     });
@@ -874,7 +877,7 @@
         type: "widget",
         title: function() { return i18n.t('blocks:widget:title') },
         icon_name: "code",
-        editorHTML: '<div class="st-widget-editor-container"><div class="editor"><span class="st-icon"></span><textarea name="text" class="st-required"></textarea></div><div style="display: none" class="preview"><pre><code class="lang-html"></code></pre></div></div>',
+        editorHTML: '<div class="st-widget-editor-container"><div class="editor"><span class="st-icon"></span><textarea name="text"></textarea></div><div style="display: none" class="preview"><pre><code class="lang-html"></code></pre></div></div>',
 
         loadData: function(data) {
             this.loadPastedContent(data.text);
