@@ -49,7 +49,12 @@
                 }
             })
         };
-        if (result.columns.length > 0)
+
+        var isEmpty = result.columns.reduce(function(empty, column) {
+            return empty && column.blocks.length <= 0;
+        }, true);
+
+        if (!isEmpty)
             return result;
         else
             return {};
