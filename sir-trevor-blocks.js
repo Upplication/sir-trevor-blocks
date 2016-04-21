@@ -422,6 +422,7 @@
       _retrieveEditorData: function(editor) {
         // Force SirTrevor to update its internal data store
         editor.store.reset();
+        editor.validateBlocks(false);
         return editor.store.retrieve().data;
       }
     });
@@ -912,6 +913,11 @@
         },
 
         _serializeData: function() {
+            var text = this.$el.find('textarea').val();
+
+            if (!text || text.length <= 0)
+                return {};
+
             return {
                 format: 'html',
                 text: this.$el.find('textarea').val()
