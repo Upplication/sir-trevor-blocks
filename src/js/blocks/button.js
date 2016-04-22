@@ -117,7 +117,7 @@
             var val = value ? value.toString() : $target.val();
 
             // This is used for number indicator in range input
-            $target.attr('st-value', val);
+            $target.parents('.st-input-container').attr('st-value', val);
 
             if (value)
                 $target.val(value);
