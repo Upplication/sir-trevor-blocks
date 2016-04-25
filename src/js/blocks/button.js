@@ -9,6 +9,8 @@
         title: function() { return i18n.t('blocks:button:title'); },
         icon_name: 'button',
 
+        clonable: true,
+
         editorHTML: function() {
             return _.template('@@include("button/editor.html")', { imports: { i18n: i18n } });
         },
@@ -48,6 +50,10 @@
             Object.keys(data)
             .forEach(function (key) {
                 var val = data[key];
+
+                if (key.indexOf('color') >= 0 && val.indexOf('rgb') >= 0) // colors: rgb -> hex
+                    val = this._rgbToHex(val);
+
                 var $ell = this.$el.find('[name="'+ key + '"]');
 
                 if ($ell.attr('units') && $ell.attr('units').length > 0)
@@ -98,8 +104,10 @@
                 $target.val('tel:' + value);
             else if (/^(ftp|http|https):\/\/[^ "]+$/.test(value))
                 $target.val(value);
-            else
+            else if (value.length > 0)
                 $target.val('http://' + value);
+            else
+                $target.val(value);
         },
 
         _onCssPropertyChange: function (ev, value) {
@@ -109,7 +117,7 @@
             var val = value ? value.toString() : $target.val();
 
             // This is used for number indicator in range input
-            $target.attr('st-value', val);
+            $target.parents('.st-input-container').attr('st-value', val);
 
             if (value)
                 $target.val(value);
@@ -125,6 +133,29 @@
             props.split('_').forEach(function (prop) {
                 this.$preview.css(prop, val);
             }, this);
+        },
+
+        _rgbToHex: function(color) {
+            color = String(color).trim();
+
+            if (color.indexOf('rgb(') != 0 || color.charAt(color.length - 1) != ')') // Dont even know what is this, do nothing
+                return color;
+
+            var rgbVals = color
+                            .replace(/^rgb\(/, '')
+                            .replace(/\)$/, '')
+                            .split(/[\s,]+/)
+                            .filter(function(n) { return !isNaN(n) })
+
+            if (rgbVals.length != 3) // Don't know what is this, return the original silently
+                return color;
+
+            return rgbVals.reduce(function(c, val) {
+                var hex = Number(val).toString(16);
+                if (hex.length == 1)
+                    hex = '0' + hex
+                return c + hex
+            }, '#')
         }
     })
 })();

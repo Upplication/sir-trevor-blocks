@@ -35,15 +35,17 @@
             }
 
             this.ckeditor = CKEDITOR.replace(this.getTextBlock()[0], {
+                allowedContent: true, // Do not filter any html tags or styles(see CkEditor docs)
                 extraPlugins: 'colorbutton,colordialog,font,justify',
                 // http://stackoverflow.com/questions/23538462/how-to-remove-buttons-from-ckeditor-4
                 toolbarGroups: [
-                    {"name":"basicstyles","groups":["basicstyles"]},
-                    {"name":"links","groups":["links"]},
-                    {"name":"paragraph","groups":["list","blocks", "align"]},
-                    {"name":"insert", "groups": ['Table']},
-                    {"name":"styles"},
-                    {"name":"colors"}
+                    {'name':'basicstyles','groups':['basicstyles']},
+                    {'name':'links','groups':['links']},
+                    {'name':'paragraph','groups': [ 'list', 'blocks', 'align' ]},
+                    {'name':'insert', 'groups': ['Table']},
+                    {'name':'styles'},
+                    {'name':'colors'},
+                    {'name':'document', 'groups': [ 'mode', 'document', 'doctools' ] },
                 ],
                 removeButtons: 'CreateDiv,Styles,Flash,Iframe,Image,HorizontalRule,Smiley,PageBreak,Anchor'
             });
@@ -69,7 +71,7 @@
 
         _serializeData: function() {
             return {
-                type: 'html',
+                format: 'html',
                 text: this.ckeditor ? this.ckeditor.getData() : ''
             }
         }

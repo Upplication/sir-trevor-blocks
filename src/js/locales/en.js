@@ -22,21 +22,23 @@
                         right: "Right"
                     },
                     hint: {
-                        text: '¡Escribe aqui el texto de tu Boton!',
-                        href: 'Write an email, phone number or web URL here'
+                        text: "Write here a caption for your button!",
+                        href: "Write an email, phone number or web URL here"
                     },
-                    accept: 'Accept',
-                    cancel: 'Cancel'
+                    accept: "Accept",
+                    cancel: "Cancel"
                 },
                 image_edit: {
-                    finish: 'Confirm the crop for being able to save'
+                    href: "Link or action",
+                    finish: "Confirm the crop for being able to save"
                 },
                 map: {
                     title: "Map",
                     hint: "Write an address here"
                 },
                 spacer: {
-                    title: "Spacer"
+                    title: "Spacer",
+                    size: "Size"
                 },
                 widget: {
                     title: "Widget",
@@ -45,6 +47,9 @@
                 },
                 ck_editor: {
                     title: "Text"
+                },
+                columns: {
+                    title: "Columns"
                 }
             }
         }

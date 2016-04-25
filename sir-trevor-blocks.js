@@ -22,21 +22,23 @@
                         right: "Right"
                     },
                     hint: {
-                        text: '¡Escribe aqui el texto de tu Boton!',
-                        href: 'Write an email, phone number or web URL here'
+                        text: "Write here a caption for your button!",
+                        href: "Write an email, phone number or web URL here"
                     },
-                    accept: 'Accept',
-                    cancel: 'Cancel'
+                    accept: "Accept",
+                    cancel: "Cancel"
                 },
                 image_edit: {
-                    finish: 'Confirm the crop for being able to save'
+                    href: "Link or action",
+                    finish: "Confirm the crop for being able to save"
                 },
                 map: {
                     title: "Map",
                     hint: "Write an address here"
                 },
                 spacer: {
-                    title: "Spacer"
+                    title: "Spacer",
+                    size: "Size"
                 },
                 widget: {
                     title: "Widget",
@@ -45,6 +47,9 @@
                 },
                 ck_editor: {
                     title: "Text"
+                },
+                columns: {
+                    title: "Columns"
                 }
             }
         }
@@ -52,6 +57,7 @@
 
     jQuery.extend(true, SirTrevor.Locales, Locales);
 })();
+
 (function() {
     var Locales = {
         es: {
@@ -76,21 +82,23 @@
                         right: "Derecha"
                     },
                     hint: {
-                        text: '¡Escribe aqui el texto de tu Boton!',
-                        href: 'Escribe aqui un email, un telefono o una web'
+                        text: "¡Escribe aqui el texto de tu Boton!",
+                        href: "Escribe aqui un email, un telefono o una web"
                     },
-                    accept: 'Aceptar',
-                    cancel: 'Cancelar'
+                    accept: "Aceptar",
+                    cancel: "Cancelar"
                 },
                 image_edit: {
-                    finish: 'Confirma el recorte de la imagen para poder guardar'
+                    href: "Enlace o acción",
+                    finish: "Confirma el recorte de la imagen para poder guardar"
                 },
                 map: {
                     title: "Mapa",
                     hint: "Escribe una direccion aquí"
                 },
                 spacer: {
-                    title: "Separador"
+                    title: "Separador",
+                    size: "Tamaño"
                 },
                 widget: {
                     title: "Widget",
@@ -99,6 +107,9 @@
                 },
                 ck_editor: {
                     title: "Texto"
+                },
+                columns: {
+                    title: "Columnas"
                 }
             }
         }
@@ -117,8 +128,10 @@
         title: function() { return i18n.t('blocks:button:title'); },
         icon_name: 'button',
 
+        clonable: true,
+
         editorHTML: function() {
-            return _.template('<div class="st-editor"><div class="st-preview st-margin-bottom-20"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row st-margin-bottom-20"><div class="st-column st-column-66 st-padding-right-25"><div class="st-control"><h4 class="st-field-name"><%= i18n.t("blocks:button:controls:action") %></h4><div class="st-input-container st-input-container-resert"> <input name="href" type="hidden"> <input class="st-input-long" name="user-href" type="text"></div></div></div><div class="st-column st-column-33 st-padding-left-25"><div class="st-control"><h5 class="st-field-name st-align-name"><%= i18n.t("blocks:button:controls:align") %></h5><div class="st-input-container st-select"> <select class="st-value" name="css-float"><option value="none"><%= i18n.t("blocks:button:controls:center") %></option><option value="left"><%= i18n.t("blocks:button:controls:left") %></option><option value="right"><%= i18n.t("blocks:button:controls:right") %></option></select></div></div></div></div><div class="st-row"><div class="st-column st-column-33 st-padding-right-25"><h4><%= i18n.t("blocks:button:controls:dimensions") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5><div class="st-input-container"> <input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:height") %></h5><div class="st-input-container"> <input class="st-value" name="css-padding" type="range" value="1" units="em 0" step="0.1" max="5" min="0.2"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:background") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-background-color" type="color" value="#00CA6B"></div></div></div><div class="st-column st-column-33 st-padding-sides-25"><h4><%= i18n.t("blocks:button:controls:border") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5><div class="st-input-container"> <input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:radius") %></h5><div class="st-input-container"> <input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-border-color" type="color" value="#4D4D4D"></div></div></div><div class="st-column st-column-33 st-padding-left-25"><h4><%= i18n.t("blocks:button:controls:font") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:size") %></h5><div class="st-input-container"> <input class="st-value" name="css-font-size" type="range" value="2" units="em" step="0.1" max="5" min="0.2"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:type") %></h5><div class="st-input-container st-select"> <select class="st-value" name="css-font-family"><option value="sans-serif">Sans Serif</option><option value="cursive">Cursive</option><option value="fantasy">Fantasy</option><option value="serif">Serif</option><option value="monospace">Monospace</option></select></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-color" type="color" value="#4D4D4D"></div></div></div></div></div>', { imports: { i18n: i18n } });
+            return _.template('<div class="st-editor"><div class="st-preview st-margin-bottom-20"><p class="st-required st-text-block" contenteditable="true"></p></div><div class="st-row st-margin-bottom-20"><div class="st-column st-column-66 st-padding-right-25"><div class="st-control"><h4 class="st-field-name"><%= i18n.t("blocks:button:controls:action") %></h4><div class="st-input-container st-input-container-resert"> <input name="href" type="hidden"> <input class="st-input-long" name="user-href" type="text"></div></div></div><div class="st-column st-column-33 st-padding-left-25"><div class="st-control"><h5 class="st-field-name st-align-name"><%= i18n.t("blocks:button:controls:align") %></h5><div class="st-input-container st-select"> <select class="st-value" name="css-float"><option value="none"><%= i18n.t("blocks:button:controls:center") %></option><option value="left"><%= i18n.t("blocks:button:controls:left") %></option><option value="right"><%= i18n.t("blocks:button:controls:right") %></option></select></div></div></div></div><div class="st-row"><div class="st-column st-column-33 st-padding-right-25"><h4><%= i18n.t("blocks:button:controls:dimensions") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5><div class="st-input-container st-range"> <input class="st-value" name="css-width" type="range" value="100" units="%" step="1" max="100" min="10"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:height") %></h5><div class="st-input-container st-range"> <input class="st-value" name="css-padding" type="range" value="1" units="em 0" step="0.1" max="5" min="0.2"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:background") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-background-color" type="color" value="#00CA6B"></div></div></div><div class="st-column st-column-33 st-padding-sides-25"><h4><%= i18n.t("blocks:button:controls:border") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:width") %></h5><div class="st-input-container st-range"> <input class="st-value" name="css-border-width" type="range" value="2" units="px" step="1" max="6" min="0"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:radius") %></h5><div class="st-input-container st-range"> <input class="st-value" name="css-border-radius" type="range" value="2" units="px" step="1" max="100" min="0"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-border-color" type="color" value="#4D4D4D"></div></div></div><div class="st-column st-column-33 st-padding-left-25"><h4><%= i18n.t("blocks:button:controls:font") %></h4><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:size") %></h5><div class="st-input-container st-range"> <input class="st-value" name="css-font-size" type="range" value="2" units="em" step="0.1" max="5" min="0.2"></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:type") %></h5><div class="st-input-container st-select"> <select class="st-value" name="css-font-family"><option value="sans-serif">Sans Serif</option><option value="cursive">Cursive</option><option value="fantasy">Fantasy</option><option value="serif">Serif</option><option value="monospace">Monospace</option></select></div></div><div class="st-control"><h5 class="st-field-name"><%= i18n.t("blocks:button:controls:color") %></h5><div class="st-input-container st-color"> <input class="st-value" name="css-color" type="color" value="#4D4D4D"></div></div></div></div></div>', { imports: { i18n: i18n } });
         },
 
         onBlockRender: function() {
@@ -156,6 +169,10 @@
             Object.keys(data)
             .forEach(function (key) {
                 var val = data[key];
+
+                if (key.indexOf('color') >= 0 && val.indexOf('rgb') >= 0) // colors: rgb -> hex
+                    val = this._rgbToHex(val);
+
                 var $ell = this.$el.find('[name="'+ key + '"]');
 
                 if ($ell.attr('units') && $ell.attr('units').length > 0)
@@ -206,8 +223,10 @@
                 $target.val('tel:' + value);
             else if (/^(ftp|http|https):\/\/[^ "]+$/.test(value))
                 $target.val(value);
-            else
+            else if (value.length > 0)
                 $target.val('http://' + value);
+            else
+                $target.val(value);
         },
 
         _onCssPropertyChange: function (ev, value) {
@@ -217,7 +236,7 @@
             var val = value ? value.toString() : $target.val();
 
             // This is used for number indicator in range input
-            $target.attr('st-value', val);
+            $target.parents('.st-input-container').attr('st-value', val);
 
             if (value)
                 $target.val(value);
@@ -233,6 +252,29 @@
             props.split('_').forEach(function (prop) {
                 this.$preview.css(prop, val);
             }, this);
+        },
+
+        _rgbToHex: function(color) {
+            color = String(color).trim();
+
+            if (color.indexOf('rgb(') != 0 || color.charAt(color.length - 1) != ')') // Dont even know what is this, do nothing
+                return color;
+
+            var rgbVals = color
+                            .replace(/^rgb\(/, '')
+                            .replace(/\)$/, '')
+                            .split(/[\s,]+/)
+                            .filter(function(n) { return !isNaN(n) })
+
+            if (rgbVals.length != 3) // Don't know what is this, return the original silently
+                return color;
+
+            return rgbVals.reduce(function(c, val) {
+                var hex = Number(val).toString(16);
+                if (hex.length == 1)
+                    hex = '0' + hex
+                return c + hex
+            }, '#')
         }
     })
 })();
@@ -273,15 +315,17 @@
             }
 
             this.ckeditor = CKEDITOR.replace(this.getTextBlock()[0], {
+                allowedContent: true, // Do not filter any html tags or styles(see CkEditor docs)
                 extraPlugins: 'colorbutton,colordialog,font,justify',
                 // http://stackoverflow.com/questions/23538462/how-to-remove-buttons-from-ckeditor-4
                 toolbarGroups: [
-                    {"name":"basicstyles","groups":["basicstyles"]},
-                    {"name":"links","groups":["links"]},
-                    {"name":"paragraph","groups":["list","blocks", "align"]},
-                    {"name":"insert", "groups": ['Table']},
-                    {"name":"styles"},
-                    {"name":"colors"}
+                    {'name':'basicstyles','groups':['basicstyles']},
+                    {'name':'links','groups':['links']},
+                    {'name':'paragraph','groups': [ 'list', 'blocks', 'align' ]},
+                    {'name':'insert', 'groups': ['Table']},
+                    {'name':'styles'},
+                    {'name':'colors'},
+                    {'name':'document', 'groups': [ 'mode', 'document', 'doctools' ] },
                 ],
                 removeButtons: 'CreateDiv,Styles,Flash,Iframe,Image,HorizontalRule,Smiley,PageBreak,Anchor'
             });
@@ -307,10 +351,80 @@
 
         _serializeData: function() {
             return {
-                type: 'html',
+                format: 'html',
                 text: this.ckeditor ? this.ckeditor.getData() : ''
             }
         }
+    });
+})();
+(function() {
+    "use strict";
+
+    if (!SirTrevor)
+        return console.error("SirTrevor.Blocks.Columns could not load because SirTrevor wasn't found");
+
+    SirTrevor.Blocks.Columns = SirTrevor.Block.extend({
+
+      type: "columns",
+      title: function() { return i18n.t('blocks:columns:title') },
+
+      _editorsSelectors: [
+        '.st-columns-editor-left > .editor',
+        '.st-columns-editor-right > .editor'
+      ],
+
+      editorHTML: '<div class="st-columns-block"><div class="st-columns-editor st-columns-editor-left"><textarea class="editor"></textarea></div><div class="st-columns-editor st-columns-editor-right"><textarea class="editor"></textarea></div></div>',
+
+      onBlockRender: function() {
+        var self = this;
+        var parentStEditor = SirTrevor.getInstance(this.instanceID);
+        var blockTypes = parentStEditor.options.blockTypes.filter(function(type) {
+            return type.toLowerCase() != self.type;
+        });
+
+        self._editors = self._editorsSelectors.map(function(selector, idx) {
+            return new SirTrevor.Editor({
+                el: self.$(selector),
+                blockTypes: blockTypes,
+                blockLimit: 1,
+            });
+        })
+      },
+
+      loadData: function(data) {
+        var self = this;
+        data.columns.forEach(function(column, idx) {
+            var selector = self._editorsSelectors[idx];
+            self.$(selector).val(JSON.stringify( { data: column.blocks } ));
+        })
+      },
+
+      _serializeData: function() {
+        var self = this;
+        var result = {
+            columns: (self._editors || []).map(function(st) {
+                return {
+                    blocks: self._retrieveEditorData(st)
+                }
+            })
+        };
+
+        var isEmpty = result.columns.reduce(function(empty, column) {
+            return empty && column.blocks.length <= 0;
+        }, true);
+
+        if (!isEmpty)
+            return result;
+        else
+            return {};
+      },
+
+      _retrieveEditorData: function(editor) {
+        // Force SirTrevor to update its internal data store
+        editor.store.reset();
+        editor.validateBlocks(false);
+        return editor.store.retrieve().data;
+      }
     });
 })();
 (function() {
@@ -402,6 +516,15 @@
         loadData: function(data){
             // Create our image tag
             this.$editor.html($('<img>', { src: data.file.url })).show();
+
+            this.$href = $('<input>', {
+                class: 'image-href',
+                type: 'text',
+                placeholder: i18n.t('blocks:image_edit:href')
+            })
+            .val(data.href)
+            .appendTo(this.$editor);
+
             this.$control_ui.hide();
         },
 
@@ -499,12 +622,16 @@
 
         _serializeData: function() {
             var url = this.$editor.find('img').attr('src');
+            var href = this.$href ? this.$href.val() : null;
 
-            if (this.$cropper && !/^http/.test(url))
+            if (this.$cropper && !(/^http/.test(url) || /^\/\//.test(url)))
                 url = this.$cropper('getCroppedCanvas').toDataURL(this.type);
 
             if (url && url.length > 0)
-                return  { file: { url: url } };
+                return  {
+                    href: href,
+                    file: { url: url }
+                };
             else
                 return null;
         },
@@ -548,6 +675,7 @@
         }
     });
 })();
+
 (function() {
     "use strict";
 
@@ -705,7 +833,9 @@
 
       type: "spacer",
       title: function() { return i18n.t('blocks:spacer:title') },
-      editorHTML: '<div class="st-control"><div class="st-icon st-icon-height"></div><div class="st-value-container"> <input class="st-value" name="height" type="range" value="5" units="vw" step="0.1" max="50" min="0"/></div><span class="st-output"></span></div>',
+      editorHTML: function() {
+          return _.template('<div class="st-control"><div class="st-value-container"> <span><%= i18n.t("blocks:spacer:size") %></span> <input class="st-value" name="height" type="range" value="5" units="vw" step="0.1" max="50" min="0"/></div><span class="st-output"></span></div>', { imports: { i18n: i18n } });
+      },
 
       loadData: function(data) {
         this.$height = this.$height || this.$editor.find('[name="height"]');
@@ -753,7 +883,7 @@
         type: "widget",
         title: function() { return i18n.t('blocks:widget:title') },
         icon_name: "code",
-        editorHTML: '<div class="st-widget-editor-container"><div class="editor"><span class="st-icon"></span><textarea name="text" class="st-required"></textarea></div><div style="display: none" class="preview"><pre><code class="lang-html"></code></pre></div></div>',
+        editorHTML: '<div class="st-widget-editor-container"><div class="editor"><span class="st-icon"></span><textarea name="text"></textarea></div><div style="display: none" class="preview"><pre><code class="lang-html"></code></pre></div></div>',
 
         loadData: function(data) {
             this.loadPastedContent(data.text);
@@ -780,6 +910,18 @@
             // so dont trigger the paste event for preventing higlighting/formatting
             if (this.$el.find('textarea').val().length <= 0)
                 this.loadPastedContent($(ev.target).val());
+        },
+
+        _serializeData: function() {
+            var text = this.$el.find('textarea').val();
+
+            if (!text || text.length <= 0)
+                return {};
+
+            return {
+                format: 'html',
+                text: this.$el.find('textarea').val()
+            }
         },
 
         loadPastedContent: function(code) {
@@ -895,6 +1037,38 @@
             var data = this._getData();
             if (data && data.align)
                 this.$control_ui.find('[class*="align-' + data.align + '"]').click();
+        },
+    }
+})();
+(function() {
+    var _ = window._;
+    var SirTrevor = window.SirTrevor;
+    var BlockMixins = SirTrevor.BlockMixins;
+    var Block = SirTrevor.Block;
+    Block.prototype.availableMixins.push('clonable');
+
+    BlockMixins.Clonable = {
+        mixinName: 'Clonable',
+
+        initializeClonable: function() {
+            // For this mixin to work we need to also have the controllable mixin available.
+            // Lets do some security checks
+            if ((this.controllable === true && !this.$control_ui) || // controllable is enabled here but not yet initialized
+                !this.controllable) { // we were not even marked as controllable
+                this.controls = this.controls || {};
+                this.withMixin(BlockMixins.Controllable);
+                this.controllable = false; // This will prevent from double initing the controllable ui
+            }
+
+            var stInstance = SirTrevor.getInstance(this.instanceID);
+
+            this.addUiControl('clone', function(e) {
+                var blockData = _.cloneDeep(this.getData());
+                var blocks = stInstance.block_manager.blocks;
+                stInstance.block_controls.currentContainer = this.$el; // This will determine where the new block is added
+                stInstance.block_manager.createBlock(blockData.type, blockData.data);
+                SirTrevor.EventBus.trigger('block:cloned', blocks[blocks.length - 1]);
+            }.bind(this))
         },
     }
 })();

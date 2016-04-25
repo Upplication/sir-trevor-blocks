@@ -1,0 +1,22 @@
+.st-block[data-type="columns"] .st-columns-editor {
+	float: left;
+	width: 50%;
+	margin: 0;
+	padding: 0;
+}
+
+.st-block[data-type="columns"] .st-columns-block:after {
+	display: block;
+	clear: both;
+	content: "";
+}
+
+.st-block[data-type="columns"]:hover .st-block .st-block__ui,
+.st-block[data-type="columns"]:hover .st-block .st-block__control-ui {
+	display: none;
+}
+
+.st-block[data-type="columns"] .st-block:hover .st-block__ui,
+.st-block[data-type="columns"] .st-block:hover .st-block__control-ui {
+	display: block;
+}

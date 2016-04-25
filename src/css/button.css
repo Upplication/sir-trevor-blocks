@@ -140,17 +140,22 @@
 }
 
 .st-block[data-type="button"] input[type="range"] {
-    position: relative
+    position: relative;
+    overflow: visible;
 }
 
-.st-block[data-type="button"] input[type="range"]:after {
+.st-block[data-type="button"] .st-input-container {
+    padding: 9px 0;
+}
+
+.st-block[data-type="button"] .st-input-container.st-range:after {
     position: absolute;
     display: block;
     content: attr(st-value);
     font-size: 0.8em;
-    text-align: right;
-    top: 8px;
-    right: -28px;
+    top: 2px;
+    left: 92%;
+    padding: 9px 0;
 }
 
 /* Give room for the output value */

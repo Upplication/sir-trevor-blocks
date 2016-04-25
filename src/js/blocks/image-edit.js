@@ -76,6 +76,15 @@
         loadData: function(data){
             // Create our image tag
             this.$editor.html($('<img>', { src: data.file.url })).show();
+
+            this.$href = $('<input>', {
+                class: 'image-href',
+                type: 'text',
+                placeholder: i18n.t('blocks:image_edit:href')
+            })
+            .val(data.href)
+            .appendTo(this.$editor);
+
             this.$control_ui.hide();
         },
 
@@ -173,12 +182,16 @@
 
         _serializeData: function() {
             var url = this.$editor.find('img').attr('src');
+            var href = this.$href ? this.$href.val() : null;
 
-            if (this.$cropper && !/^http/.test(url))
+            if (this.$cropper && !(/^http/.test(url) || /^\/\//.test(url)))
                 url = this.$cropper('getCroppedCanvas').toDataURL(this.type);
 
             if (url && url.length > 0)
-                return  { file: { url: url } };
+                return  {
+                    href: href,
+                    file: { url: url }
+                };
             else
                 return null;
         },
