@@ -189,8 +189,10 @@
 
 .st-block[data-type="button"] .st-input-container.st-select select.st-value {
     border: none;
-    background: #eee;
+    background: #eeeeee;
     min-width: 132px;
+    margin-top: 8px;
+    margin-bottom: 10px;
 }
 
 .st-block[data-type="button"] .sp-dd {
