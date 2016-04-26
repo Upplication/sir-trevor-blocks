@@ -22,14 +22,16 @@ var gulp = require('gulp'),
  * introduced a feature or made a backwards-incompatible release.
  */
 var inc = function(importance) {
-    // get all the files to bump version in
-    return gulp.src('./package.json')
-        .pipe(bump({type: importance}))            // bump the version number in those files
-        .pipe(gulp.dest('./'))                     // save it back to filesystem
-        .pipe(addsrc(['./sir-trevor-blocks.*', './sir-trevor-blocks.min.*']))
-        .pipe(git.commit('bump package version'))  // commit the changed version number
-        .pipe(filter('package.json'))              // read only one file to get the version number
-        .pipe(tag({ prefix: '' }))                 // **tag it in the repository**
+    return function() {
+        // get all the files to bump version in
+        return gulp.src('./package.json')
+            .pipe(bump({type: importance}))            // bump the version number in those files
+            .pipe(gulp.dest('./'))                     // save it back to filesystem
+            .pipe(addsrc(['./sir-trevor-blocks.*', './sir-trevor-blocks.min.*']))
+            .pipe(git.commit('bump package version'))  // commit the changed version number
+            .pipe(filter('package.json'))              // read only one file to get the version number
+            .pipe(tag({ prefix: '' }))                 // **tag it in the repository**
+    }
 }
 
 var compile = function(production) {
@@ -66,9 +68,12 @@ var compile = function(production) {
     }
 }
 
-gulp.task('tag-patch', function() { return inc('patch'); });
-gulp.task('tag-minor', function() { return inc('minor'); });
-gulp.task('tag-major', function() { return inc('major'); });
+gulp.task('tag-patch', inc('patch'));
+gulp.task('tag-minor', inc('minor'));
+gulp.task('tag-major', inc('major'));
+
+gulp.task('compile-uncompressed', compile());
+gulp.task('compile-minify', compile(true));
 
 gulp.task('patch', function (cb) {
   return seq('compile', 'tag-patch', cb)
@@ -82,8 +87,6 @@ gulp.task('release', function (cb) {
   return seq('compile', 'tag-major', cb)
 });
 
-gulp.task('compile-uncompressed', compile());
-gulp.task('compile-minify', compile(true));
 gulp.task('compile', function(cb) {
     return seq('compile-uncompressed', 'compile-minify', cb);
 })
