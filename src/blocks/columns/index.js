@@ -1,22 +1,22 @@
-(function() {
-    "use strict";
+var i18n = require('i18n');
+var SirTrevor = require('sir-trevor-js');
+var editorHTML = require('./editor.html');
 
-    if (!SirTrevor)
-        return console.error("SirTrevor.Blocks.Columns could not load because SirTrevor wasn't found");
+module.exports = SirTrevor.Block.extend({
 
-    SirTrevor.Blocks.Columns = SirTrevor.Block.extend({
+    type: "columns",
+    title: function() {
+        return i18n.t('blocks:columns:title')
+    },
 
-      type: "columns",
-      title: function() { return i18n.t('blocks:columns:title') },
-
-      _editorsSelectors: [
+    _editorsSelectors: [
         '.st-columns-editor-left > .editor',
         '.st-columns-editor-right > .editor'
-      ],
+    ],
 
-      editorHTML: '@@include("columns.html")',
+    editorHTML: editorHTML,
 
-      onBlockRender: function() {
+    onBlockRender: function() {
         var self = this;
         var parentStEditor = SirTrevor.getInstance(this.instanceID);
         var blockTypes = parentStEditor.options.blockTypes.filter(function(type) {
@@ -28,19 +28,19 @@
                 el: self.$(selector),
                 blockTypes: blockTypes,
                 blockLimit: 1,
-            });
+                });
         })
-      },
+    },
 
-      loadData: function(data) {
+    loadData: function(data) {
         var self = this;
         data.columns.forEach(function(column, idx) {
             var selector = self._editorsSelectors[idx];
             self.$(selector).val(JSON.stringify( { data: column.blocks } ));
         })
-      },
+    },
 
-      _serializeData: function() {
+    _serializeData: function() {
         var self = this;
         var result = {
             columns: (self._editors || []).map(function(st) {
@@ -58,13 +58,12 @@
             return result;
         else
             return {};
-      },
+    },
 
-      _retrieveEditorData: function(editor) {
+    _retrieveEditorData: function(editor) {
         // Force SirTrevor to update its internal data store
         editor.store.reset();
         editor.validateBlocks(false);
         return editor.store.retrieve().data;
-      }
-    });
-})();
+    }
+})
