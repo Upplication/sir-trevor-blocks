@@ -32,3 +32,277 @@
 
 .st-block__ui-delete-controls .st-icon.st-block-ui-btn--confirm-delete:before { content: '\ea4e'; }
 .st-block__ui-delete-controls .st-icon.st-block-ui-btn--deny-delete:before { content: '\ea1e'; }
+
+
+/* NEW ONES! */
+
+.panel-content #st-editor-2,
+.panel-content #st-editor-2 .st-errors,
+.panel-content #st-editor-2 .st-ready,
+.panel-content #st-editor-2 .st-ready .st-block-controls,
+.st-block-controls--active {
+    background-color: #ffffff;
+}
+
+.st-block-controls--active a {
+    color: #555555;
+    padding: 10px;
+    margin: 10px;
+    border: 1px dashed #cccccc;
+    min-width: 80px;
+    -webkit-transition: all 150ms ease-in;
+    -moz-transition: all 150ms ease-in;
+    -o-transition: all 150ms ease-in;
+    -ms-transition: all 150ms ease-in;
+    transition: all 150ms ease-in;
+}
+
+.st-block-controls--active a:hover {
+    color: #00c86b;
+    border: 1px dashed #00c86b;
+    background-color: #f6f6f6;
+}
+
+.panel-content #st-editor-2 .st-ready .st-block__inner {
+    margin: 0 10px;
+    padding: 1em;
+}
+
+.st-block__inner:hover {
+    border-color: #00c86b;
+}
+
+
+.st-block-control-ui-btn,
+.st-block-ui-btn {
+    color: #00c86b;
+    border-top: 2px solid #00c86b;
+    border-left: 2px solid #00c86b;
+}
+
+.st-block-control-ui-btn:hover,
+.st-block-ui-btn:hover {
+    color: #ffffff;
+    background-color: #00c86b;
+    border-top: 2px solid #00c86b;
+    border-left: 2px solid #00c86b;
+}
+
+a.st-block-ui-btn.st-block-ui-btn--deny-delete,
+a.st-block-ui-btn.st-block-ui-btn--confirm-delete {
+    color: #eb5151;
+    border-top: 2px solid #eb5151;
+    border-left: 2px solid #eb5151;
+}
+a.st-block-ui-btn.st-block-ui-btn--deny-delete:hover,
+a.st-block-ui-btn.st-block-ui-btn--confirm-delete:hover {
+    background-color: #e62323;
+    color: #ffffff;
+}
+
+
+/* Sir Trevor Blocks "add feature" fullwidth Button */
+.st-block-controls__top,
+.st-icon--add:after {
+    margin: 10px;
+    background-color: #eeeeee;
+    border-radius: 0;
+}
+
+.st-block-controls__top:hover:before {
+    color: #00c86b;
+    background: #F3F3F3;
+    cursor: pointer;
+}
+
+.st-block--with-plus:after {
+    color: #00c86b;
+}
+
+.st-block__delete-label {
+    background-color: #fbcec9;
+    font-weight: 600;
+}
+
+.st-upload-btn {
+    background-color: #00c86b;
+    border-radius: 0;
+    -webkit-transition: all 150ms ease-in;
+    -moz-transition: all 150ms ease-in;
+    -o-transition: all 150ms ease-in;
+    -ms-transition: all 150ms ease-in;
+    transition: all 150ms ease-in;
+}
+
+.st-block__upload-container:hover .st-upload-btn {
+    background-color: #00a659;
+}
+
+.panel-content #st-editor-2 .st-errors {
+    background-color: #ffe1e4;
+    color: #eb5151;
+    padding: 1em;
+    margin: 10px;
+}
+
+.st-block-control-ui-btn--save {
+    border-left: none;
+    border-right: 2px solid #00c86b;
+}
+
+.st-block-control-ui-btn--clone {
+    border-left: none;
+    border-bottom: none;
+    border-top: 2px solid #00c86b;
+    border-right: 2px solid #00c86b;
+}
+
+.st-block__messages {
+    position: relative;
+    top: -1.9em;
+    left: -30px;
+    padding: 10px 15px;
+    border: none;
+    border-left: none;
+    border-top: none;
+    width: 100%;
+}
+
+.st-block--with-errors .st-block__messages {
+    border-color: #eb5151;
+    background-color: #fbcec9;
+}
+
+.st-block__inputs {
+    padding: 1.6em 0 1em;
+    border-radius: 0;
+    background: #ffffff;
+    border-top: 2px solid transparent;
+    border: 1px dashed #cccccc;
+}
+
+
+
+/* Sir Trevor blocks UI buttons */
+.st-icon.st-block-ui-btn:before,
+.st-icon.st-block-control-ui-btn:before {
+    line-height: 2.5em;
+}
+.st-icon.st-block-control-ui-btn {
+    line-height: 2.5em;
+    height: 2.5em;
+    width: 3em;
+}
+
+/* ... SIR TREVOR :: SAVE BUTTON ICON (FLOPPY) .................. */
+.st-icon.st-block-control-ui-btn--save:before {
+    content: '\e83e';
+    font-family: "search";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    margin-left: .2em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* SirTrevor: Hide Link/Unlink float controls */
+.st-format-bar .st-format-btn--Link,
+.st-format-bar .st-format-btn--Unlink {
+    display: none;
+}
+
+/* SirTrevor: Fix border because of hiding Link/Unlink controls */
+.st-format-bar .st-format-btn--Italic {
+    border-right: none;
+}
+
+
+
+
+/* RESERT :: Sir Trevor Blocks "action" title with more padding top */
+.st-block[data-type=button] .st-editor .st-column.st-column-66.st-padding-right-25 .st-control .st-field-name {
+    padding-top: 20px;
+    min-width: 80px;
+}
+
+/* RESERT :: Sir Trevor Blocks more padding bottom to fix edition controls overlay */
+.st-block__inner {
+    padding: 1.875em 1.875em 3.8em;
+}
+
+/* Sir Trevor Blocks to delete lateral paddings in edition sliders (button feature) */
+input[name="css-width"],
+input[name="css-padding"],
+input[name="css-border-width"],
+input[name="css-border-radius"],
+input[name="css-font-size"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
+/* ............................................................... */
+/* ... SIR TREVOR BLOCKS :: numbers in "BUTTON" feature editor .. */
+/* ............................................................. */
+
+.st-block[data-type=button] .st-input-container.st-range:after {
+    position: absolute;
+    display: inline-block;
+    content: attr(st-value);
+    font-size: 13px !important;
+    top: 8px;
+    left: initial;
+    right: 0;
+    padding: 9px 0;
+    color: #999999;
+}
+
+@media screen and (max-width: 1620px) {
+    .st-block[data-type=button] .st-input-container.st-range:after {
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .st-block[data-type="button"] .st-column.st-column-66 {
+        width: 66.6666%;
+    }
+    .st-block[data-type="button"] .st-column.st-column-25 {
+        width: 25%;
+    }
+    .st-block[data-type="button"] .st-column.st-column-33 {
+        width: 33.3333%;
+    }
+}
+
+@media screen and (max-width: 567px) {
+    .st-block[data-type="button"] .st-column.st-column-66,
+    .st-block[data-type="button"] .st-column.st-column-33,
+    .st-block[data-type="button"] .st-column.st-column-25 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .st-block[data-type=button] .st-input-container.st-range:after {
+        display: none;
+    }
+    .st-block[data-type="button"] h5.st-field-name.st-align-name,
+    .st-block[data-type="button"] h5.st-field-name {
+        min-width: 80px !important;
+    }
+}
+
+@media screen and (max-width: 365px) {
+    .st-block[data-type="button"] .st-control .st-input-container.st-color,
+    .st-block[data-type="button"] .st-control .st-input-container.st-select {
+        text-align: left;
+    }
+}

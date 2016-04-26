@@ -160,7 +160,7 @@
 
 /* Give room for the output value */
 .st-block[data-type="button"] input[type="range"] {
-    width: 92%;
+    width: 100%;
 }
 
 /* Container resert */
@@ -170,7 +170,7 @@
 
 /* Inputs */
 .st-block[data-type="button"] h5.st-field-name {
-    min-width: 80px;
+    min-width: 75px;
 }
 
 .st-block[data-type="button"] h5.st-field-name.st-align-name {
@@ -197,7 +197,6 @@
     background: #eeeeee;
     min-width: 132px;
     margin-top: 8px;
-    margin-bottom: 10px;
 }
 
 .st-block[data-type="button"] .sp-dd {
