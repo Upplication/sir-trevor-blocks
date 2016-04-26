@@ -30,7 +30,7 @@
     "gulpfile.js"
   ],
   "dependencies": {
-    "sir-trevor-js": "~0.5.0",
+    "sir-trevor": "~0.5.0",
     "highlightjs": "~8.8.0",
     "spectrum": "~1.7.1",
     "jquery": "~2.1.4",

@@ -10,6 +10,7 @@ Custom blocks:
 * spacer
 * text-align
 * widget
+* columns
 
 ### INSTALLATION
 
