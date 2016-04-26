@@ -2,6 +2,10 @@
 .st-block[data-type="button"] .st-preview {
     text-align: center;
     margin: 0 auto;
+    -webkit-transition: opacity 0.25s ease-out;
+    -moz-transition: opacity 0.25s ease-out;
+    -ms-transition: opacity 0.25s ease-out;
+    -o-transition: opacity 0.25s ease-out;
     transition: opacity 0.25s ease-out;
     border-style: solid;
     box-sizing: border-box;
@@ -66,7 +70,7 @@
 
 .st-block[data-type="button"] .st-control {
     position: relative;
-    margin-top: 0.4em;
+    margin-top: 0;
 }
 
 .st-block[data-type="button"] .st-control > * {
@@ -78,16 +82,53 @@
 
 .st-block[data-type="button"] .st-control .st-field-name {
     width: 15%;
-    padding: 9px 0;
+    padding-top: 14px;
+    padding-right: 10px;
+}
+
+.st-block[data-type=button] .st-column h4,
+.st-block[data-type=button] h5.st-field-name.st-align-name {
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 16px !important;
+    font-weight: 600;
+    letter-spacing: .01em;
+    color: #3fa4d7 !important;
+}
+
+.st-block[data-type=button] .st-editor .st-control .st-field-name {
+    padding-top: 14px;
+    padding-right: 10px;
+    font-size: 15px;
+    color: #777777;
 }
 
 .st-block[data-type="button"] .st-control .st-input-container {
     width: 85%;
 }
 
+.st-block[data-type=button] .st-input-container.st-range {
+    padding: 5px 0;
+}
+
+.st-block[data-type=button] .st-input-container.st-range:after {
+    position: absolute;
+    display: inline-block;
+    content: attr(st-value);
+    font-size: 13px;
+    top: initial;
+    left: initial;
+    padding: 12px 0 0 5px;
+    color: #999999;
+}
+
 .st-block[data-type="button"] .st-control .st-input-container.st-color,
 .st-block[data-type="button"] .st-control .st-input-container.st-select {
     text-align: right;
+}
+
+.st-block[data-type=button] .st-input-container.st-color {
+    padding: 10px 0;
 }
 
 .st-block[data-type="button"] .st-control .st-input-container.st-color .sp-preview {
@@ -153,8 +194,10 @@
 
 .st-block[data-type="button"] .st-input-container.st-select select.st-value {
     border: none;
-    background: #eee;
+    background: #eeeeee;
     min-width: 132px;
+    margin-top: 8px;
+    margin-bottom: 10px;
 }
 
 .st-block[data-type="button"] .sp-dd {
@@ -183,12 +226,19 @@
     margin-bottom: 20px;
 }
 
+/* Sir Trevor "ADD FEATURE" BUTTON */
+.st-block[data-type=button] .st-editor .st-icon:before {
+    font-size: 22px;
+    left: 6px;
+}
+.st-block[data-type=button] .st-editor .st-icon.st-icon-width:before {
+    top: 4px;
+    font-size: 25px;
+}
+
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 1565px) {
-    .st-block[data-type="button"] h5.st-field-name {
-        min-width: 180px;
-    }
     .st-block[data-type="button"] .st-column.st-column-66.st-padding-right-25 .st-input-container {
         width: 100%;
     }
