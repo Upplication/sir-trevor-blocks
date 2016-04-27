@@ -818,7 +818,10 @@ a.cke_dialog_ui_button_cancel span {
 	display: block;
 }
 
-/* New Ones! */
+.st-block[data-type="columns"] .st-block:hover .st-block__ui .st-block-ui-btn--reorder,
+.st-block[data-type="columns"] .st-block:hover .st-block__ui .st-block-positioner {
+	display: none;
+}
 
 .st-columns-block .st-columns-editor .st-editor .st-row .st-column {
     width: 100%;
@@ -922,7 +925,8 @@ a.cke_dialog_ui_button_cancel span {
     .st-block[data-type="button"] .st-input-container:not(.st-input-container-resert) {
         width: 70% !important;
     }
-}.st-block[data-type="image_edit"] .image-href {
+}
+.st-block[data-type="image_edit"] .image-href {
 	margin-top: 5px;
 }
 .st-block[data-type="spacer"] .st-control {
