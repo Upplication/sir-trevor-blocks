@@ -18,11 +18,10 @@ module.exports = SirTrevor.Block.extend({
         this.$editor.val(data.text);
     },
 
-    onBlockRender: function(){
-        //
-        if (this.config && this.config.basePath) {
-            CKEDITOR.basePath = this.config.basePath;
-        }
+    setupCkEditor: function(destroy) {
+
+        if (!!destroy && this.ckeditor)
+            this.ckeditor.destroy();
 
         this.ckeditor = CKEDITOR.replace(this.getTextBlock()[0], {
             allowedContent: true, // Do not filter any html tags or styles(see CkEditor docs)
@@ -54,9 +53,19 @@ module.exports = SirTrevor.Block.extend({
             ev.target = this.$editor[0];
             this.mediator.trigger(eventType, ev);
         }.bind(this));
+    },
 
-        // FIXME: reorder problems :(
-        this.$editor.parent().find('.st-block-ui-btn--reorder').hide();
+    onBlockRender: function() {
+
+        if (this.config && this.config.basePath) {
+            CKEDITOR.basePath = this.config.basePath;
+        }
+
+        this.setupCkEditor();
+        this.mediator.on('block:changePosition', function($block) {
+            if ($block == this.$el)
+                this.setupCkEditor(true);
+        }.bind(this));
     },
 
     _serializeData: function() {
