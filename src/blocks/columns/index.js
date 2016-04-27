@@ -18,7 +18,7 @@ module.exports = SirTrevor.Block.extend({
 
     onBlockRender: function() {
         var self = this;
-        var parentStEditor = SirTrevor.getInstance(this.instanceID);
+        var parentStEditor = SirTrevor.getInstance(self.instanceID);
         var blockTypes = parentStEditor.options.blockTypes.filter(function(type) {
             return type.toLowerCase() != self.type;
         });
@@ -32,13 +32,13 @@ module.exports = SirTrevor.Block.extend({
         })
 
         SirTrevor.EventBus.on('block:reorder:dropped', function(blockId) {
-            if (blockId == this.blockID)
-                self._triggerEventOnChildEditors(self.$el);
+            if (blockId == self.blockID)
+                self._triggerChangePositionOnChildModules();
         });
 
-        this.mediator.on('block:changePosition', function($block) {
-            if ($block == this.$el)
-                self._triggerEventOnChildEditors(self.$el);
+        self.mediator.on('block:changePosition', function($block) {
+            if ($block == self.$el)
+                self._triggerChangePositionOnChildModules();
         });
     },
 
@@ -77,9 +77,11 @@ module.exports = SirTrevor.Block.extend({
         return editor.store.retrieve().data;
     },
 
-    _triggerEventOnChildEditors: function(eventName, data) {
-        self._editors.forEach(function(editor) {
-            editor.mediator.trigger(eventName, data);
+    _triggerChangePositionOnChildModules: function() {
+        this._editors.forEach(function(editor) {
+            editor.block_manager.blocks.forEach(function(block) {
+                block.mediator.trigger('block:changePosition', block.$el);
+            })
         })
     }
 })
