@@ -21,7 +21,10 @@
 	display: block;
 }
 
-/* New Ones! */
+.st-block[data-type="columns"] .st-block:hover .st-block__ui .st-block-ui-btn--reorder,
+.st-block[data-type="columns"] .st-block:hover .st-block__ui .st-block-positioner {
+	display: none;
+}
 
 .st-columns-block .st-columns-editor .st-editor .st-row .st-column {
     width: 100%;
