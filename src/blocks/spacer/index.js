@@ -1,13 +1,14 @@
 var _ = require('lodash');
 var i18n = require('i18n');
 var SirTrevor = require('sir-trevor-js');
+var editorHTML = require('./editor.html');
 
 module.exports = SirTrevor.Block.extend({
 
   type: "spacer",
   title: function() { return i18n.t('blocks:spacer:title') },
   editorHTML: function() {
-      return _.template('@@include("spacer.html")', { imports: { i18n: i18n } });
+      return _.template(editorHTML, { imports: { i18n: i18n } });
   },
 
   loadData: function(data) {

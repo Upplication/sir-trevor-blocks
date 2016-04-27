@@ -2,13 +2,14 @@ var $ = require('jquery');
 var i18n = require('i18n');
 var hljs = require('highlightjs')
 var SirTrevor = require('sir-trevor-js');
+var editorHTML = require('./editor.html');
 
 module.exports = SirTrevor.Blocks.Text.extend({
 
     type: "widget",
     title: function() { return i18n.t('blocks:widget:title') },
     icon_name: "code",
-    editorHTML: '@@include("widget.html")',
+    editorHTML: editorHTML,
 
     loadData: function(data) {
         this.loadPastedContent(data.text);
