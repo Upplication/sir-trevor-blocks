@@ -28,8 +28,18 @@ module.exports = SirTrevor.Block.extend({
                 el: self.$(selector),
                 blockTypes: blockTypes,
                 blockLimit: 1,
-                });
+            });
         })
+
+        SirTrevor.EventBus.on('block:reorder:dropped', function(blockId) {
+            if (blockId == this.blockID)
+                self._triggerEventOnChildEditors(self.$el);
+        });
+
+        this.mediator.on('block:changePosition', function($block) {
+            if ($block == this.$el)
+                self._triggerEventOnChildEditors(self.$el);
+        });
     },
 
     loadData: function(data) {
@@ -65,5 +75,11 @@ module.exports = SirTrevor.Block.extend({
         editor.store.reset();
         editor.validateBlocks(false);
         return editor.store.retrieve().data;
+    },
+
+    _triggerEventOnChildEditors: function(eventName, data) {
+        self._editors.forEach(function(editor) {
+            editor.mediator.trigger(eventName, data);
+        })
     }
 })
