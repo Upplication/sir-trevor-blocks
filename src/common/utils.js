@@ -14,7 +14,7 @@ module.exports = {
 	},
 
 	loadBlock: function(block) {
-		SirTrevor.Blocks[this._classify(block.type)] = block;
+		SirTrevor.Blocks[this._classify(block.prototype.type)] = block;
 	},
 
 	_titleize: function(str){
