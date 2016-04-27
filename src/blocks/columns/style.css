@@ -11,6 +11,10 @@
 	content: "";
 }
 
+.st-block[data-type="columns"] .st-block .st-block__control-ui .st-block-control-ui-btn--clone {
+    display: none;
+}
+
 .st-block[data-type="columns"]:hover .st-block .st-block__ui,
 .st-block[data-type="columns"]:hover .st-block .st-block__control-ui {
 	display: none;

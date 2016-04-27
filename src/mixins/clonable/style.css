@@ -1,8 +1,5 @@
 .st-block__control-ui .st-block-control-ui-btn--clone:before {
 	display: block;
 	font-family: 'upplication-icons' !important;
-}
-
-.st-block__control-ui .st-block-control-ui-btn--clone:before {
 	content: "\ea17";
 }
