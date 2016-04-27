@@ -808,6 +808,10 @@ a.cke_dialog_ui_button_cancel span {
 	content: "";
 }
 
+.st-block[data-type="columns"] .st-block .st-block__control-ui .st-block-control-ui-btn--clone {
+    display: none;
+}
+
 .st-block[data-type="columns"]:hover .st-block .st-block__ui,
 .st-block[data-type="columns"]:hover .st-block .st-block__control-ui {
 	display: none;
@@ -1019,8 +1023,5 @@ a.cke_dialog_ui_button_cancel span {
 .st-block__control-ui .st-block-control-ui-btn--clone:before {
 	display: block;
 	font-family: 'upplication-icons' !important;
-}
-
-.st-block__control-ui .st-block-control-ui-btn--clone:before {
 	content: "\EA17";
 }
