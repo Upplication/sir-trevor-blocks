@@ -20,3 +20,109 @@
 .st-block[data-type="columns"] .st-block:hover .st-block__control-ui {
 	display: block;
 }
+
+/* New Ones! */
+
+.st-columns-block .st-columns-editor .st-editor .st-row .st-column {
+    width: 100%;
+    padding: 0;
+}
+
+.st-columns-block .st-columns-editor .st-editor .st-row .st-column h4 {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    color: #3fa4d7;
+    margin: 10px 0;
+}
+.st-columns-block .st-columns-editor .st-editor .st-row .st-column h4:first-child {
+    margin-top: 5px;
+}
+
+.st-columns-block .st-columns-editor .st-editor .st-row .st-column .st-control {
+    margin-top: 8px;
+}
+
+.st-block[data-type="button"] .st-input-container.st-input-container-resert {
+    width: 65% !important;
+}
+
+.st-columns-block .st-columns-editor .st-editor .st-row .st-column .st-control .st-field-name {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    color: #777777;
+    display: inline-block;
+    float: left;
+    text-align: right;
+    width: 35%;
+    max-width: 100px;
+    min-width: 35% !important;
+    padding-top: 14px !important;
+    padding-right: 10px;
+}
+
+.st-block[data-type="button"] .st-input-container.st-select {
+    padding-top: 0;
+}
+
+.st-columns-block .st-columns-editor .st-editor .st-row .st-column .st-control .st-input-container .st-input-container-resert {
+    display: inline-block;
+    float: right;
+    width: 65% !important;
+    float: right;
+}
+
+.st-columns-block .st-block[data-type="button"] .st-input-container.st-color .sp-replacer,
+.st-columns-block .st-block[data-type="button"] .st-input-container.st-select select.st-value {
+    float: left;
+}
+
+.st-columns-block .st-block[data-type=button] .st-input-container.st-range:after {
+    position: absolute;
+    display: inline-block;
+    content: attr(st-value);
+    font-size: 12px !important;
+    top: 9px;
+    left: 99%;
+    color: #999999;
+}
+
+/* Media Queries */
+@media screen and (min-width: 1565px) {
+    .st-columns-block .st-block[data-type=button] .st-input-container-resert .st-input-long {
+        min-width: inherit;
+    }
+}
+
+@media screen and (min-width: 1365px) {
+    .st-columns-block .st-block[data-type=button] .st-input-container.st-range:after {
+        left: 85%;
+    }
+}
+
+@media screen and (max-width: 1095px) {
+    .st-columns-block .st-block[data-type="button"] .st-input-container:not(.st-input-container-resert) {
+        width: 63% !important;
+    }
+}
+
+@media screen and (max-width: 567px) {
+    .st-columns-editor.st-columns-editor-left,
+    .st-columns-editor.st-columns-editor-right {
+        width: 100% !important;
+        float: left !important;
+    }
+}
+
+@media screen and (max-width: 365px) {
+    .st-columns-block .st-columns-editor .st-editor .st-row .st-column .st-control .st-field-name {
+        width: 30% !important;
+    }
+    .st-block[data-type="button"] .st-input-container.st-input-container-resert {
+        width: 70% !important;
+    }
+    .st-block[data-type="button"] .st-input-container:not(.st-input-container-resert) {
+        width: 70% !important;
+    }
+}
