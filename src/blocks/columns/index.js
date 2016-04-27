@@ -40,6 +40,9 @@ module.exports = SirTrevor.Block.extend({
             if ($block == self.$el)
                 self._triggerChangePositionOnChildModules();
         });
+
+        // TODO: Fix me when reordirng a block column does not mess this it up
+        self.$ui.find('.st-block-positioner').hide();
     },
 
     loadData: function(data) {
