@@ -62,6 +62,12 @@ module.exports = SirTrevor.Block.extend({
         }
 
         this.setupCkEditor();
+
+        SirTrevor.EventBus.on('block:reorder:dropped', function(blockId) {
+            if (blockId == this.blockID)
+                this.setupCkEditor(true);
+        }.bind(this));
+
         this.mediator.on('block:changePosition', function($block) {
             if ($block == this.$el)
                 this.setupCkEditor(true);
