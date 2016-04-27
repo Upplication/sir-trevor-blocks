@@ -53,13 +53,13 @@
 	Utils.loadBlock(__webpack_require__(26));
 	Utils.loadBlock(__webpack_require__(30));
 	Utils.loadBlock(__webpack_require__(33));
-	Utils.loadBlock(__webpack_require__(35));
 	Utils.loadBlock(__webpack_require__(36));
 	Utils.loadBlock(__webpack_require__(37));
-	Utils.loadBlock(__webpack_require__(39));
+	Utils.loadBlock(__webpack_require__(38));
+	Utils.loadBlock(__webpack_require__(40));
 
-	Utils.loadMixin(__webpack_require__(42));
 	Utils.loadMixin(__webpack_require__(43));
+	Utils.loadMixin(__webpack_require__(44));
 
 
 /***/ },
@@ -536,9 +536,11 @@
 /* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var $ = __webpack_require__(22);
 	var i18n = __webpack_require__(28);
 	var SirTrevor = __webpack_require__(23);
 	var editorHTML = __webpack_require__(34);
+	var positionerFix = __webpack_require__(35);
 
 	module.exports = SirTrevor.Block.extend({
 
@@ -580,7 +582,8 @@
 	        });
 
 	        // TODO: Fix me when reordirng a block column does not mess this it up
-	        self.$ui.find('.st-block-positioner').hide();
+	        if ($('style#st-block-positioner-fix').length <= 0)
+	            $('head').append(positionerFix);
 	    },
 
 	    loadData: function(data) {
@@ -635,6 +638,12 @@
 
 /***/ },
 /* 35 */
+/***/ function(module, exports) {
+
+	module.exports = "<style id=\"st-block-positioner-fix\">.st-block-positioner { display: none; }</style>";
+
+/***/ },
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(27);
@@ -874,7 +883,7 @@
 	});
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(27);
@@ -1024,13 +1033,13 @@
 	});
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(27);
 	var i18n = __webpack_require__(28);
 	var SirTrevor = __webpack_require__(23);
-	var editorHTML = __webpack_require__(38);
+	var editorHTML = __webpack_require__(39);
 
 	module.exports = SirTrevor.Block.extend({
 
@@ -1065,20 +1074,20 @@
 	});
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"st-control\">\n    <div class=\"st-value-container\">\n    \t<span><%= i18n.t(\"blocks:spacer:size\") %></span>\n        <input class=\"st-value\" name=\"height\" type=\"range\" value=\"5\" units=\"vw\" step=\"0.1\" max=\"50\" min=\"0\" />\n    </div>\n    <span class=\"st-output\"></span>\n</div>";
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(22);
 	var i18n = __webpack_require__(28);
-	var hljs = __webpack_require__(40)
+	var hljs = __webpack_require__(41)
 	var SirTrevor = __webpack_require__(23);
-	var editorHTML = __webpack_require__(41);
+	var editorHTML = __webpack_require__(42);
 
 	module.exports = SirTrevor.Blocks.Text.extend({
 
@@ -1163,19 +1172,19 @@
 	});
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports) {
 
 	module.exports = hljs;
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"st-widget-editor-container\">\n    <div class=\"editor\">\n        <span class=\"st-icon\"></span>\n        <textarea name=\"text\"></textarea>\n    </div>\n    <div style=\"display: none\" class=\"preview\">\n        <pre><code class=\"lang-html\"></code></pre>\n    </div>\n</div>";
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports) {
 
 	var defaultAlignConfig = {
@@ -1254,7 +1263,7 @@
 	};
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(27);
