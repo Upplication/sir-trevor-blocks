@@ -1,6 +1,8 @@
+var $ = require('jquery');
 var i18n = require('i18n');
 var SirTrevor = require('sir-trevor-js');
 var editorHTML = require('./editor.html');
+var positionerFix = require('./positioner-fix.html');
 
 module.exports = SirTrevor.Block.extend({
 
@@ -42,7 +44,8 @@ module.exports = SirTrevor.Block.extend({
         });
 
         // TODO: Fix me when reordirng a block column does not mess this it up
-        self.$ui.find('.st-block-positioner').hide();
+        if ($('style#st-block-positioner-fix').length <= 0)
+            $('head').append(positionerFix);
     },
 
     loadData: function(data) {
