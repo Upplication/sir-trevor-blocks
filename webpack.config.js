@@ -24,7 +24,7 @@ module.exports = {
         new ExtractTextPlugin('[name]'),
     ],
     externals: {
-        'lodash': 'lodash',
+        'lodash': '_',
         'jquery': 'jQuery',
         'sir-trevor-js': 'SirTrevor',
         'i18n': 'i18n',
