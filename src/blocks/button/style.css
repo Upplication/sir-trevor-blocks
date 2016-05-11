@@ -252,6 +252,24 @@
     }
 }
 
+@media screen and (max-width: 1470px) {
+    .st-block[data-type="button"] .st-column .st-control .st-field-name {
+        width: 100%;
+    }
+
+    .st-block[data-type="button"] .st-input-container:not(.st-input-container-resert) {
+        width: 100% !important;
+    }
+    .st-block[data-type="button"] .st-column.st-column-33 .st-input-container input {
+        max-width: 80%;
+    }
+
+    .st-block[data-type="button"] .st-input-container.st-select select.st-value,
+    .st-block[data-type="button"] .st-input-container.st-color .sp-replacer {
+        float: left;
+    }
+}
+
 @media screen and (max-width: 670px) {
     .st-block[data-type="button"] .st-column.st-column-66,
     .st-block[data-type="button"] .st-column.st-column-33,

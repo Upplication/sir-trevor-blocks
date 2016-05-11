@@ -97,13 +97,19 @@
 
 /* Media Queries */
 @media screen and (min-width: 1565px) {
-    .st-columns-block .st-block[data-type=button] .st-input-container-resert .st-input-long {
+    .st-columns-block .st-block[data-type="button"] .st-input-container-resert .st-input-long {
         min-width: inherit;
     }
 }
 
+@media screen and (max-width: 1470px) {
+    .st-columns-block .st-columns-editor .st-editor .st-row .st-column .st-control .st-field-name {
+        text-align: left;
+    }
+}
+
 @media screen and (min-width: 1365px) {
-    .st-columns-block .st-block[data-type=button] .st-input-container.st-range:after {
+    .st-columns-block .st-block[data-type="button"] .st-input-container.st-range:after {
         left: 85%;
     }
 }

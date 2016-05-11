@@ -230,7 +230,7 @@ a.st-block-ui-btn.st-block-ui-btn--confirm-delete:hover {
 
 /* RESERT :: Sir Trevor Blocks "action" title with more padding top */
 .st-block[data-type=button] .st-editor .st-column.st-column-66.st-padding-right-25 .st-control .st-field-name {
-    padding-top: 20px;
+    padding-top: 15px;
     min-width: 80px;
 }
 
@@ -282,6 +282,9 @@ input[name="css-font-size"] {
     .st-block[data-type="button"] .st-column.st-column-33 {
         width: 33.3333%;
     }
+    .st-block[data-type=button] .st-input-container.st-range:after {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 567px) {
@@ -291,12 +294,12 @@ input[name="css-font-size"] {
         width: 100%;
         margin-bottom: 10px;
     }
-    .st-block[data-type=button] .st-input-container.st-range:after {
-        display: none;
-    }
     .st-block[data-type="button"] h5.st-field-name.st-align-name,
     .st-block[data-type="button"] h5.st-field-name {
         min-width: 80px !important;
+    }
+    .st-block[data-type=button] .st-input-container.st-range:after {
+        display: inline-block;
     }
 }
 
