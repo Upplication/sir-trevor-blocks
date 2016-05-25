@@ -49,7 +49,7 @@ module.exports = SirTrevor.Block.extend({
     },
 
     editorHTML: function() {
-        return _.template(editorHTML, { imports: { i18n: i18n, fonts: fonts } });
+        return _.template(editorHTML, { imports: { i18n: i18n }, fonts: fonts });
     },
 
     loadData: function(data) {
@@ -131,7 +131,7 @@ module.exports = SirTrevor.Block.extend({
             }
         });
 
-        data._fontUrl = _find(fonts, { fontName: data['css-font-family'] });
+        data._fontUrl = _.find(fonts, { fontName: data['css-font-family'] });
         return data;
     },
 

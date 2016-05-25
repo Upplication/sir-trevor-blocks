@@ -1,5 +1,5 @@
 <div class="st-editor">
-	<% fonts.forEach(function(font) { %>
+	<% _.forEach(fonts, function(font) { %>
 	<link href='<%= font.url %>' rel='stylesheet' type='text/css'>
 	<% }) %>
 	<div class="st-preview st-margin-bottom-20">
@@ -84,7 +84,7 @@
 				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:type") %></h5>
 				<div class="st-input-container st-select">
 					<select class="st-value" name="css-font-family">
-						<% fonts.forEach(function(font) { %>
+						<% _.forEach(fonts, function(font) { %>
 						<option value="<%= font.fontName %>"><%= font.name %></option>
 						<% }) %>
 					</select>
