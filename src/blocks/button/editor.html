@@ -1,5 +1,7 @@
 <div class="st-editor">
-
+	<% fonts.forEach(function(font) { %>
+	<link href='<%= font.url %>' rel='stylesheet' type='text/css'>
+	<% }) %>
 	<div class="st-preview st-margin-bottom-20">
 		<p class="st-required st-text-block" contenteditable="true"></p>
 	</div>
@@ -82,11 +84,9 @@
 				<h5 class="st-field-name"><%= i18n.t("blocks:button:controls:type") %></h5>
 				<div class="st-input-container st-select">
 					<select class="st-value" name="css-font-family">
-						<option value="sans-serif">Sans Serif</option>
-						<option value="cursive">Cursive</option>
-						<option value="fantasy">Fantasy</option>
-						<option value="serif">Serif</option>
-						<option value="monospace">Monospace</option>
+						<% fonts.forEach(function(font) { %>
+						<option value="<%= font.fontName %>"><%= font.name %></option>
+						<% }) %>
 					</select>
 				</div>
 			</div>

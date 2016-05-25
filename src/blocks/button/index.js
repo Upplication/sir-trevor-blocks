@@ -4,6 +4,39 @@ var i18n = require('i18n');
 var SirTrevor = require('sir-trevor-js');
 var editorHTML = require('./editor.html');
 
+var fonts = [
+    {
+        id: 'sans-serif',
+        name: 'Sans Serif',
+        fontName: 'Open Sans',
+        url: 'https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic'
+    },
+    {
+        id: 'cursive',
+        name: 'Cursive',
+        fontName: 'Gloria Hallelujah',
+        url: 'https://fonts.googleapis.com/css?family=Gloria+Hallelujah'
+    },
+    {
+        id: 'fantasy',
+        name: 'Fantasy',
+        fontName: 'Anton',
+        url: 'https://fonts.googleapis.com/css?family=Anton'
+    },
+    {
+        id: 'serif',
+        name: 'Serif',
+        fontName: 'Droid Serif',
+        url: 'https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic'
+    },
+    {
+        id: 'monospace',
+        name: 'Monospace',
+        fontName: 'Droid Sans Mono',
+        url: 'https://fonts.googleapis.com/css?family=Droid+Sans+Mono'
+    },
+];
+
 module.exports = SirTrevor.Block.extend({
 
     type: 'button',
@@ -16,13 +49,18 @@ module.exports = SirTrevor.Block.extend({
     },
 
     editorHTML: function() {
-        return _.template(editorHTML, { imports: { i18n: i18n } });
+        return _.template(editorHTML, { imports: { i18n: i18n, fonts: fonts } });
     },
 
     loadData: function(data) {
         this.setTextBlockHTML(data.text);
         Object.keys(data)
         .forEach(function (key) {
+
+            // Ignore data._* fields
+            if (key.charAt(0) == '_')
+                return;
+
             var val = data[key];
 
             if (key.indexOf('color') >= 0 && val.indexOf('rgb') >= 0) // colors: rgb -> hex
@@ -93,6 +131,7 @@ module.exports = SirTrevor.Block.extend({
             }
         });
 
+        data._fontUrl = _find(fonts, { fontName: data['css-font-family'] });
         return data;
     },
 
