@@ -6,34 +6,29 @@ var editorHTML = require('./editor.html');
 
 var fonts = [
     {
-        id: 'sans-serif',
-        name: 'Sans Serif',
-        fontName: 'Open Sans',
-        url: 'https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic'
+        name: 'Open Sans',
+        url: 'https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic',
+        fallback: 'sans-serif'
     },
     {
-        id: 'cursive',
-        name: 'Cursive',
-        fontName: 'Gloria Hallelujah',
-        url: 'https://fonts.googleapis.com/css?family=Gloria+Hallelujah'
+        name: 'Gloria Hallelujah',
+        url: 'https://fonts.googleapis.com/css?family=Gloria+Hallelujah',
+        fallback: 'cursive',
     },
     {
-        id: 'fantasy',
-        name: 'Fantasy',
-        fontName: 'Anton',
-        url: 'https://fonts.googleapis.com/css?family=Anton'
+        name: 'Anton',
+        url: 'https://fonts.googleapis.com/css?family=Anton',
+        fallback: 'fantasy',
     },
     {
-        id: 'serif',
-        name: 'Serif',
-        fontName: 'Droid Serif',
-        url: 'https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic'
+        name: 'Droid Serif',
+        url: 'https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic',
+        fallback: 'serif',
     },
     {
-        id: 'monospace',
-        name: 'Monospace',
-        fontName: 'Droid Sans Mono',
-        url: 'https://fonts.googleapis.com/css?family=Droid+Sans+Mono'
+        name: 'Droid Sans Mono',
+        url: 'https://fonts.googleapis.com/css?family=Droid+Sans+Mono',
+        fallback: 'monospace',
     },
 ];
 
@@ -131,7 +126,13 @@ module.exports = SirTrevor.Block.extend({
             }
         });
 
-        data._fontUrl = _.find(fonts, { fontName: data['css-font-family'] });
+        var font = _.find(fonts, { name: data['css-font-family'] });
+
+        // Support for fallback
+        if (!font)
+            font = _.find(fonts, { fallback: data['css-font-family'] });
+
+        data._fontUrl = font.url;
         return data;
     },
 
