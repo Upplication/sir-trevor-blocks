@@ -4,34 +4,6 @@ var i18n = require('i18n');
 var SirTrevor = require('sir-trevor-js');
 var editorHTML = require('./editor.html');
 
-var fonts = [
-    {
-        name: 'Open Sans',
-        url: 'https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic',
-        fallback: 'sans-serif'
-    },
-    {
-        name: 'Gloria Hallelujah',
-        url: 'https://fonts.googleapis.com/css?family=Gloria+Hallelujah',
-        fallback: 'cursive',
-    },
-    {
-        name: 'Anton',
-        url: 'https://fonts.googleapis.com/css?family=Anton',
-        fallback: 'fantasy',
-    },
-    {
-        name: 'Droid Serif',
-        url: 'https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic',
-        fallback: 'serif',
-    },
-    {
-        name: 'Droid Sans Mono',
-        url: 'https://fonts.googleapis.com/css?family=Droid+Sans+Mono',
-        fallback: 'monospace',
-    },
-];
-
 module.exports = SirTrevor.Block.extend({
 
     type: 'button',
@@ -39,12 +11,40 @@ module.exports = SirTrevor.Block.extend({
 
     clonable: true,
 
+    fonts: [
+        {
+            name: 'Open Sans',
+            url: 'https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic',
+            fallback: 'sans-serif'
+        },
+        {
+            name: 'Gloria Hallelujah',
+            url: 'https://fonts.googleapis.com/css?family=Gloria+Hallelujah',
+            fallback: 'cursive',
+        },
+        {
+            name: 'Anton',
+            url: 'https://fonts.googleapis.com/css?family=Anton',
+            fallback: 'fantasy',
+        },
+        {
+            name: 'Droid Serif',
+            url: 'https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic',
+            fallback: 'serif',
+        },
+        {
+            name: 'Droid Sans Mono',
+            url: 'https://fonts.googleapis.com/css?family=Droid+Sans+Mono',
+            fallback: 'monospace',
+        },
+    ],
+
     title: function() {
         return i18n.t('blocks:button:title');
     },
 
     editorHTML: function() {
-        return _.template(editorHTML, { imports: { i18n: i18n }, fonts: fonts });
+        return _.template(editorHTML, { imports: { i18n: i18n }, fonts: this.fonts });
     },
 
     loadData: function(data) {
@@ -57,6 +57,15 @@ module.exports = SirTrevor.Block.extend({
                 return;
 
             var val = data[key];
+
+            if (key.indexOf('font-family' >= 0)) {
+                var font = _.find(this.fonts, { name: val });
+                var fontFallback = _.find(this.fonts, { fallback: val });
+                if (data._fontFallback)
+                    fontFallback = _.find(this.fonts, { fallback: data._fontFallback });
+                var defaultFont = this.fonts[0];
+                val = (font || fontFallback || defaultFont).name;
+            }
 
             if (key.indexOf('color') >= 0 && val.indexOf('rgb') >= 0) // colors: rgb -> hex
                 val = this._rgbToHex(val);
@@ -126,13 +135,16 @@ module.exports = SirTrevor.Block.extend({
             }
         });
 
-        var font = _.find(fonts, { name: data['css-font-family'] });
+        var font = _.find(this.fonts, { name: data['css-font-family'] });
+        var fontFamilyFallback = _.find(this.fonts, { fallback: data['css-font-family'] });
+        var fontDefaultFallback = this.fonts[0];
 
         // Support for fallback
         if (!font)
-            font = _.find(fonts, { fallback: data['css-font-family'] });
+            font = fontFamilyFallback || fontDefaultFallback
 
         data._fontUrl = font.url;
+        data._fontFallback = font.fallback;
         return data;
     },
 
