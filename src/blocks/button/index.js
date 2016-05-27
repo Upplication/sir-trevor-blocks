@@ -58,7 +58,7 @@ module.exports = SirTrevor.Block.extend({
 
             var val = data[key];
 
-            if (key.indexOf('font-family' >= 0)) {
+            if (key.indexOf('font-family') >= 0) {
                 var font = _.find(this.fonts, { name: val });
                 var fontFallback = _.find(this.fonts, { fallback: val });
                 if (data._fontFallback)
