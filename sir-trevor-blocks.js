@@ -357,7 +357,7 @@
 	        var content = this.getTextBlockHTML();
 
 	        try { // Sometimes there will be a enclosing <p>, sometimes not :/
-	            content = $(content).text()
+	            content = $(content).text() || content;
 	        } catch (e) {} // Do nothing
 
 	        if (content.length <= 0)
