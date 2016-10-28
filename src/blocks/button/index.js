@@ -103,7 +103,13 @@ module.exports = SirTrevor.Block.extend({
         });
 
         // Set the default button text
-        if ($(this.getTextBlockHTML()).text().length <= 0)
+        var content = this.getTextBlockHTML();
+
+        try { // Sometimes there will be a enclosing <p>, sometimes not :/
+            content = $(content).text()
+        } catch (e) {} // Do nothing
+
+        if (content.length <= 0)
             this.setTextBlockHTML(i18n.t("blocks:button:hint:text"));
 
         this.$editor.find('[name="user-href"]')
