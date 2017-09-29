@@ -15,7 +15,7 @@ module.exports = SirTrevor.Blocks.Image.extend({
             var data = {
                 name: this.filename + '.png',
                 folder: 'img',
-                base64content: this.$cropper('getCroppedCanvas').toDataURL(this.type)
+                base64content: this._getCroppedImageBlobUrl()
             };
 
             this.resetErrors();
@@ -184,7 +184,7 @@ module.exports = SirTrevor.Blocks.Image.extend({
         var href = this.$href ? this.$href.val() : null;
 
         if (this.$cropper && !(/^http/.test(url) || /^\/\//.test(url)))
-            url = this.$cropper('getCroppedCanvas').toDataURL(this.type);
+            url = this._getCroppedImageBlobUrl();
 
         if (url && url.length > 0)
             return  {
@@ -231,5 +231,9 @@ module.exports = SirTrevor.Blocks.Image.extend({
             array[i] = obj[i];
 
         return array;
-    }
+    },
+
+    _getCroppedImageBlobUrl: function() {
+        return this.$cropper('getCroppedCanvas').toDataURL('image/png');
+    },
 });
