@@ -42,27 +42,28 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	// Webpack JS entry point
 	var Utils = __webpack_require__(21);
 
 	Utils.loadLocale('es', __webpack_require__(24));
 	Utils.loadLocale('en', __webpack_require__(25));
+	Utils.loadLocale('pt', __webpack_require__(26));
 
-	Utils.loadBlock(__webpack_require__(26));
-	Utils.loadBlock(__webpack_require__(30));
-	Utils.loadBlock(__webpack_require__(33));
-	Utils.loadBlock(__webpack_require__(36));
+	Utils.loadBlock(__webpack_require__(27));
+	Utils.loadBlock(__webpack_require__(31));
+	Utils.loadBlock(__webpack_require__(34));
 	Utils.loadBlock(__webpack_require__(37));
 	Utils.loadBlock(__webpack_require__(38));
-	Utils.loadBlock(__webpack_require__(40));
+	Utils.loadBlock(__webpack_require__(39));
+	Utils.loadBlock(__webpack_require__(41));
 
-	Utils.loadMixin(__webpack_require__(43));
 	Utils.loadMixin(__webpack_require__(44));
+	Utils.loadMixin(__webpack_require__(45));
 
 
-/***/ },
+/***/ }),
 /* 1 */,
 /* 2 */,
 /* 3 */,
@@ -84,7 +85,7 @@
 /* 19 */,
 /* 20 */,
 /* 21 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(22);
 	var SirTrevor = __webpack_require__(23);
@@ -117,21 +118,21 @@
 		},
 	}
 
-/***/ },
+/***/ }),
 /* 22 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = jQuery;
 
-/***/ },
+/***/ }),
 /* 23 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = SirTrevor;
 
-/***/ },
+/***/ }),
 /* 24 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = {
 	    blocks: {
@@ -187,9 +188,9 @@
 	    }
 	}
 
-/***/ },
+/***/ }),
 /* 25 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = {
 	    blocks: {
@@ -245,15 +246,74 @@
 	    }
 	}
 
-/***/ },
+/***/ }),
 /* 26 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-	var _ = __webpack_require__(27);
+	module.exports = {
+	    blocks: {
+	        button: {
+	            title: "Botão",
+	            controls: {
+	                action: "Ação",
+	                dimensions: "Dimensões ",
+	                border: "extremidade",
+	                font: " Fonte ",
+	                width: "Largura",
+	                height: "Alto",
+	                radius: "Radio",
+	                size: " Tamanho",
+	                type: "Tipo",
+	                background: "Fundo",
+	                color: "Cor",
+	                align: "Alinhado",
+	                center: "Centro",
+	                left: "Esquerda ",
+	                right: "Direita"
+	            },
+	            hint: {
+	                text: "Escreve aquí o texto do teu botão!",
+	                href: " Escreve aquí um email, um número de telefone ou uma web"
+	            },
+	            accept: "Aceitar",
+	            cancel: "Cancelar"
+	        },
+	        image_edit: {
+	            href: "Link",
+	            finish: "Confirma o recorte da imagem para a poderes guardar"
+	        },
+	        map: {
+	            title: "Mapa",
+	            hint: "Escreve aquí uma direção"
+	        },
+	        spacer: {
+	            title: "Separador",
+	            size: "Tamanho"
+	        },
+	        widget: {
+	            title: "Widget",
+	            hint: "Coloca o html do teu widget aqui ",
+	            edit: "Clica duasvezes para editar"
+	        },
+	        ck_editor: {
+	            title: "Texto"
+	        },
+	        columns: {
+	            title: "Colunas"
+	        }
+	    }
+	}
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__(28);
 	var $ = __webpack_require__(22);
-	var i18n = __webpack_require__(28);
+	var i18n = __webpack_require__(29);
 	var SirTrevor = __webpack_require__(23);
-	var editorHTML = __webpack_require__(29);
+	var editorHTML = __webpack_require__(30);
 
 	module.exports = SirTrevor.Block.extend({
 
@@ -472,32 +532,32 @@
 	    }
 	})
 
-/***/ },
-/* 27 */
-/***/ function(module, exports) {
+/***/ }),
+/* 28 */
+/***/ (function(module, exports) {
 
 	module.exports = _;
 
-/***/ },
-/* 28 */
-/***/ function(module, exports) {
+/***/ }),
+/* 29 */
+/***/ (function(module, exports) {
 
 	module.exports = i18n;
 
-/***/ },
-/* 29 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"st-editor\">\n\t<% _.forEach(fonts, function(font) { %>\n\t<link href='<%= font.url %>' rel='stylesheet' type='text/css'>\n\t<% }) %>\n\t<div class=\"st-preview st-margin-bottom-20\">\n\t\t<p class=\"st-required st-text-block\" contenteditable=\"true\"></p>\n\t</div>\n\n\t<div class=\"st-row st-margin-bottom-20\">\n\t\t<div class=\"st-column st-column-66 st-padding-right-25\">\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h4 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:action\") %></h4>\n\t\t\t\t<div class=\"st-input-container st-input-container-resert\">\n\t\t\t\t\t<input name=\"href\" type=\"hidden\">\n\t\t\t\t\t<input class=\"st-input-long\" name=\"user-href\" type=\"text\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"st-column st-column-33 st-padding-left-25\">\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name st-align-name\"><%= i18n.t(\"blocks:button:controls:align\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-select\">\n\t\t\t\t\t<select class=\"st-value\" name=\"css-float\">\n\t\t\t\t\t\t<option value=\"none\"><%= i18n.t(\"blocks:button:controls:center\") %></option>\n\t\t\t\t\t\t<option value=\"left\"><%= i18n.t(\"blocks:button:controls:left\") %></option>\n\t\t\t\t\t\t<option value=\"right\"><%= i18n.t(\"blocks:button:controls:right\") %></option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t<div class=\"st-row\">\n\t\t<div class=\"st-column st-column-33 st-padding-right-25\">\n\t\t\t<h4><%= i18n.t(\"blocks:button:controls:dimensions\") %></h4>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:width\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-range\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-width\" type=\"range\" value=\"100\" units=\"%\" step=\"1\" max=\"100\" min=\"10\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:height\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-range\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-padding\" type=\"range\" value=\"1\" units=\"em 0\" step=\"0.1\" max=\"5\" min=\"0.2\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:background\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-color\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-background-color\" type=\"color\" value=\"#00CA6B\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"st-column st-column-33 st-padding-sides-25\">\n\t\t\t<h4><%= i18n.t(\"blocks:button:controls:border\") %></h4>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:width\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-range\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-border-width\" type=\"range\" value=\"2\" units=\"px\" step=\"1\" max=\"6\" min=\"0\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:radius\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-range\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-border-radius\" type=\"range\" value=\"2\" units=\"px\" step=\"1\" max=\"100\" min=\"0\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:color\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-color\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-border-color\" type=\"color\" value=\"#4D4D4D\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"st-column st-column-33 st-padding-left-25\">\n\t\t\t<h4><%= i18n.t(\"blocks:button:controls:font\") %></h4>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:size\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-range\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-font-size\" type=\"range\" value=\"2\" units=\"em\" step=\"0.1\" max=\"5\" min=\"0.2\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:type\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-select\">\n\t\t\t\t\t<select class=\"st-value\" name=\"css-font-family\">\n\t\t\t\t\t\t<% _.forEach(fonts, function(font) { %>\n\t\t\t\t\t\t<option value=\"<%= font.name %>\"><%= font.name %></option>\n\t\t\t\t\t\t<% }) %>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:color\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-color\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-color\" type=\"color\" value=\"#4D4D4D\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>";
-
-/***/ },
+/***/ }),
 /* 30 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
+
+	module.exports = "<div class=\"st-editor\">\r\n\t<% _.forEach(fonts, function(font) { %>\r\n\t<link href='<%= font.url %>' rel='stylesheet' type='text/css'>\r\n\t<% }) %>\r\n\t<div class=\"st-preview st-margin-bottom-20\">\r\n\t\t<p class=\"st-required st-text-block\" contenteditable=\"true\"></p>\r\n\t</div>\r\n\r\n\t<div class=\"st-row st-margin-bottom-20\">\r\n\t\t<div class=\"st-column st-column-66 st-padding-right-25\">\r\n\t\t\t<div class=\"st-control\">\r\n\t\t\t\t<h4 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:action\") %></h4>\r\n\t\t\t\t<div class=\"st-input-container st-input-container-resert\">\r\n\t\t\t\t\t<input name=\"href\" type=\"hidden\">\r\n\t\t\t\t\t<input class=\"st-input-long\" name=\"user-href\" type=\"text\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"st-column st-column-33 st-padding-left-25\">\r\n\t\t\t<div class=\"st-control\">\r\n\t\t\t\t<h5 class=\"st-field-name st-align-name\"><%= i18n.t(\"blocks:button:controls:align\") %></h5>\r\n\t\t\t\t<div class=\"st-input-container st-select\">\r\n\t\t\t\t\t<select class=\"st-value\" name=\"css-float\">\r\n\t\t\t\t\t\t<option value=\"none\"><%= i18n.t(\"blocks:button:controls:center\") %></option>\r\n\t\t\t\t\t\t<option value=\"left\"><%= i18n.t(\"blocks:button:controls:left\") %></option>\r\n\t\t\t\t\t\t<option value=\"right\"><%= i18n.t(\"blocks:button:controls:right\") %></option>\r\n\t\t\t\t\t</select>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"st-row\">\r\n\t\t<div class=\"st-column st-column-33 st-padding-right-25\">\r\n\t\t\t<h4><%= i18n.t(\"blocks:button:controls:dimensions\") %></h4>\r\n\t\t\t<div class=\"st-control\">\r\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:width\") %></h5>\r\n\t\t\t\t<div class=\"st-input-container st-range\">\r\n\t\t\t\t\t<input class=\"st-value\" name=\"css-width\" type=\"range\" value=\"100\" units=\"%\" step=\"1\" max=\"100\" min=\"10\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"st-control\">\r\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:height\") %></h5>\r\n\t\t\t\t<div class=\"st-input-container st-range\">\r\n\t\t\t\t\t<input class=\"st-value\" name=\"css-padding\" type=\"range\" value=\"1\" units=\"em 0\" step=\"0.1\" max=\"5\" min=\"0.2\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"st-control\">\r\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:background\") %></h5>\r\n\t\t\t\t<div class=\"st-input-container st-color\">\r\n\t\t\t\t\t<input class=\"st-value\" name=\"css-background-color\" type=\"color\" value=\"#00CA6B\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"st-column st-column-33 st-padding-sides-25\">\r\n\t\t\t<h4><%= i18n.t(\"blocks:button:controls:border\") %></h4>\r\n\t\t\t<div class=\"st-control\">\r\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:width\") %></h5>\r\n\t\t\t\t<div class=\"st-input-container st-range\">\r\n\t\t\t\t\t<input class=\"st-value\" name=\"css-border-width\" type=\"range\" value=\"2\" units=\"px\" step=\"1\" max=\"6\" min=\"0\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"st-control\">\r\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:radius\") %></h5>\r\n\t\t\t\t<div class=\"st-input-container st-range\">\r\n\t\t\t\t\t<input class=\"st-value\" name=\"css-border-radius\" type=\"range\" value=\"2\" units=\"px\" step=\"1\" max=\"100\" min=\"0\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"st-control\">\r\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:color\") %></h5>\r\n\t\t\t\t<div class=\"st-input-container st-color\">\r\n\t\t\t\t\t<input class=\"st-value\" name=\"css-border-color\" type=\"color\" value=\"#4D4D4D\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"st-column st-column-33 st-padding-left-25\">\r\n\t\t\t<h4><%= i18n.t(\"blocks:button:controls:font\") %></h4>\r\n\t\t\t<div class=\"st-control\">\r\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:size\") %></h5>\r\n\t\t\t\t<div class=\"st-input-container st-range\">\r\n\t\t\t\t\t<input class=\"st-value\" name=\"css-font-size\" type=\"range\" value=\"2\" units=\"em\" step=\"0.1\" max=\"5\" min=\"0.2\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"st-control\">\r\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:type\") %></h5>\r\n\t\t\t\t<div class=\"st-input-container st-select\">\r\n\t\t\t\t\t<select class=\"st-value\" name=\"css-font-family\">\r\n\t\t\t\t\t\t<% _.forEach(fonts, function(font) { %>\r\n\t\t\t\t\t\t<option value=\"<%= font.name %>\"><%= font.name %></option>\r\n\t\t\t\t\t\t<% }) %>\r\n\t\t\t\t\t</select>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"st-control\">\r\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:color\") %></h5>\r\n\t\t\t\t<div class=\"st-input-container st-color\">\r\n\t\t\t\t\t<input class=\"st-value\" name=\"css-color\" type=\"color\" value=\"#4D4D4D\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</div>";
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var SirTrevor = __webpack_require__(23);
-	var i18n = __webpack_require__(28);
-	var editorHTML = __webpack_require__(31);
-	var CKEDITOR = __webpack_require__(32);
+	var i18n = __webpack_require__(29);
+	var editorHTML = __webpack_require__(32);
+	var CKEDITOR = __webpack_require__(33);
 
 	module.exports = SirTrevor.Block.extend({
 
@@ -532,7 +592,8 @@
 	                {'name':'colors'},
 	                {'name':'document', 'groups': [ 'mode', 'document', 'doctools' ] },
 	            ],
-	            removeButtons: 'CreateDiv,Styles,Flash,Iframe,Image,HorizontalRule,Smiley,PageBreak,Anchor'
+	            removeButtons: 'CreateDiv,Styles,Flash,Iframe,Image,HorizontalRule,Smiley,PageBreak,Anchor',
+	            language: SirTrevor.config.language
 	        });
 
 	        this.loading();
@@ -578,27 +639,27 @@
 	    }
 	})
 
-/***/ },
-/* 31 */
-/***/ function(module, exports) {
+/***/ }),
+/* 32 */
+/***/ (function(module, exports) {
 
 	module.exports = "<textarea class=\"st-text-block\" rows=\"10\" cols=\"80\"></textarea>";
 
-/***/ },
-/* 32 */
-/***/ function(module, exports) {
+/***/ }),
+/* 33 */
+/***/ (function(module, exports) {
 
 	module.exports = CKEDITOR;
 
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(22);
-	var i18n = __webpack_require__(28);
+	var i18n = __webpack_require__(29);
 	var SirTrevor = __webpack_require__(23);
-	var editorHTML = __webpack_require__(34);
-	var positionerFix = __webpack_require__(35);
+	var editorHTML = __webpack_require__(35);
+	var positionerFix = __webpack_require__(36);
 
 	module.exports = SirTrevor.Block.extend({
 
@@ -688,25 +749,25 @@
 	    }
 	})
 
-/***/ },
-/* 34 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"st-columns-block\">\n\t<div class=\"st-columns-editor st-columns-editor-left\">\n\t\t<textarea class=\"editor\"></textarea>\n\t</div>\n\t<div class=\"st-columns-editor st-columns-editor-right\">\n\t\t<textarea class=\"editor\"></textarea>\n\t</div>\n</div>";
-
-/***/ },
+/***/ }),
 /* 35 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
+
+	module.exports = "<div class=\"st-columns-block\">\r\n\t<div class=\"st-columns-editor st-columns-editor-left\">\r\n\t\t<textarea class=\"editor\"></textarea>\r\n\t</div>\r\n\t<div class=\"st-columns-editor st-columns-editor-right\">\r\n\t\t<textarea class=\"editor\"></textarea>\r\n\t</div>\r\n</div>";
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports) {
 
 	module.exports = "<style id=\"st-block-positioner-fix\">.st-block-positioner { display: none; }</style>";
 
-/***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(27);
+	var _ = __webpack_require__(28);
 	var $ = __webpack_require__(22);
-	var i18n = __webpack_require__(28);
+	var i18n = __webpack_require__(29);
 	var SirTrevor = __webpack_require__(23);
 
 	module.exports = SirTrevor.Blocks.Image.extend({
@@ -944,13 +1005,13 @@
 	    },
 	});
 
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(27);
+	var _ = __webpack_require__(28);
 	var $ = __webpack_require__(22);
-	var i18n = __webpack_require__(28);
+	var i18n = __webpack_require__(29);
 	var SirTrevor = __webpack_require__(23);
 
 	module.exports = SirTrevor.Block.extend({
@@ -1094,14 +1155,14 @@
 	    }
 	});
 
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(27);
-	var i18n = __webpack_require__(28);
+	var _ = __webpack_require__(28);
+	var i18n = __webpack_require__(29);
 	var SirTrevor = __webpack_require__(23);
-	var editorHTML = __webpack_require__(39);
+	var editorHTML = __webpack_require__(40);
 
 	module.exports = SirTrevor.Block.extend({
 
@@ -1135,21 +1196,21 @@
 	  }
 	});
 
-/***/ },
-/* 39 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"st-control\">\n    <div class=\"st-value-container\">\n    \t<span><%= i18n.t(\"blocks:spacer:size\") %></span>\n        <input class=\"st-value\" name=\"height\" type=\"range\" value=\"5\" units=\"vw\" step=\"0.1\" max=\"50\" min=\"0\" />\n    </div>\n    <span class=\"st-output\"></span>\n</div>";
-
-/***/ },
+/***/ }),
 /* 40 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
+
+	module.exports = "<div class=\"st-control\">\r\n    <div class=\"st-value-container\">\r\n    \t<span><%= i18n.t(\"blocks:spacer:size\") %></span>\r\n        <input class=\"st-value\" name=\"height\" type=\"range\" value=\"5\" units=\"vw\" step=\"0.1\" max=\"50\" min=\"0\" />\r\n    </div>\r\n    <span class=\"st-output\"></span>\r\n</div>";
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(22);
-	var i18n = __webpack_require__(28);
-	var hljs = __webpack_require__(41)
+	var i18n = __webpack_require__(29);
+	var hljs = __webpack_require__(42)
 	var SirTrevor = __webpack_require__(23);
-	var editorHTML = __webpack_require__(42);
+	var editorHTML = __webpack_require__(43);
 
 	module.exports = SirTrevor.Blocks.Text.extend({
 
@@ -1233,21 +1294,21 @@
 
 	});
 
-/***/ },
-/* 41 */
-/***/ function(module, exports) {
+/***/ }),
+/* 42 */
+/***/ (function(module, exports) {
 
 	module.exports = hljs;
 
-/***/ },
-/* 42 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"st-widget-editor-container\">\n    <div class=\"editor\">\n        <span class=\"st-icon\"></span>\n        <textarea name=\"text\"></textarea>\n    </div>\n    <div style=\"display: none\" class=\"preview\">\n        <pre><code class=\"lang-html\"></code></pre>\n    </div>\n</div>";
-
-/***/ },
+/***/ }),
 /* 43 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
+
+	module.exports = "<div class=\"st-widget-editor-container\">\r\n    <div class=\"editor\">\r\n        <span class=\"st-icon\"></span>\r\n        <textarea name=\"text\"></textarea>\r\n    </div>\r\n    <div style=\"display: none\" class=\"preview\">\r\n        <pre><code class=\"lang-html\"></code></pre>\r\n    </div>\r\n</div>";
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports) {
 
 	var defaultAlignConfig = {
 	    aligns : {
@@ -1324,11 +1385,11 @@
 	    },
 	};
 
-/***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(27);
+	var _ = __webpack_require__(28);
 	var SirTrevor = __webpack_require__(23);
 
 	module.exports = {
@@ -1356,5 +1417,5 @@
 	    },
 	}
 
-/***/ }
+/***/ })
 /******/ ]);
