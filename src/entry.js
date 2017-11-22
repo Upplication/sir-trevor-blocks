@@ -3,6 +3,7 @@ var Utils = require('./common/utils');
 
 Utils.loadLocale('es', require('./locales/es'));
 Utils.loadLocale('en', require('./locales/en'));
+Utils.loadLocale('pt', require('./locales/pt'));
 
 Utils.loadBlock(require('./blocks/button'));
 Utils.loadBlock(require('./blocks/ck_editor'));

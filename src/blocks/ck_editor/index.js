@@ -36,7 +36,8 @@ module.exports = SirTrevor.Block.extend({
                 {'name':'colors'},
                 {'name':'document', 'groups': [ 'mode', 'document', 'doctools' ] },
             ],
-            removeButtons: 'CreateDiv,Styles,Flash,Iframe,Image,HorizontalRule,Smiley,PageBreak,Anchor'
+            removeButtons: 'CreateDiv,Styles,Flash,Iframe,Image,HorizontalRule,Smiley,PageBreak,Anchor',
+            language: SirTrevor.config.language
         });
 
         this.loading();
