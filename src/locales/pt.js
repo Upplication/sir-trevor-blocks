@@ -5,11 +5,11 @@ module.exports = {
             controls: {
                 action: "Ação",
                 dimensions: "Dimensões ",
-                border: "extremidade",
+                border: "Extremidade",
                 font: " Fonte ",
                 width: "Largura",
                 height: "Alto",
-                radius: "Radio",
+                radius: "Arredondar",
                 size: " Tamanho",
                 type: "Tipo",
                 background: "Fundo",
