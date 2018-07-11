@@ -12,20 +12,23 @@ module.exports = SirTrevor.Block.extend({
     default_width: 600,
     default_height: 300,
     default_zoom: 15,
-    map_static_img: "https://maps.googleapis.com/maps/api/staticmap?size=<%= width %>x<%= height %>&center=<%= address %>&markers=|<%= address %>&zoom=<%= zoom %>&scale=2",
+    map_static_img: "https://maps.googleapis.com/maps/api/staticmap?size=<%= width %>x<%= height %>&center=<%= address %>&markers=|<%= address %>&zoom=<%= zoom %>&scale=2&key=<%= key %>",
     map_link: "http://maps.google.com/maps?q=<%= address %>",
 
     editorHTML: function() {
+        console.log(SirTrevor.config.defaults.googleKey)
         var address = $('<input>', { type: 'text', name:'address', placeholder: i18n.t('blocks:map:hint') });
         var zoom = $('<input>', { type: 'hidden', name:'zoom', value: this.default_zoom });
         var width = $('<input>', { type: 'hidden', name:'width', value: this.default_width });
         var height = $('<input>', { type: 'hidden', name:'height', value: this.default_height });
+        var key = $('<input>', { type: 'hidden', name:'key', value: SirTrevor.config.defaults.googleKey });
         var map = $('<div>', { class: 'map' });
         var container = $('<div>');
         container.append(address);
         container.append(zoom);
         container.append(width);
         container.append(height);
+        container.append(key);
         container.append(map);
         map.css({
             'border-radius': '5px',
@@ -102,7 +105,8 @@ module.exports = SirTrevor.Block.extend({
             address: address,
             zoom: this.$el.find('[name="zoom"]').val(),
             width: this.$el.find('[name="width"]').val(),
-            height: this.$el.find('[name="height"]').val()
+            height: this.$el.find('[name="height"]').val(),
+            key: this.$el.find('[name="key"]').val(),
         }
     },
 

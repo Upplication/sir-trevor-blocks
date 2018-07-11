@@ -42,7 +42,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	// Webpack JS entry point
 	var Utils = __webpack_require__(21);
@@ -63,7 +63,7 @@
 	Utils.loadMixin(__webpack_require__(45));
 
 
-/***/ },
+/***/ }),
 /* 1 */,
 /* 2 */,
 /* 3 */,
@@ -85,7 +85,7 @@
 /* 19 */,
 /* 20 */,
 /* 21 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(22);
 	var SirTrevor = __webpack_require__(23);
@@ -118,21 +118,21 @@
 		},
 	}
 
-/***/ },
+/***/ }),
 /* 22 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = jQuery;
 
-/***/ },
+/***/ }),
 /* 23 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = SirTrevor;
 
-/***/ },
+/***/ }),
 /* 24 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = {
 	    blocks: {
@@ -188,9 +188,9 @@
 	    }
 	}
 
-/***/ },
+/***/ }),
 /* 25 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = {
 	    blocks: {
@@ -246,9 +246,9 @@
 	    }
 	}
 
-/***/ },
+/***/ }),
 /* 26 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = {
 	    blocks: {
@@ -305,9 +305,9 @@
 	}
 
 
-/***/ },
+/***/ }),
 /* 27 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(28);
 	var $ = __webpack_require__(22);
@@ -532,27 +532,27 @@
 	    }
 	})
 
-/***/ },
+/***/ }),
 /* 28 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = _;
 
-/***/ },
+/***/ }),
 /* 29 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = i18n;
 
-/***/ },
+/***/ }),
 /* 30 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = "<div class=\"st-editor\">\n\t<% _.forEach(fonts, function(font) { %>\n\t<link href='<%= font.url %>' rel='stylesheet' type='text/css'>\n\t<% }) %>\n\t<div class=\"st-preview st-margin-bottom-20\">\n\t\t<p class=\"st-required st-text-block\" contenteditable=\"true\"></p>\n\t</div>\n\n\t<div class=\"st-row st-margin-bottom-20\">\n\t\t<div class=\"st-column st-column-66 st-padding-right-25\">\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h4 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:action\") %></h4>\n\t\t\t\t<div class=\"st-input-container st-input-container-resert\">\n\t\t\t\t\t<input name=\"href\" type=\"hidden\">\n\t\t\t\t\t<input class=\"st-input-long\" name=\"user-href\" type=\"text\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"st-column st-column-33 st-padding-left-25\">\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name st-align-name\"><%= i18n.t(\"blocks:button:controls:align\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-select\">\n\t\t\t\t\t<select class=\"st-value\" name=\"css-float\">\n\t\t\t\t\t\t<option value=\"none\"><%= i18n.t(\"blocks:button:controls:center\") %></option>\n\t\t\t\t\t\t<option value=\"left\"><%= i18n.t(\"blocks:button:controls:left\") %></option>\n\t\t\t\t\t\t<option value=\"right\"><%= i18n.t(\"blocks:button:controls:right\") %></option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t<div class=\"st-row\">\n\t\t<div class=\"st-column st-column-33 st-padding-right-25\">\n\t\t\t<h4><%= i18n.t(\"blocks:button:controls:dimensions\") %></h4>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:width\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-range\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-width\" type=\"range\" value=\"100\" units=\"%\" step=\"1\" max=\"100\" min=\"10\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:height\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-range\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-padding\" type=\"range\" value=\"1\" units=\"em 0\" step=\"0.1\" max=\"5\" min=\"0.2\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:background\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-color\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-background-color\" type=\"color\" value=\"#00CA6B\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"st-column st-column-33 st-padding-sides-25\">\n\t\t\t<h4><%= i18n.t(\"blocks:button:controls:border\") %></h4>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:width\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-range\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-border-width\" type=\"range\" value=\"2\" units=\"px\" step=\"1\" max=\"6\" min=\"0\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:radius\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-range\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-border-radius\" type=\"range\" value=\"2\" units=\"px\" step=\"1\" max=\"100\" min=\"0\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:color\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-color\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-border-color\" type=\"color\" value=\"#4D4D4D\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"st-column st-column-33 st-padding-left-25\">\n\t\t\t<h4><%= i18n.t(\"blocks:button:controls:font\") %></h4>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:size\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-range\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-font-size\" type=\"range\" value=\"2\" units=\"em\" step=\"0.1\" max=\"5\" min=\"0.2\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:type\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-select\">\n\t\t\t\t\t<select class=\"st-value\" name=\"css-font-family\">\n\t\t\t\t\t\t<% _.forEach(fonts, function(font) { %>\n\t\t\t\t\t\t<option value=\"<%= font.name %>\"><%= font.name %></option>\n\t\t\t\t\t\t<% }) %>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"st-control\">\n\t\t\t\t<h5 class=\"st-field-name\"><%= i18n.t(\"blocks:button:controls:color\") %></h5>\n\t\t\t\t<div class=\"st-input-container st-color\">\n\t\t\t\t\t<input class=\"st-value\" name=\"css-color\" type=\"color\" value=\"#4D4D4D\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>";
 
-/***/ },
+/***/ }),
 /* 31 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var SirTrevor = __webpack_require__(23);
 	var i18n = __webpack_require__(29);
@@ -639,21 +639,21 @@
 	    }
 	})
 
-/***/ },
+/***/ }),
 /* 32 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = "<textarea class=\"st-text-block\" rows=\"10\" cols=\"80\"></textarea>";
 
-/***/ },
+/***/ }),
 /* 33 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = CKEDITOR;
 
-/***/ },
+/***/ }),
 /* 34 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(22);
 	var i18n = __webpack_require__(29);
@@ -749,21 +749,21 @@
 	    }
 	})
 
-/***/ },
+/***/ }),
 /* 35 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = "<div class=\"st-columns-block\">\n\t<div class=\"st-columns-editor st-columns-editor-left\">\n\t\t<textarea class=\"editor\"></textarea>\n\t</div>\n\t<div class=\"st-columns-editor st-columns-editor-right\">\n\t\t<textarea class=\"editor\"></textarea>\n\t</div>\n</div>";
 
-/***/ },
+/***/ }),
 /* 36 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = "<style id=\"st-block-positioner-fix\">.st-block-positioner { display: none; }</style>";
 
-/***/ },
+/***/ }),
 /* 37 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(28);
 	var $ = __webpack_require__(22);
@@ -1005,9 +1005,9 @@
 	    },
 	});
 
-/***/ },
+/***/ }),
 /* 38 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(28);
 	var $ = __webpack_require__(22);
@@ -1023,20 +1023,23 @@
 	    default_width: 600,
 	    default_height: 300,
 	    default_zoom: 15,
-	    map_static_img: "https://maps.googleapis.com/maps/api/staticmap?size=<%= width %>x<%= height %>&center=<%= address %>&markers=|<%= address %>&zoom=<%= zoom %>&scale=2",
+	    map_static_img: "https://maps.googleapis.com/maps/api/staticmap?size=<%= width %>x<%= height %>&center=<%= address %>&markers=|<%= address %>&zoom=<%= zoom %>&scale=2&key=<%= key %>",
 	    map_link: "http://maps.google.com/maps?q=<%= address %>",
 
 	    editorHTML: function() {
+	        console.log(SirTrevor.config.defaults.googleKey)
 	        var address = $('<input>', { type: 'text', name:'address', placeholder: i18n.t('blocks:map:hint') });
 	        var zoom = $('<input>', { type: 'hidden', name:'zoom', value: this.default_zoom });
 	        var width = $('<input>', { type: 'hidden', name:'width', value: this.default_width });
 	        var height = $('<input>', { type: 'hidden', name:'height', value: this.default_height });
+	        var key = $('<input>', { type: 'hidden', name:'key', value: SirTrevor.config.defaults.googleKey });
 	        var map = $('<div>', { class: 'map' });
 	        var container = $('<div>');
 	        container.append(address);
 	        container.append(zoom);
 	        container.append(width);
 	        container.append(height);
+	        container.append(key);
 	        container.append(map);
 	        map.css({
 	            'border-radius': '5px',
@@ -1113,7 +1116,8 @@
 	            address: address,
 	            zoom: this.$el.find('[name="zoom"]').val(),
 	            width: this.$el.find('[name="width"]').val(),
-	            height: this.$el.find('[name="height"]').val()
+	            height: this.$el.find('[name="height"]').val(),
+	            key: this.$el.find('[name="key"]').val(),
 	        }
 	    },
 
@@ -1155,9 +1159,9 @@
 	    }
 	});
 
-/***/ },
+/***/ }),
 /* 39 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(28);
 	var i18n = __webpack_require__(29);
@@ -1196,15 +1200,15 @@
 	  }
 	});
 
-/***/ },
+/***/ }),
 /* 40 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = "<div class=\"st-control\">\n    <div class=\"st-value-container\">\n    \t<span><%= i18n.t(\"blocks:spacer:size\") %></span>\n        <input class=\"st-value\" name=\"height\" type=\"range\" value=\"5\" units=\"vw\" step=\"0.1\" max=\"50\" min=\"0\" />\n    </div>\n    <span class=\"st-output\"></span>\n</div>";
 
-/***/ },
+/***/ }),
 /* 41 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(22);
 	var i18n = __webpack_require__(29);
@@ -1294,21 +1298,21 @@
 
 	});
 
-/***/ },
+/***/ }),
 /* 42 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = hljs;
 
-/***/ },
+/***/ }),
 /* 43 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = "<div class=\"st-widget-editor-container\">\n    <div class=\"editor\">\n        <span class=\"st-icon\"></span>\n        <textarea name=\"text\"></textarea>\n    </div>\n    <div style=\"display: none\" class=\"preview\">\n        <pre><code class=\"lang-html\"></code></pre>\n    </div>\n</div>";
 
-/***/ },
+/***/ }),
 /* 44 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	var defaultAlignConfig = {
 	    aligns : {
@@ -1385,9 +1389,9 @@
 	    },
 	};
 
-/***/ },
+/***/ }),
 /* 45 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(28);
 	var SirTrevor = __webpack_require__(23);
@@ -1417,5 +1421,5 @@
 	    },
 	}
 
-/***/ }
+/***/ })
 /******/ ]);
