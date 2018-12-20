@@ -194,9 +194,9 @@ module.exports = SirTrevor.Blocks.Image.extend({
             schema = '';
         else if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(href))
             schema = 'mailto:';
-        else if (/^\+?[0-9\-]+$/.test(value))
+        else if (/^\+?[0-9\-]+$/.test(href))
             schema = 'tel:';
-        else if (value.length > 0)
+        else if (href.length > 0)
             schema = 'http://';
         else
             schema.val(href);
