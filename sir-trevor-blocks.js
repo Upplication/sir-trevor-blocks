@@ -809,18 +809,18 @@
 	                }.bind(this)
 
 	            })
-	            .then(function (res) {
-	                if (res.result == 'success') {
-	                    this.setAndLoadData({ file: { url: res.url } });
-	                    // event
-	                    var eventType = 'blocks:image_edit:uploaded';
-	                    var ev = jQuery.Event(ev);
-	                    ev.target = this.$editor.find('>img')[0];
-	                    this.mediator.trigger(eventType, ev);
-	                } else
-	                    handleError(res);
-	            }.bind(this))
-	            .fail(handleError);
+	                .then(function (res) {
+	                    if (res.result == 'success') {
+	                        this.setAndLoadData({ file: { url: res.url } });
+	                        // event
+	                        var eventType = 'blocks:image_edit:uploaded';
+	                        var ev = jQuery.Event(ev);
+	                        ev.target = this.$editor.find('>img')[0];
+	                        this.mediator.trigger(eventType, ev);
+	                    } else
+	                        handleError(res);
+	                }.bind(this))
+	                .fail(handleError);
 	        }
 	    },
 
@@ -848,8 +848,8 @@
 	            type: 'text',
 	            placeholder: i18n.t('blocks:image_edit:href')
 	        })
-	        .val(data.href)
-	        .appendTo(this.$editor);
+	            .val(data.href)
+	            .appendTo(this.$editor);
 
 	        this.$control_ui.hide();
 	    },
@@ -880,6 +880,8 @@
 
 	    onBlockRender: function() {
 	        // Remove the default dropzone (from the dropable mixin)
+	        console.log("eeeeeeeeeeeeeeee");
+
 	        this.$dropzone
 	            .noDropArea()
 	            .unbind('drop');
@@ -949,13 +951,26 @@
 	    _serializeData: function() {
 	        var url = this.$editor.find('img').attr('src');
 	        var href = this.$href ? this.$href.val() : null;
+	        var schema = "";
 
 	        if (this.$cropper && !(/^http/.test(url) || /^\/\//.test(url)))
 	            url = this._getCroppedImageBlobUrl();
 
+	        //Checking type of input (mail,tel,hyperlink,text)
+	        if (/^(ftp:\/\/|http:\/\/|https:\/\/|mailto:|tel:)/.test(href))
+	            schema = '';
+	        else if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(href))
+	            schema = 'mailto:';
+	        else if (/^\+?[0-9\-]+$/.test(value))
+	            schema = 'tel:';
+	        else if (value.length > 0)
+	            schema = 'http://';
+	        else
+	            schema.val(href);
+
 	        if (url && url.length > 0)
 	            return  {
-	                href: href,
+	                href: schema + href,
 	                file: { url: url }
 	            };
 	        else
@@ -973,7 +988,7 @@
 	        e = e.originalEvent;
 
 	        var el = $(e.target),
-	        types = this._toArray(e.dataTransfer.types);
+	            types = this._toArray(e.dataTransfer.types);
 	        el.removeClass('st-dropzone--dragover');
 
 	        /*
