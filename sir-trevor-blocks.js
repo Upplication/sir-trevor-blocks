@@ -966,6 +966,9 @@
 	        else
 	        schema = 'http://';
 
+	        if (href == null)
+	            href = '';
+
 	        if (url && url.length > 0)
 	            return  {
 	                href: schema + href,
