@@ -113,7 +113,6 @@ module.exports = SirTrevor.Blocks.Image.extend({
 
     onBlockRender: function() {
         // Remove the default dropzone (from the dropable mixin)
-        console.log("eeeeeeeeeeeeeeee");
 
         this.$dropzone
             .noDropArea()
@@ -184,7 +183,7 @@ module.exports = SirTrevor.Blocks.Image.extend({
     _serializeData: function() {
         var url = this.$editor.find('img').attr('src');
         var href = this.$href ? this.$href.val() : null;
-        var schema = "";
+        var schema = '';
 
         if (this.$cropper && !(/^http/.test(url) || /^\/\//.test(url)))
             url = this._getCroppedImageBlobUrl();
