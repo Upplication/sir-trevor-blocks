@@ -203,7 +203,7 @@ module.exports = SirTrevor.Blocks.Image.extend({
 
         if (url && url.length > 0)
             return  {
-                href: schema + href,
+                href: href != null && href.length > 0 ? schema + href : null,
                 file: { url: url }
             };
         else
